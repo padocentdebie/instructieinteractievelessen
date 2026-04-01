@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructie: Interactieve Lessen Bouwen</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg: #f4f7f6;
+            --text: #333;
+            --white: #ffffff;
+            --warning-bg: #fff5f5;
+            --warning-border: #feb2b2;
+            --warning-text: #c53030;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .slider-container {
+            width: 90%;
+            max-width: 850px;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 15px;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* Stijlvol Tekstvak voor Aanbeveling */
+        .callout-card {
+            background-color: var(--warning-bg);
+            border-left: 6px solid var(--warning-text);
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .callout-card h4 {
+            margin: 0 0 10px 0;
+            color: var(--warning-text);
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .callout-card p {
+            margin: 0;
+            color: #742a2a;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            line-height: 2;
+            font-size: 1.05rem;
+        }
+
+        .infographic {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:disabled {
+            background-color: #dcdde1;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .progress {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #95a5a6;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        code {
+            background: #f1f2f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #e83e8c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slider-container">
+    <div class="step active" id="step-1">
+        <h2>Stap 1: GitHub (Je Online Archiefkast)</h2>
+        <p>GitHub is de plek waar jouw interactieve les "woont" op het internet. Omdat Gemini een technische code voor je schrijft, hebben we een plek nodig die deze code begrijpt en toegankelijk maakt voor de laptops van je studenten. GitHub bewaart je werk en geeft je een link die je later in It's Learning plakt.</p>
+        
+        <div class="callout-card">
+            <h4>⚠️ Belangrijke Veiligheidsinstructie</h4>
+            <p>Plaats NOOIT politiegegevens, vertrouwelijke informatie of privacygevoelige gegevens van burgers in de AI (Gemini). Gebruik uitsluitend algemene, educatieve termen voor je lessen om de dataveiligheid te waarborgen.</p>
+        </div>
+
+        <p><strong>Inloggen en je account instellen:</strong></p>
+        <ul>
+            <li>Ga naar <strong>GitHub.com</strong> en kies voor <strong>'Sign up'</strong>.</li>
+            <li>Gebruik de knop <strong>'Continue with Google'</strong> om in te loggen met je werk-account.</li>
+            <li>Kies een <strong>neutrale gebruikersnaam</strong> zonder verwijzingen naar de politie (bijv. <em>Onderwijs_Project_2026</em>).</li>
+            <li>Bevestig de autorisatie en controleer je Gmail voor de verificatiecode.</li>
+        </ul>
+    </div>
+
+    <div class="step" id="step-2">
+        <h2>Stap 2: Firebase (De Supercomputer)</h2>
+        <p>Waar GitHub de opslag is, is Firebase het brein dat alles live verbindt. Zonder Firebase zou een Bingo-spel niet werken; het zorgt er namelijk voor dat als jij op "Volgend Woord" klikt, alle schermen in de klas tegelijkertijd verspringen. Het is de motor achter de interactiviteit.</p>
+        
+        <p><strong>Hoe activeer je de verbinding?</strong></p>
+        <ul>
+            <li>Bezoek <strong>Firebase.google.com</strong> en klik op 'Get started'.</li>
+            <li>Log in via de <strong>'Google'</strong> knop met hetzelfde account als bij GitHub.</li>
+            <li>Maak een nieuw project aan met een <strong>neutrale naam</strong>.</li>
+            <li>Na het aanmaken kom je in de 'Console'. Dit is het hart van je live-verbinding.</li>
+        </ul>
+
+        <img src="githubfirebase.jpg" alt="Infographic Route van de les" class="infographic">
+    </div>
+
+    <div class="step" id="step-3">
+        <h2>Stap 3: Gemini & Het "Prompten"</h2>
+        <p>Gemini is je technische assistent. Jij hoeft geen programmeur te zijn; Gemini vertaalt jouw onderwijskundige wensen naar een digitaal spel. Het proces van een vraag stellen aan de AI noemen we <strong>"prompten"</strong>.</p>
+        <p>Om een resultaat te krijgen waar je echt iets aan hebt, moet je uitgebreid zijn in je uitleg:</p>
+        <ul>
+            <li><strong>Context:</strong> Vertel voor welk vak en welk niveau de les is.</li>
+            <li><strong>Doel:</strong> Leg uit wat de studenten moeten leren of doen.</li>
+            <li><strong>Functionaliteit:</strong> Beschrijf precies wat er moet gebeuren (bijv. "De student moet op een knop kunnen klikken en dan moet het vakje van kleur veranderen").</li>
+        </ul>
+    </div>
+
+    <div class="step" id="step-4">
+        <h2>Stap 4: Je les tonen in It's Learning</h2>
+        <p>De laatste stap is het plaatsen van je creatie in <strong>It's Learning</strong>. Dit doen we via een <strong>iFrame</strong>. Dit is eigenlijk een venster op je It's Learning pagina waar de inhoud van je GitHub-pagina doorheen schijnt.</p>
+        
+        <p><strong>De iFrame plaatsen:</strong></p>
+        <ul>
+            <li>Kopieer de iFrame-code die Gemini voor je heeft gegenereerd (begint met <code>&lt;iframe...</code>).</li>
+            <li>Ga in It's Learning naar je vak en voeg een <strong>'Pagina'</strong> toe.</li>
+            <li>Zoek in de tekstverwerker naar het icoontje met de haakjes <code>&lt; &gt;</code> (Broncode).</li>
+            <li>Plak de code onderaan en klik nogmaals op <code>&lt; &gt;</code> om het resultaat te zien.</li>
+            <li>Sla de pagina op en je interactieve les is live voor je studenten!</li>
+        </ul>
+    </div>
+
+    <div class="navigation">
+        <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige stap</button>
+        <button class="btn" id="nextBtn" onclick="changeStep(1)">Volgende stap</button>
+    </div>
+    <div class="progress" id="progressText">Stap 1 van 4</div>
+</div>
+
+<script>
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    function changeStep(n) {
+        document.getElementById(`step-${currentStep}`).classList.remove('active');
+        currentStep += n;
+        document.getElementById(`step-${currentStep}`).classList.add('active');
+        
+        document.getElementById('prevBtn').disabled = (currentStep === 1);
+        
+        const nextBtn = document.getElementById('nextBtn');
+        if (currentStep === totalSteps) {
+            nextBtn.innerText = "Afronden";
+            nextBtn.onclick = () => {
+                alert("Gefeliciteerd! Je bent klaar om je eerste interactieve les te bouwen.");
+                location.reload();
+            };
+        } else {
+            nextBtn.innerText = "Volgende stap";
+            nextBtn.onclick = () => changeStep(1);
+        }
+
+        document.getElementById('progressText').innerText = `Stap ${currentStep} van ${totalSteps}`;
+    }
+</script>
+
+</body>
+</html>
