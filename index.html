@@ -3,207 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instructie: Interactieve Lessen Bouwen</title>
+    <title>Workshop: Interactieve Lessen Bouwen met AI</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --accent: #3498db;
-            --bg: #f4f7f6;
-            --text: #333;
-            --white: #ffffff;
-            --warning-bg: #fff5f5;
-            --warning-border: #feb2b2;
-            --warning-text: #c53030;
+            --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --text: #333;
+            --white: #ffffff; --warning-bg: #fff5f5; --warning-border: #feb2b2; --warning-text: #c53030;
+            --info-bg: #ebf8ff; --info-border: #90cdf4; --info-text: #2c5282; --danger: #e74c3c;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .slider-container {
-            width: 95%;
-            max-width: 950px;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            margin: 20px;
-        }
-
-        .step {
-            display: none;
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        .step.active {
-            display: block;
-        }
-
-        h2 {
-            color: var(--primary);
-            border-bottom: 3px solid var(--accent);
-            padding-bottom: 15px;
-            margin-top: 0;
-        }
-
-        p { line-height: 1.6; font-size: 1.05rem; }
-
-        .callout-card {
-            background-color: var(--warning-bg);
-            border-left: 6px solid var(--warning-text);
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin: 20px 0;
-        }
-
-        .callout-card h4 { margin: 0 0 5px 0; color: var(--warning-text); }
-
-        .instruction-img {
-            width: 100%;
-            max-width: 750px;
-            height: auto;
-            border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid #ddd;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .img-caption {
-            font-style: italic;
-            color: #666;
-            text-align: center;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .btn {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        .btn:disabled { background-color: #dcdde1; cursor: not-allowed; }
-
-        .progress { text-align: center; margin-top: 15px; font-weight: 600; color: #95a5a6; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { width: 95%; max-width: 1100px; background: var(--white); padding: 50px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); position: relative; margin: 20px; }
+        .step { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .step.active { display: block; }
+        h2 { color: var(--primary); border-bottom: 4px solid var(--accent); padding-bottom: 12px; margin-top: 0; font-size: 2rem; }
+        p { line-height: 1.8; font-size: 1.15rem; margin-bottom: 20px; }
+        .card { padding: 25px; border-radius: 12px; margin: 25px 0; border-left: 8px solid; line-height: 1.7; }
+        .warning { background: var(--warning-bg); border-color: var(--warning-text); color: var(--warning-text); }
+        .info { background: var(--info-bg); border-color: var(--info-text); color: var(--info-text); }
+        input, textarea { width: 100%; padding: 15px; margin: 12px 0; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1.1rem; }
+        .btn { background: var(--accent); color: white; border: none; padding: 16px 35px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: background 0.3s; }
+        .btn:hover { background: #2980b9; }
+        .btn-danger { background: var(--danger); margin-top: 20px; font-size: 0.9rem; padding: 10px 20px; }
+        .btn-danger:hover { background: #c0392b; }
+        .navigation { display: flex; justify-content: space-between; margin-top: 40px; border-top: 2px solid #eee; padding-top: 25px; }
+        .instruction-img { width: 100%; max-width: 800px; border-radius: 12px; margin: 25px auto; display: block; border: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; margin-top: 25px; }
+        th, td { padding: 15px; border: 1px solid #eee; text-align: left; }
+        th { background: var(--primary); color: white; }
+        .code-box { background: #2d3436; color: #fab1a0; padding: 20px; border-radius: 10px; font-family: monospace; overflow-x: auto; margin-top: 15px; border: 2px dashed #636e72; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<div class="slider-container">
+<div class="container">
     <div class="step active" id="step-1">
-        <h2>Stap 1: GitHub & Veiligheid</h2>
-        <p>GitHub is de online plek waar we de code van onze les opslaan. Voordat we beginnen, een heel belangrijke afspraak:</p>
-        
-        <div class="callout-card">
-            <h4>⚠️ Belangrijke Veiligheidsinstructie</h4>
-            <p>Plaats NOOIT politiegegevens of privacygevoelige informatie in de AI. Houd je lessen altijd algemeen en educatief.</p>
+        <h2>Welkom bij de Workshop: Interactieve Lessen Bouwen</h2>
+        <div class="card warning">
+            <strong>⚠️ Belangrijke Veiligheidsaanbeveling:</strong> Plaats <strong>NOOIT</strong> werkelijke politiegegevens of privacygevoelige informatie in Gemini.
         </div>
-
-        <p><strong>De eerste stap:</strong> Log in op GitHub.com via je Google-account en zorg voor een neutrale gebruikersnaam (geen politie-verwijzingen).</p>
+        <div class="card info">
+            <strong>Doel:</strong> Met AI (Gemini) een interactieve les maken.<br><br>
+            <strong>Inhoud:</strong> Prompten, GitHub (opslag), Firebase (motor) en It's Learning (publicatie).
+        </div>
     </div>
 
     <div class="step" id="step-2">
-        <h2>Stap 2: Een nieuwe lesmap aanmaken</h2>
-        <p>In GitHub heet een projectmap een 'Repository'. Zo maak je deze aan:</p>
-        
-        <img src="nieuweles.png" alt="Nieuwe repository" class="instruction-img">
-        <p class="img-caption">1. Klik op de groene knop <strong>'New'</strong> bij je Repositories.</p>
-
-        <img src="naam.png" alt="Naam geven" class="instruction-img">
-        <p class="img-caption">2. Geef je les een duidelijke, neutrale naam en klik onderaan op <strong>'Create repository'</strong>.</p>
+        <h2>Stap A: Jouw Didactisch Lesontwerp</h2>
+        <p>Vul je gegevens in om een prompt te genereren voor Gemini.</p>
+        <input type="text" id="user-name" placeholder="Je achternaam...">
+        <input type="text" id="les-doel" placeholder="Wat is het leerdoel?">
+        <textarea id="les-werkvorm" rows="4" placeholder="Wat is de werkvorm? (bijv. quiz, feedbackspel...)"></textarea>
+        <button class="btn" onclick="saveDesign()">Sla op & Genereer Prompt</button>
+        <div id="prompt-result" style="display:none; margin-top:30px;">
+            <div class="code-box" id="generated-prompt"></div>
+        </div>
     </div>
 
     <div class="step" id="step-3">
-        <h2>Stap 3: Het bestand index.html maken</h2>
-        <p>Nu gaan we de code die Gemini voor ons heeft geschreven in de map plakken.</p>
-
-        <img src="nieuwbestand.png" alt="Nieuw bestand" class="instruction-img">
-        <p class="img-caption">1. Klik op de link <strong>'creating a new file'</strong>.</p>
-
-        <img src="index.png" alt="Bestandsnaam index" class="instruction-img">
-        <p class="img-caption">2. Typ bij de bestandsnaam exact: <strong>index.html</strong> (rode pijl). Plak daarna de code van Gemini in het grote witte vlak (gele pijl).</p>
+        <h2>Overzicht: Plannen van de deelnemers</h2>
+        <div id="dashboard-1">Laden...</div>
     </div>
 
     <div class="step" id="step-4">
-        <h2>Stap 4: Je les live zetten (De Startknop)</h2>
-        <p>De code staat nu op GitHub, maar is nog onzichtbaar. We moeten GitHub vertellen dat het een website is.</p>
-
-        <img src="main.png" alt="GitHub Pages instellingen" class="instruction-img">
-        <p class="img-caption">Volg de genummerde cirkels in de afbeelding:</p>
-        <ul>
-            <li><strong>Cirkel 1:</strong> Klik op het tabblad <strong>'Settings'</strong> bovenaan.</li>
-            <li><strong>Cirkel 2:</strong> Scroll in het linker-menu naar beneden en klik op <strong>'Pages'</strong>.</li>
-            <li><strong>Cirkel 3:</strong> Kies bij Branch voor <strong>'main'</strong> en klik op <strong>'Save'</strong>.</li>
-            <li><strong>Cirkel 4:</strong> Na een minuutje wachten verschijnt hier je live link! (blauw).</li>
-        </ul>
+        <h2>Stap A: De Code van Gemini Ontvangen</h2>
+        <p>Kopieer de volledige HTML-code van Gemini. Heb je nog geen bruikbare code? Vraag Gemini om één index.html bestand.</p>
     </div>
 
     <div class="step" id="step-5">
-        <h2>Stap 5: Firebase (De Verbinding)</h2>
-        <p>Firebase is de 'supercomputer' die zorgt dat de les interactief is. Het verbindt de laptops van de agenten in de klas met jouw scherm.</p>
-        <p>Log in op <strong>Firebase.google.com</strong> met Google en maak een nieuw project aan met dezelfde neutrale naam als op GitHub.</p>
-        <img src="githubfirebase.jpg" alt="Infographic" class="infographic" style="width:100%; border-radius:10px; margin-top:10px; border:1px solid #ddd;">
+        <h2>Stap B: GitHub (De Archiefkast)</h2>
+        <img src="nieuweles.png" class="instruction-img">
+        <img src="naam.png" class="instruction-img">
+        <img src="nieuwbestand.png" class="instruction-img">
+        <img src="index.png" class="instruction-img">
+        <p>Ga naar <strong>Settings -> Pages</strong>, kies Branch <strong>'main'</strong> en klik op <strong>Save</strong>.</p>
+        <img src="main.png" class="instruction-img">
     </div>
 
     <div class="step" id="step-6">
-        <h2>Stap 6: Plaatsen in It's Learning</h2>
-        <p>Kopieer de iFrame-code (het venster). Ga naar It's Learning, kies 'Broncode' (het icoontje <strong>&lt; &gt;</strong>) en plak de code daar in.</p>
-        <p>Je interactieve les is nu klaar voor gebruik!</p>
+        <h2>Voortgang: GitHub Status</h2>
+        <button class="btn" onclick="updateStatus('github', true)">✅ Mijn GitHub link werkt!</button>
+        <div id="dashboard-2" style="margin-top:20px;"></div>
+    </div>
+
+    <div class="step" id="step-7">
+        <h2>Stap C: Firebase (De Motor)</h2>
+        <img src="githubfirebase.jpg" class="instruction-img">
+        <p>Firebase zorgt voor de live verbinding tussen alle studenten.</p>
+    </div>
+
+    <div class="step" id="step-8">
+        <h2>Stap C: Firebase Instellen</h2>
+        <div class="card warning">Zet in Firebase bij 'Rules' de waarden op <strong>true</strong>.</div>
+        <textarea id="firebase-config-input" rows="5" placeholder="Plak hier je Firebase configuratie code..."></textarea>
+        <button class="btn" onclick="updateStatus('firebase', true)">✅ Firebase gekoppeld</button>
+    </div>
+
+    <div class="step" id="step-9">
+        <h2>Voortgang: Koppelingen</h2>
+        <div id="dashboard-3"></div>
+    </div>
+
+    <div class="step" id="step-10">
+        <h2>Stap D: iFrame Generator</h2>
+        <p>Plak hier de link van je GitHub Pages site:</p>
+        <input type="text" id="github-url" placeholder="https://jouwnaam.github.io/project/">
+        <button class="btn" onclick="generateIframe()">Genereer It's Learning Code</button>
+        <div id="iframe-result" style="display:none; margin-top:20px;">
+            <div class="code-box" id="final-iframe-code"></div>
+        </div>
+        <br><button class="btn" onclick="updateStatus('iframe', true)">✅ iFrame gereed</button>
+    </div>
+
+    <div class="step" id="step-11">
+        <h2>Stap D: Plaatsen in It's Learning</h2>
+        <p>Maak een 'Pagina' aan, klik op <strong>&lt; &gt; (Broncode)</strong>, plak je code en klik op <strong>Opslaan</strong>.</p>
+    </div>
+
+    <div class="step" id="step-12">
+        <h2>Eindoverzicht Workshop</h2>
+        <div id="dashboard-4"></div>
+        
+        <hr style="margin-top:50px;">
+        <div style="text-align: center;">
+            <p><small>Beheeroptie voor docent:</small></p>
+            <button class="btn btn-danger" onclick="resetWorkshop()">⚠️ Reset Workshop (Wis alle data)</button>
+        </div>
     </div>
 
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
         <button class="btn" id="nextBtn" onclick="changeStep(1)">Volgende</button>
     </div>
-    <div class="progress" id="progressText">Stap 1 van 6</div>
+    <div class="progress" id="progressText">Stap 1 van 12</div>
 </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4",
+        authDomain: "pvaangifteinleveren-77dbe.firebaseapp.com",
+        databaseURL: "https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "pvaangifteinleveren-77dbe",
+        storageBucket: "pvaangifteinleveren-77dbe.firebasestorage.app",
+        messagingSenderId: "20239054410",
+        appId: "1:20239054410:web:264b3c759312248d9f18b3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    window.saveDesign = function() {
+        const name = document.getElementById('user-name').value;
+        const doel = document.getElementById('les-doel').value;
+        const vorm = document.getElementById('les-werkvorm').value;
+        if(!name) return alert("Vul je naam in!");
+        
+        document.getElementById('generated-prompt').innerText = `Hee Gemini, maak een interactieve les in HTML. Doel: ${doel}. Werkvorm: ${vorm}. Geen echte politiegegevens gebruiken.`;
+        document.getElementById('prompt-result').style.display = 'block';
+
+        set(ref(db, 'workshop/users/' + name), { name, doel, github: false, firebase: false, iframe: false });
+        localStorage.setItem('workshopUser', name);
+    };
+
+    window.updateStatus = function(field, status) {
+        const name = localStorage.getItem('workshopUser');
+        if(name) set(ref(db, `workshop/users/${name}/${field}`), status);
+    };
+
+    window.resetWorkshop = function() {
+        if(confirm("Weet je zeker dat je alle deelnemersgegevens wilt wissen? Dit kan niet ongedaan worden gemaakt.")) {
+            remove(ref(db, 'workshop/users')).then(() => {
+                localStorage.clear();
+                location.reload();
+            });
+        }
+    };
+
+    window.generateIframe = function() {
+        const url = document.getElementById('github-url').value;
+        const code = `<iframe src="${url}" width="100%" height="800px" style="border:none; border-radius:15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);"></iframe>`;
+        document.getElementById('final-iframe-code').innerText = code;
+        document.getElementById('iframe-result').style.display = 'block';
+    };
+
+    onValue(ref(db, 'workshop/users'), (snapshot) => {
+        const users = snapshot.val();
+        let html = `<table><tr><th>Naam</th><th>Doel</th><th>GitHub</th><th>Firebase</th><th>iFrame</th></tr>`;
+        for(let id in users) {
+            const u = users[id];
+            html += `<tr><td>${u.name}</td><td>${u.doel || '-'}</td><td>${u.github?'✅':'⏳'}</td><td>${u.firebase?'✅':'⏳'}</td><td>${u.iframe?'✅':'⏳'}</td></tr>`;
+        }
+        html += `</table>`;
+        ['dashboard-1', 'dashboard-2', 'dashboard-3', 'dashboard-4'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).innerHTML = html; });
+    });
+</script>
 
 <script>
     let currentStep = 1;
-    const totalSteps = 6;
-
     function changeStep(n) {
         document.getElementById(`step-${currentStep}`).classList.remove('active');
         currentStep += n;
         document.getElementById(`step-${currentStep}`).classList.add('active');
         document.getElementById('prevBtn').disabled = (currentStep === 1);
-        const nextBtn = document.getElementById('nextBtn');
-        if (currentStep === totalSteps) {
-            nextBtn.innerText = "Klaar";
-            nextBtn.onclick = () => alert("Succes met je instructie! Je collega's zijn er klaar voor.");
-        } else {
-            nextBtn.innerText = "Volgende";
-            nextBtn.onclick = () => changeStep(1);
-        }
-        document.getElementById('progressText').innerText = `Stap ${currentStep} van ${totalSteps}`;
+        document.getElementById('nextBtn').innerText = (currentStep === 12) ? "Klaar" : "Volgende stap";
+        document.getElementById('progressText').innerText = `Stap ${currentStep} van 12`;
+        window.scrollTo(0,0);
     }
 </script>
 </body>
