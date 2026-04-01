@@ -41,61 +41,70 @@
 <div class="container">
     <div class="step active" id="step-1">
         <h2>Welkom bij de Workshop: Interactieve Lessen</h2>
-        <div class="card warning"><strong>⚠️ Belangrijke Veiligheid:</strong> Plaats NOOIT werkelijke politiegegevens in Gemini.</div>
-        <div class="card info"><strong>Doel:</strong> Met AI (Gemini) een interactieve les maken.</div>
+        <div class="card warning">
+            <strong>⚠️ Belangrijke Veiligheid:</strong> Plaats <strong>NOOIT</strong> werkelijke politiegegevens, privacygevoelige informatie of namen van burgers in Gemini. Gebruik uitsluitend fictieve casuïstiek.
+        </div>
+        <div class="card info">
+            <strong>Doel:</strong> Vandaag leer je hoe je met AI (Gemini) een volledig functionerende interactieve les bouwt, deze online zet via GitHub, koppelt aan een database (Firebase) en integreert in It's Learning.
+        </div>
     </div>
 
     <div class="step" id="step-2">
         <h2>Stap A: Jouw Didactisch Lesontwerp</h2>
-        <p>Vul je gegevens in om een prompt te genereren voor Gemini.</p>
+        <p>Voordat we de techniek induiken, bepalen we de inhoud. Wat wil je dat de studenten gaan doen?</p>
         <input type="text" id="user-name" placeholder="Je achternaam...">
-        <input type="text" id="les-doel" placeholder="Wat is het leerdoel?">
-        <textarea id="les-werkvorm" rows="4" placeholder="Wat is de werkvorm? (bijv. antwoorden op vragen, opstellen van een tekst, feedback geven op een tekst quiz,...)"></textarea>
+        <input type="text" id="les-doel" placeholder="Wat is het leerdoel? (bijv. Kennis van artikel 8 WVW)">
+        <textarea id="les-werkvorm" rows="4" placeholder="Wat is de werkvorm? (bijv. antwoorden op vragen, opstellen van een tekst, feedback geven op een tekst, quiz, etc.)"></textarea>
         <button class="btn" onclick="saveDesign()">Sla op & Genereer Prompt</button>
-        <div id="prompt-result" style="display:none; margin-top:30px;"><div class="code-box" id="generated-prompt"></div></div>
+        <div id="prompt-result" style="display:none; margin-top:30px;">
+            <p><strong>Kopieer deze prompt voor de volgende stap:</strong></p>
+            <div class="code-box" id="generated-prompt"></div>
+        </div>
     </div>
 
     <div class="step" id="step-3">
         <h2>Overzicht: Plannen van de deelnemers</h2>
+        <p>Kijk hieronder wat je collega's gaan bouwen. Misschien doe je nog inspiratie op!</p>
         <div id="dashboard-1">Laden...</div>
     </div>
 
     <div class="step" id="step-4">
         <h2>Stap A: Naar Gemini voor je Code</h2>
-        <p>Klik op de knop om Gemini te openen en plak daar je prompt.</p>
+        <p>Klik op de paarse knop om Gemini te openen. Plak daar de prompt die je zojuist hebt gegenereerd.</p>
         <a href="https://gemini.google.com/" target="_blank" class="btn btn-gemini">👉 Open Gemini (Google AI)</a>
-        <div class="card info">Kopieer de volledige HTML-code die Gemini voor je genereert.</div>
+        <div class="card info">
+            <strong>Instructie:</strong> Kopieer de <u>volledige</u> HTML-code die Gemini voor je genereert. Als de code stopt halverwege, typ dan "ga verder". Je hebt alles nodig van de eerste tot de laatste regel.
+        </div>
     </div>
 
     <div class="step" id="step-5">
         <h2>Stap B: Wat is GitHub?</h2>
-        <p>Je hebt nu de code van je les, maar deze staat nog op je klembord. Om de les toegankelijk te maken voor je studenten, moet de code op internet geplaatst worden. Hiervoor gebruiken we **GitHub**.</p>
-        
+        <p>Je hebt nu de code, maar die staat nog op je klembord. Om de les toegankelijk te maken voor je studenten, moet de code op internet geplaatst worden. Hiervoor gebruiken we <strong>GitHub</strong>.</p>
         <div class="card info">
             <strong>Wat doet GitHub?</strong><br>
-            Zie GitHub als een grote, beveiligde online archiefkast (een 'Repository'). Het zet jouw code om in een werkende website met een eigen link die iedereen kan openen.
+            Zie GitHub als een beveiligde online archiefkast. Het host jouw code en maakt er een werkende website van met een unieke link.
         </div>
-
-        <p><strong>De Opdracht:</strong> Log in op GitHub. We gebruiken hiervoor je Google-account, zodat je geen nieuw wachtwoord hoeft te onthouden.</p>
-        
+        <p><strong>De Opdracht:</strong> Log in op GitHub. Gebruik hiervoor je Google-account, dat is wel zo makkelijk.</p>
         <a href="https://github.com/login" target="_blank" class="btn btn-github">🌐 Ga naar GitHub & Log in met Google</a>
-        
-        <p><small><i>Tip: Kies na het klikken voor "Sign in with Google" om direct toegang te krijgen.</i></small></p>
+        <p><small><i>Tip: Kies voor "Sign in with Google" om direct toegang te krijgen zonder nieuw wachtwoord.</i></small></p>
     </div>
 
     <div class="step" id="step-6">
         <h2>Stap B: Je les live zetten op GitHub</h2>
-        <p>Nu je bent ingelogd, gaan we je les 'hosten'. Volg de afbeeldingen hieronder stap-voor-stap:</p>
+        <p>Nu je bent ingelogd, maken we de les 'echt'. Volg deze stappen exact:</p>
         <img src="nieuweles.png" class="instruction-img">
         <img src="naam.png" class="instruction-img">
         <img src="nieuwbestand.png" class="instruction-img">
         <img src="index.png" class="instruction-img">
-        <div class="card info">Plak je code in 'index.html', ga naar <strong>Settings -> Pages</strong>, kies Branch <strong>'main'</strong> en klik op <strong>Save</strong>.</div>
+        <div class="card info">
+            <strong>Activeer de website:</strong> Plak je code in 'index.html' en sla op. Ga daarna naar <strong>Settings -> Pages</strong>, kies bij Branch voor <strong>'main'</strong> en klik op <strong>Save</strong>.
+        </div>
         <img src="main.png" class="instruction-img">
     </div>
 
     <div class="step" id="step-7">
         <h2>Voortgang: GitHub Status</h2>
+        <p>Is je les bereikbaar via de link die GitHub Pages je geeft? (Dit duurt vaak 1-2 minuten).</p>
         <button class="btn" onclick="updateStatus('github', true)">✅ Mijn GitHub link werkt!</button>
         <div id="dashboard-2" style="margin-top:20px;"></div>
     </div>
@@ -103,13 +112,17 @@
     <div class="step" id="step-8">
         <h2>Stap C: Firebase (De Motor)</h2>
         <img src="githubfirebase.jpg" class="instruction-img">
-        <p>Firebase zorgt voor de live verbinding tussen alle studenten.</p>
+        <p>Zonder Firebase is je les een statische tekst. Firebase is de 'motor' die ervoor zorgt dat studenten live resultaten kunnen zien en antwoorden naar de database kunnen sturen.</p>
     </div>
 
     <div class="step" id="step-9">
         <h2>Stap C: Firebase Instellen</h2>
-        <div class="card warning">Zet in de Firebase Console bij 'Rules' de waarden op <strong>true</strong>.</div>
+        <div class="card warning">
+            <strong>Cruciale stap:</strong> Zet in de Firebase Console onder het tabblad 'Rules' de waarden van 'read' en 'write' op <strong>true</strong>. Klik daarna op 'Publish'.
+        </div>
+        <p>Kopieer je configuratie-code uit Firebase en plak deze hieronder:</p>
         <textarea id="firebase-config-input" rows="5" placeholder="Plak hier je Firebase configuratie code..."></textarea>
+        <p><strong>Vraag nu aan Gemini:</strong> "Integreer deze configuratie in mijn code zodat de database werkt."</p>
         <button class="btn" onclick="updateStatus('firebase', true)">✅ Firebase gekoppeld</button>
     </div>
 
@@ -119,24 +132,31 @@
     </div>
 
     <div class="step" id="step-11">
-        <h2>Stap D: iFrame Generator</h2>
-        <p>Plak de link van je GitHub Pages site:</p>
-        <input type="text" id="github-url" placeholder="https://jouwnaam.github.io/project/">
+        <h2>Stap D: iFrame Generator voor It's Learning</h2>
+        <p>Om je les in It's Learning te tonen, maken we een 'venster' (iFrame).</p>
+        <div class="card info">
+            <strong>Waar vind ik mijn link?</strong> Ga in GitHub naar <strong>Settings > Pages</strong>. Bovenaan staat de link in een blauw vak (bijv. <i>https://jouwnaam.github.io/project/</i>). Kopieer deze.
+        </div>
+        <input type="text" id="github-url" placeholder="Plak hier je GitHub Pages link...">
         <button class="btn" onclick="generateIframe()">Genereer It's Learning Code</button>
-        <div id="iframe-result" style="display:none; margin-top:20px;"><div class="code-box" id="final-iframe-code"></div></div>
+        <div id="iframe-result" style="display:none; margin-top:20px;">
+            <p>Kopieer deze code:</p>
+            <div class="code-box" id="final-iframe-code"></div>
+        </div>
         <br><button class="btn" onclick="updateStatus('iframe', true)">✅ iFrame gereed</button>
     </div>
 
     <div class="step" id="step-12">
         <h2>Stap D: Plaatsen in It's Learning</h2>
-        <p>Maak een 'Pagina' aan, klik op <strong>&lt; &gt; (Broncode)</strong>, plak je code en klik op <strong>Opslaan</strong>.</p>
+        <p>Ga naar je vak in It's Learning. Voeg een 'Pagina' toe. Klik in de editor op het icoontje <strong>&lt; &gt; (Broncode)</strong>, plak de code uit de vorige stap en klik op <strong>Opslaan</strong>.</p>
     </div>
 
     <div class="step" id="step-13">
         <h2>Eindoverzicht Workshop</h2>
+        <p>Gefeliciteerd! Je hebt een interactieve les gebouwd met AI. Hieronder zie je de status van de groep:</p>
         <div id="dashboard-4"></div>
         <hr style="margin-top:60px;">
-        <button class="btn btn-danger" onclick="resetWorkshop()">⚠️ Reset Workshop (Beveiligd)</button>
+        <button class="btn btn-danger" onclick="resetWorkshop()">⚠️ Reset Workshop (Beveiligd voor docent)</button>
     </div>
 
     <div class="navigation">
@@ -150,6 +170,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
+    // Workshop beheer database (Firebase van de gids zelf)
     const firebaseConfig = {
         apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4",
         authDomain: "pvaangifteinleveren-77dbe.firebaseapp.com",
@@ -168,8 +189,10 @@
         const doel = document.getElementById('les-doel').value;
         const vorm = document.getElementById('les-werkvorm').value;
         if(!name) return alert("Vul eerst je naam in!");
-        document.getElementById('generated-prompt').innerText = `Hee Gemini, maak een interactieve les in één HTML-bestand. Doel: ${doel}. Werkvorm: ${vorm}. Gebruik een modern design en bereid de code voor op Firebase. Gebruik GEEN echte politiegegevens.`;
+        
+        document.getElementById('generated-prompt').innerText = `Hee Gemini, maak een interactieve les in één HTML-bestand. Gebruik GEEN echte politiegegevens. Leerdoel: ${doel}. Werkvorm: ${vorm}. Zorg voor een modern design en bereid de code voor op een Firebase database koppeling.`;
         document.getElementById('prompt-result').style.display = 'block';
+        
         set(ref(db, 'workshop/users/' + name), { name, doel, github: false, firebase: false, iframe: false });
         localStorage.setItem('workshopUser', name);
     };
@@ -180,12 +203,18 @@
     };
 
     window.resetWorkshop = function() {
-        const pw = prompt("Wachtwoord:");
-        if(pw === "admin123") { remove(ref(db, 'workshop/users')).then(() => { localStorage.clear(); location.reload(); }); }
+        const pw = prompt("Beheerderswachtwoord:");
+        if(pw === "admin123") { 
+            remove(ref(db, 'workshop/users')).then(() => { 
+                localStorage.clear(); 
+                location.reload(); 
+            }); 
+        }
     };
 
     window.generateIframe = function() {
         const url = document.getElementById('github-url').value;
+        if(!url) return alert("Plak eerst je link!");
         const code = `<iframe src="${url}" width="100%" height="800px" style="border:none; border-radius:15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);"></iframe>`;
         document.getElementById('final-iframe-code').innerText = code;
         document.getElementById('iframe-result').style.display = 'block';
@@ -199,7 +228,10 @@
             html += `<tr><td>${u.name}</td><td>${u.doel || '-'}</td><td>${u.github?'✅':'⏳'}</td><td>${u.firebase?'✅':'⏳'}</td><td>${u.iframe?'✅':'⏳'}</td></tr>`;
         }
         html += `</table>`;
-        ['dashboard-1', 'dashboard-2', 'dashboard-3', 'dashboard-4'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).innerHTML = html; });
+        ['dashboard-1', 'dashboard-2', 'dashboard-3', 'dashboard-4'].forEach(id => { 
+            const el = document.getElementById(id);
+            if(el) el.innerHTML = html; 
+        });
     });
 </script>
 
