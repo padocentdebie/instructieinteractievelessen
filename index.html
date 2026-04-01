@@ -29,7 +29,7 @@
 
         .slider-container {
             width: 95%;
-            max-width: 900px;
+            max-width: 950px;
             background: var(--white);
             padding: 40px;
             border-radius: 20px;
@@ -69,7 +69,7 @@
 
         .instruction-img {
             width: 100%;
-            max-width: 700px;
+            max-width: 750px;
             height: auto;
             border-radius: 8px;
             margin: 15px 0;
@@ -142,25 +142,39 @@
     </div>
 
     <div class="step" id="step-3">
-        <h2>Stap 3: Het bestand maken</h2>
-        <p>Nu de map klaar is, gaan we de code die Gemini voor ons heeft geschreven erin plakken.</p>
+        <h2>Stap 3: Het bestand index.html maken</h2>
+        <p>Nu gaan we de code die Gemini voor ons heeft geschreven in de map plakken.</p>
 
         <img src="nieuwbestand.png" alt="Nieuw bestand" class="instruction-img">
-        <p class="img-caption">1. Klik op de link <strong>'creating a new file'</strong> in het blauwe vak.</p>
+        <p class="img-caption">1. Klik op de link <strong>'creating a new file'</strong>.</p>
 
         <img src="index.png" alt="Bestandsnaam index" class="instruction-img">
         <p class="img-caption">2. Typ bij de bestandsnaam exact: <strong>index.html</strong> (rode pijl). Plak daarna de code van Gemini in het grote witte vlak (gele pijl).</p>
     </div>
 
     <div class="step" id="step-4">
-        <h2>Stap 4: Firebase (De Verbinding)</h2>
-        <p>Firebase is de 'supercomputer' die zorgt dat de les interactief is. Het verbindt de laptops van de agenten in de klas met jouw scherm.</p>
-        <p>Log in op <strong>Firebase.google.com</strong> met Google en maak een nieuw project aan met dezelfde neutrale naam als op GitHub.</p>
-        <img src="githubfirebase.jpg" alt="Infographic" class="infographic" style="width:100%; border-radius:10px; margin-top:10px;">
+        <h2>Stap 4: Je les live zetten (De Startknop)</h2>
+        <p>De code staat nu op GitHub, maar is nog onzichtbaar. We moeten GitHub vertellen dat het een website is.</p>
+
+        <img src="main.png" alt="GitHub Pages instellingen" class="instruction-img">
+        <p class="img-caption">Volg de genummerde cirkels in de afbeelding:</p>
+        <ul>
+            <li><strong>Cirkel 1:</strong> Klik op het tabblad <strong>'Settings'</strong> bovenaan.</li>
+            <li><strong>Cirkel 2:</strong> Scroll in het linker-menu naar beneden en klik op <strong>'Pages'</strong>.</li>
+            <li><strong>Cirkel 3:</strong> Kies bij Branch voor <strong>'main'</strong> en klik op <strong>'Save'</strong>.</li>
+            <li><strong>Cirkel 4:</strong> Na een minuutje wachten verschijnt hier je live link! (blauw).</li>
+        </ul>
     </div>
 
     <div class="step" id="step-5">
-        <h2>Stap 5: Plaatsen in It's Learning</h2>
+        <h2>Stap 5: Firebase (De Verbinding)</h2>
+        <p>Firebase is de 'supercomputer' die zorgt dat de les interactief is. Het verbindt de laptops van de agenten in de klas met jouw scherm.</p>
+        <p>Log in op <strong>Firebase.google.com</strong> met Google en maak een nieuw project aan met dezelfde neutrale naam als op GitHub.</p>
+        <img src="githubfirebase.jpg" alt="Infographic" class="infographic" style="width:100%; border-radius:10px; margin-top:10px; border:1px solid #ddd;">
+    </div>
+
+    <div class="step" id="step-6">
+        <h2>Stap 6: Plaatsen in It's Learning</h2>
         <p>Kopieer de iFrame-code (het venster). Ga naar It's Learning, kies 'Broncode' (het icoontje <strong>&lt; &gt;</strong>) en plak de code daar in.</p>
         <p>Je interactieve les is nu klaar voor gebruik!</p>
     </div>
@@ -169,12 +183,12 @@
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
         <button class="btn" id="nextBtn" onclick="changeStep(1)">Volgende</button>
     </div>
-    <div class="progress" id="progressText">Stap 1 van 5</div>
+    <div class="progress" id="progressText">Stap 1 van 6</div>
 </div>
 
 <script>
     let currentStep = 1;
-    const totalSteps = 5;
+    const totalSteps = 6;
 
     function changeStep(n) {
         document.getElementById(`step-${currentStep}`).classList.remove('active');
@@ -184,7 +198,7 @@
         const nextBtn = document.getElementById('nextBtn');
         if (currentStep === totalSteps) {
             nextBtn.innerText = "Klaar";
-            nextBtn.onclick = () => alert("Succes met je instructie!");
+            nextBtn.onclick = () => alert("Succes met je instructie! Je collega's zijn er klaar voor.");
         } else {
             nextBtn.innerText = "Volgende";
             nextBtn.onclick = () => changeStep(1);
