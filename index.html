@@ -92,19 +92,28 @@
         <h2>Stap C: Firebase (De Database)</h2>
         <div class="card info">
             <strong>De connectie:</strong> Je website staat op GitHub, maar de data (antwoorden) wordt opgeslagen in Firebase. Github bewaart de code van de website. De website kan teksten van deelnemers laten zien. Maar die teksten moeten ook ergens opgeslagen worden. Dat kan in Firebase. Tijdens de les worden teksten uit firebase opgehaald en getoond. Bekijk de infographic om het systeem te begrijpen. 
-        </div>
+       <img src="githubfirebase.png" class="instruction-img" alt="Infographic: GitHub en Firebase koppeling">
+        
+        <a href="https://console.firebase.google.com/" target="_blank" class="btn btn-firebase">🔥 Open Firebase Console</a>  </div>
         <p><strong>Actie: Realtime Database activeren</strong></p>
         <p>Ga naar de Firebase Console, klik op <strong>Build > Realtime Database</strong> en kies voor 'Create Database'.</p>
         
-        <img src="githubfirebase.png" class="instruction-img" alt="Infographic: GitHub en Firebase koppeling">
-        
-        <a href="https://console.firebase.google.com/" target="_blank" class="btn btn-firebase">🔥 Open Firebase Console</a>
+       
     </div>
 
     <div class="step" id="step-9">
         <h2>Stap C: Koppelen & Regels</h2>
         <div class="card warning">
-            <strong>⚠️ Belangrijk:</strong> Zet in de Realtime Database bij het tabblad <strong>Rules</strong> de waarden op <strong>true</strong>.
+            <strong>⚠️ Belangrijk:</strong> Zet in de Realtime Database bij het tabblad <strong>Rules</strong> de waarden op: <p><strong>Stap 2: Kopieer en plak deze beveiligingsregels:</strong></p>
+<div class="code-box" style="position: relative;">
+    <pre id="firebase-rules-text">{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}</pre>
+    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; position: absolute; top: 10px; right: 10px;" onclick="copyRules()">Kopieer</button>
+</div> <strong>true</strong>.
         </div>
         <textarea id="firebase-config-input" rows="5" placeholder="Plak hier je firebaseConfig code..."></textarea>
         <button class="btn" onclick="updateStatus('firebase', true)">✅ Firebase ingesteld</button>
