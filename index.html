@@ -149,7 +149,7 @@
     const db = getDatabase(app);
 
     window.addTheoryOogst = () => {
-        const termen = ["Directe Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap", "Mentale Schema's", "Chunking", "Voorkennis", "Beloning"];
+        const termen = ["Directe Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap","Eigen inbreng in de leeromgeving", "Mentale Schema's", "Chunking", "Voorkennis", "Beloning"];
         termen.forEach((t, i) => { push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 50 + (i * 30), y: 150 + (i * 45), type: 'theory' }); });
     };
 
