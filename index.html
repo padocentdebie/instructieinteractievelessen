@@ -189,7 +189,7 @@ EISEN: Gebruik de Firebase config uit de broncode voor real-time updates. Zorg v
 
     // --- WHITEBOARD & THEORIE ---
     window.addTheoryOogst = () => {
-        const termen = ["Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap", "Voorkennis", "Chunking", "Zone naaste ontwikkeling"];
+        const termen = ["Feedback", "Scaffolding", "Sociaal Leren", "Invloed op de leeromgeving","Eigenaarschap", "Voorkennis", "Chunking", "Zone naaste ontwikkeling"];
         termen.forEach((t, i) => { push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 100+(i*35), y: 150+(i*45), type: 'theory' }); });
     };
 
