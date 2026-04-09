@@ -23,16 +23,13 @@
         .flow-card { background: var(--bg); padding: 25px; border-radius: 15px; border-top: 5px solid var(--accent); }
         .flow-card h3 { margin-top: 0; color: var(--primary); }
         
-        .materials-box { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .tool { display: flex; align-items: center; gap: 20px; padding: 15px; border-radius: 12px; background: #fff; border: 1px solid #eee; }
-        .tool-icon { font-size: 1.8rem; width: 40px; font-weight: bold; text-align: center; }
-        .tool-info h4 { margin: 0; color: var(--primary); }
-        
         /* --- Digibord Styling --- */
         .board-outer-container { width: 100%; overflow: auto; border: 2px solid #ddd; border-radius: 15px; margin: 20px 0; background: #eee; }
         #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; }
-        .board-column { flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 2px dashed rgba(0,0,0,0.1); padding-top: 25px; }
-        .board-column h3 { font-size: 1.6rem; text-transform: uppercase; color: var(--primary); opacity: 0.7; font-weight: 800; }
+        .board-column { flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 2px dashed rgba(0,0,0,0.1); padding: 25px 15px; text-align: center; }
+        .board-column h3 { font-size: 1.6rem; text-transform: uppercase; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+        .board-column .features { font-size: 0.85rem; color: #666; font-style: italic; line-height: 1.4; }
+        
         .col-1 { background-color: var(--col-behaviorisme); }
         .col-2 { background-color: var(--col-cognitivisme); }
         .col-3 { background-color: var(--col-constructivisme); border-right: none; }
@@ -46,14 +43,19 @@
         }
         .draggable-word.theory { border-left-color: var(--theory-color); background: #fffdf0; }
 
+        /* --- Live Feed Cards --- */
+        .feed-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
+        .feed-card { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 12px; border-top: 4px solid var(--gemini-purple); box-shadow: 0 4px 6px rgba(0,0,0,0.05); animation: fadeIn 0.3s ease; }
+
         /* --- UI Elementen --- */
         .btn { background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; margin: 5px; }
         .btn-secondary { background: var(--theory-color); color: #333; }
+        .btn-success { background: #27ae60; color: white; }
         .btn-danger { background: var(--danger); color: white; }
+        
         .navigation { display: flex; justify-content: space-between; margin-top: 40px; border-top: 2px solid #eee; padding-top: 25px; }
         input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; box-sizing: border-box; }
         .instr-img { width: 100%; max-width: 600px; border-radius: 10px; border: 1px solid #ddd; margin: 15px 0; }
-        .code-snippet { background: #2d3436; color: #fab1a0; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; overflow-x: auto; margin-top: 10px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -66,7 +68,7 @@
         <div class="roadmap">
             <div class="flow-card">
                 <h3>💡 Motivatie</h3>
-                <p>Waarom maken we lessen interactief? (Activeer de lerende)</p>
+                <p>Waarom maken we lessen interactief? (Lerende activeren)</p>
             </div>
             <div class="flow-card">
                 <h3>🎯 Zelf doelen bedenken</h3>
@@ -77,30 +79,36 @@
                 <p>Hoe: Ontwerp de juiste interactie.</p>
             </div>
         </div>
-
-        <div class="materials-box">
-            <h3 style="color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px;">🛠️ Materialen</h3>
-            <div class="tool"><div class="tool-icon" style="color: var(--gemini-purple);">A</div><div class="tool-info"><h4>Gemini ('denken')</h4><p>Onze AI-partner voor het genereren van code en inhoud.</p></div></div>
-            <div class="tool"><div class="tool-icon" style="color: var(--github-black);">B</div><div class="tool-info"><h4>GitHub</h4><p>Live publicatie van je interactieve les.</p></div></div>
-            <div class="tool"><div class="tool-icon" style="color: var(--firebase-orange);">C</div><div class="tool-info"><h4>Firebase</h4><p>Real-time opslag van data en interactie.</p></div></div>
+        <div style="background: #eee; padding: 25px; border-radius: 20px; margin-top: 30px;">
+            <h3 style="margin-top:0;">🛠️ Materialen</h3>
+            <p><strong>Gemini:</strong> Onze AI-partner voor het genereren van code.<br>
+               <strong>GitHub:</strong> Voor het publiceren van je website.<br>
+               <strong>Firebase:</strong> De 'lijm' voor real-time interactie.</p>
         </div>
     </div>
 
     <div class="step" id="step-2">
         <h2>Stap A: Coöperatief Brainstormen</h2>
-        <p>Sleep de begrippen naar de juiste didactiek of trek lijnen op het bord.</p>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 15px;">
-            <input type="text" id="word-input" placeholder="Voeg eigen begrip toe..." style="margin:0; flex-grow: 1;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+            <input type="text" id="word-input" placeholder="Voeg eigen begrip toe..." style="flex-grow: 1; margin: 0;">
             <button class="btn" onclick="addWordToFirebase()">Voeg toe</button>
             <button class="btn btn-secondary" onclick="addTheoryOogst()">🎓 Theorie Oogst</button>
             <button class="btn btn-danger" onclick="clearFullReset()">🗑️ Wis Bord</button>
         </div>
-
         <div class="board-outer-container">
             <div id="digibord">
-                <div class="board-column col-1"><h3>Behaviorisme</h3></div>
-                <div class="board-column col-2"><h3>Cognitivisme</h3></div>
-                <div class="board-column col-3"><h3>Constructivisme</h3></div>
+                <div class="board-column col-1">
+                    <h3>Behaviorisme</h3>
+                    <div class="features">Conditionering, herhaling, directe beloning, meetbaar gedrag</div>
+                </div>
+                <div class="board-column col-2">
+                    <h3>Cognitivisme</h3>
+                    <div class="features">Informatieverwerking, geheugen, schema's, logisch denken</div>
+                </div>
+                <div class="board-column col-3">
+                    <h3>Constructivisme</h3>
+                    <div class="features">Zelf ontdekken, sociaal leren, context, actieve kennisbouw</div>
+                </div>
                 <canvas id="drawingCanvas" width="1600" height="800"></canvas>
             </div>
         </div>
@@ -108,38 +116,30 @@
     </div>
 
     <div class="step" id="step-3">
-        <h2>Stap B: Ontwerp je Les</h2>
-        <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
+        <h2>Stap B: Ontwerp & Live Inspiratie</h2>
+        <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #ddd; margin-bottom: 30px;">
             <input type="text" id="user-name" placeholder="Jouw voornaam...">
             <input type="text" id="les-doel" placeholder="Wat is het leerdoel?">
-            <textarea id="les-werkvorm" rows="4" placeholder="Welke werkvorm kies je? Beschrijf de interactie..."></textarea>
-            <button class="btn btn-success" onclick="saveDesign()">Sla Plan op & Maak Prompt</button>
+            <textarea id="les-werkvorm" rows="3" placeholder="Welke interactieve werkvorm kies je?"></textarea>
+            <button class="btn btn-success" onclick="saveDesign()">Sla Plan op & Deel</button>
         </div>
-        <div id="prompt-result" style="display:none; margin-top:20px; background: #f0f4f8; padding: 20px; border-radius: 15px; border-left: 5px solid var(--gemini-purple);">
-            <strong>Kopieer dit naar Gemini:</strong>
-            <p id="generated-prompt" style="font-style: italic;"></p>
-        </div>
+        
+        <h3>💡 Live feed van de groep:</h3>
+        <div id="live-feed" class="feed-container"></div>
     </div>
 
     <div class="step" id="step-4">
-        <h2>Stap C: Firebase Koppelen</h2>
-        <p>Kopieer je SDK configuratie uit het Firebase console:</p>
+        <h2>Stap C: Gemini Code Verwerken</h2>
+        <p>Plak hieronder de volledige code die Gemini voor je heeft gegenereerd:</p>
+        <textarea id="gemini-code-input" rows="12" placeholder="Plak hier de <html>...</html> code..." style="font-family: monospace; background: #2d3436; color: #fab1a0;"></textarea>
+        <button class="btn btn-success" onclick="saveGeminiCode()">💾 Sla Gemini Code op</button>
+        <hr>
+        <p>Instellingen voor in Gemini:</p>
         <img src="Screenshot 2026-04-09 09.29.49.png" class="instr-img">
-        <div class="code-snippet" id="config-to-copy">
-const firebaseConfig = {
-  apiKey: "JOUW_GEKOPIEERDE_KEY",
-  authDomain: "jouw-project.firebaseapp.com",
-  databaseURL: "jouw-url.firebasedatabase.app",
-  projectId: "jouw-project-id",
-  storageBucket: "jouw-bucket.appspot.com",
-  appId: "jouw-app-id"
-};
-        </div>
-        <button class="btn btn-secondary" onclick="copyConfig()" style="margin-top:10px;">Kopieer Config voor Gemini</button>
     </div>
 
     <div class="navigation">
-        <button class="btn" id="prevBtn" onclick="changeStep(-1)" style="background: #95a5a6;" disabled>Vorige</button>
+        <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
         <span id="progressText" style="font-weight: bold;">Stap 1 van 13</span>
         <button class="btn" id="nextBtn" onclick="changeStep(1)">Volgende</button>
     </div>
@@ -161,25 +161,23 @@ const firebaseConfig = {
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Theorie Oogst Functie (Originele didactische termen)
+    // --- Theorie Oogst (Originele termen) ---
     window.addTheoryOogst = () => {
         const termen = ["Directe Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap", "Mentale Schema's", "Chunking", "Voorkennis", "Beloning"];
-        termen.forEach((t, i) => {
-            push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 50 + (i * 30), y: 100 + (i * 45), type: 'theory' });
-        });
+        termen.forEach((t, i) => { push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 50 + (i * 30), y: 150 + (i * 45), type: 'theory' }); });
     };
 
-    // Whiteboard functionaliteit
+    // --- Digibord & Draggable ---
+    const board = document.getElementById('digibord');
     const canvas = document.getElementById('drawingCanvas');
     const ctx = canvas.getContext('2d');
-    const board = document.getElementById('digibord');
-    ctx.lineWidth = 3; ctx.strokeStyle = '#2c3e50'; ctx.lineCap = 'round';
+    ctx.lineWidth = 3; ctx.strokeStyle = '#2c3e50';
 
     canvas.onmousedown = () => { ctx.beginPath(); canvas.onmousemove = (e) => {
         const r = canvas.getBoundingClientRect();
         ctx.lineTo(e.clientX - r.left, e.clientY - r.top); ctx.stroke();
     };};
-    window.onmouseup = () => { canvas.onmousemove = null; };
+    window.onmouseup = () => canvas.onmousemove = null;
 
     window.addWordToFirebase = () => {
         const input = document.getElementById('word-input');
@@ -213,33 +211,44 @@ const firebaseConfig = {
         if (el) { el.style.left = s.val().x+'px'; el.style.top = s.val().y+'px'; }
     });
 
-    window.clearFullReset = () => { if(confirm("Wis het bord voor iedereen?")) remove(ref(db, 'workshop/whiteboard')).then(() => location.reload()); };
+    window.clearFullReset = () => { if(confirm("Bord wissen?")) remove(ref(db, 'workshop/whiteboard')).then(() => location.reload()); };
 
+    // --- Live Feed ---
     window.saveDesign = () => {
-        const n = document.getElementById('user-name').value;
-        const d = document.getElementById('les-doel').value;
-        const v = document.getElementById('les-werkvorm').value;
-        if(!n) return alert("Naam is verplicht.");
-        document.getElementById('generated-prompt').innerText = `Acteer als een expert in didactiek en web-ontwikkeling. Schrijf de code voor een interactieve les over "${d}". Gebruik de werkvorm: "${v}". Maak gebruik van de Firebase config die ik je zo geef.`;
-        document.getElementById('prompt-result').style.display = 'block';
+        const name = document.getElementById('user-name').value;
+        const doel = document.getElementById('les-doel').value;
+        const vorm = document.getElementById('les-werkvorm').value;
+        if(!name) return alert("Naam verplicht!");
+        set(ref(db, 'workshop/users/' + name), { name, doel, vorm });
     };
 
-    window.copyConfig = () => {
-        navigator.clipboard.writeText(document.getElementById('config-to-copy').innerText);
-        alert("Gekopieerd!");
-    };
-</script>
+    onChildAdded(ref(db, 'workshop/users'), (s) => {
+        const d = s.val();
+        const card = document.createElement('div');
+        card.className = 'feed-card';
+        card.innerHTML = `<strong>${d.name}</strong><br><small>Doel: ${d.doel}</small><p>${d.vorm}</p>`;
+        document.getElementById('live-feed').prepend(card);
+    });
 
-<script>
+    // --- Gemini Code ---
+    window.saveGeminiCode = () => {
+        const name = document.getElementById('user-name').value || "anoniem";
+        const code = document.getElementById('gemini-code-input').value;
+        if(!code) return alert("Plak de code eerst.");
+        set(ref(db, 'workshop/gemini_codes/' + name), { name, code, time: Date.now() });
+        alert("Code veilig opgeslagen!");
+    };
+
+    // --- Navigatie ---
     let step = 1;
-    function changeStep(n) {
+    window.changeStep = (n) => {
         document.getElementById(`step-${step}`).classList.remove('active');
         step += n;
         document.getElementById(`step-${step}`).classList.add('active');
         document.getElementById('prevBtn').disabled = (step === 1);
         document.getElementById('progressText').innerText = `Stap ${step} van 13`;
         window.scrollTo(0,0);
-    }
+    };
 </script>
 </body>
 </html>
