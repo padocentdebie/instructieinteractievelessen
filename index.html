@@ -53,9 +53,11 @@
         .btn { background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn:hover { filter: brightness(1.1); }
         .btn-secondary { background: var(--theory-color); color: #333; }
+        .btn-danger { background: var(--danger); color: white; }
         .navigation { display: flex; justify-content: space-between; margin-top: 40px; border-top: 2px solid #eee; padding-top: 25px; }
         input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; }
         .code-box { background: #2d3436; color: #fab1a0; padding: 20px; border-radius: 10px; font-family: monospace; margin-top: 15px; overflow-x: auto; }
+        .instr-img { width: 100%; max-width: 600px; border-radius: 10px; border: 1px solid #ddd; margin: 10px 0 20px 0; }
         a { color: var(--accent); text-decoration: none; font-weight: bold; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -73,9 +75,9 @@
         </div>
         <div class="materials-box">
             <h3 style="color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px;">🛠️ Materialen</h3>
-            <div class="tool"><div class="tool-icon" style="color: var(--gemini-purple);">A</div><div class="tool-info"><h4>Gemini ('denken')</h4><p>Onze AI-partner voor het genereren van de code en inhoud van de les.</p></div></div>
-            <div class="tool"><div class="tool-icon" style="color: var(--github-black);">B</div><div class="tool-info"><h4><a href="https://github.com/login" target="_blank">GitHub</a></h4><p>Opslag website: hier bewaren en publiceren we de les zodat deze live staat.</p></div></div>
-            <div class="tool"><div class="tool-icon" style="color: var(--firebase-orange);">C</div><div class="tool-info"><h4><a href="https://console.firebase.google.com/" target="_blank">Firebase</a></h4><p>De database die zorgt voor real-time interactie in je les.</p></div></div>
+            <div class="tool"><div class="tool-icon" style="color: var(--gemini-purple);">A</div><div class="tool-info"><h4>Gemini ('denken')</h4><p>Onze AI-partner voor het genereren van de code en inhoud.</p></div></div>
+            <div class="tool"><div class="tool-icon" style="color: var(--github-black);">B</div><div class="tool-info"><h4><a href="https://github.com/login" target="_blank">GitHub</a></h4><p>Publicatieplatform: hier wordt jouw les live gezet.</p></div></div>
+            <div class="tool"><div class="tool-icon" style="color: var(--firebase-orange);">C</div><div class="tool-info"><h4><a href="https://console.firebase.google.com/" target="_blank">Firebase</a></h4><p>De database die zorgt voor real-time interactie.</p></div></div>
         </div>
     </div>
 
@@ -84,8 +86,8 @@
         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 15px;">
             <input type="text" id="word-input" placeholder="Voeg eigen begrip toe..." style="margin:0; flex-grow: 1; min-width: 200px;">
             <button class="btn" onclick="addWordToFirebase()">Voeg toe</button>
-            <button class="btn btn-secondary" onclick="addTheoryOogst()">🎓 Voeg Theorie Oogst toe</button>
-            <button class="btn" style="background: var(--danger);" onclick="clearAllData()">Wis Bord</button>
+            <button class="btn btn-secondary" onclick="addTheoryOogst()">🎓 Theorie Oogst</button>
+            <button class="btn btn-danger" onclick="clearBoard()">🗑️ Wis Bord</button>
         </div>
         <div class="board-outer-container">
             <div id="digibord">
@@ -104,52 +106,48 @@
     </div>
 
     <div class="step" id="step-3">
-        <h2>Stap B: De Live Inspiratie Feed</h2>
-        <p>Hier verschijnen de plannen van alle deelnemers real-time:</p>
+        <h2>Stap B: Live Inspiratie Feed</h2>
+        <p>Real-time plannen van alle deelnemers:</p>
         <div id="live-feed" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;"></div>
     </div>
 
     <div class="step" id="step-4">
-        <h2>Stap C: Gemini laten 'denken' (Prompten)</h2>
+        <h2>Stap C: Gemini Prompten</h2>
         <div class="flow-card" style="border-left: 10px solid var(--gemini-purple);">
-            <p>Ga naar <a href="https://gemini.google.com/" target="_blank">Gemini</a>, kopieer je plan en gebruik deze prompt:</p>
+            <p>Stuur dit naar <a href="https://gemini.google.com/" target="_blank">Gemini</a>:</p>
             <blockquote style="background: #eee; padding: 15px; border-radius: 8px; font-style: italic;">
-                "Ik ben een docent en wil een interactieve HTML-les maken. Gebruik mijn leerdoel en werkvorm om een volledige website (één HTML bestand) te schrijven met CSS en JavaScript. Zorg voor een modern design."
+                "Ik ben een docent en maak een interactieve HTML-les. Gebruik mijn doel en werkvorm om een volledige website (één bestand) te schrijven met CSS en JS. Gebruik een modern design."
             </blockquote>
         </div>
     </div>
 
     <div class="step" id="step-5">
         <h2>Stap D: <a href="https://console.firebase.google.com/" target="_blank" style="color:var(--firebase-orange)">Firebase</a> instellen</h2>
-        <ol>
-            <li>Maak een project aan en kies <strong>Realtime Database</strong>.</li>
-            <li>Ga naar <strong>Rules</strong> en zet alles op <strong>true</strong>:</li>
-        </ol>
+        
+        <p><strong>1. Ga naar de console:</strong> Klik op de website rechtsboven op 'Go to console'.</p>
+        <img src="Screenshot 2026-04-09 09.29.49.jpg" class="instr-img">
+
+        <p><strong>2. Projectoverzicht:</strong> Kies je project (bijv. 'AISpecialist').</p>
+        <img src="Screenshot 2026-04-09 09.30.58.jpg" class="instr-img">
+
+        <p><strong>3. Stel de regels in:</strong> Ga naar <strong>Realtime Database > Rules</strong> en zet ze op <code>true</code>. Klik op <strong>Publish</strong>.</p>
         <div class="code-box">
-            {<br>
-            &nbsp;&nbsp;"rules": {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;".read": true,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;".write": true<br>
-            &nbsp;&nbsp;}<br>
-            }
+            { "rules": { ".read": true, ".write": true } }
         </div>
-        <p>Kopieer daarna de 'Config' uit de projectinstellingen naar je code.</p>
     </div>
 
     <div class="step" id="step-6">
-        <h2>Stap E: Publiceren via <a href="https://github.com/" target="_blank" style="color:var(--github-black)">GitHub</a></h2>
+        <h2>Stap E: Publiceren via GitHub</h2>
         <ol>
-            <li>Maak een nieuwe 'Repository' aan op GitHub.</li>
-            <li>Upload je <code>index.html</code> bestand.</li>
+            <li>Upload <code>index.html</code> (en je afbeeldingen) naar een nieuwe Repo.</li>
             <li>Ga naar <strong>Settings > Pages</strong>.</li>
-            <li>Zet Branch op <strong>main</strong> en folder op <strong>/ (root)</strong>.</li>
-            <li>Klik op <strong>Save</strong> en je les is na 1 minuut live!</li>
+            <li>Kies branch <strong>main</strong> en klik <strong>Save</strong>.</li>
         </ol>
     </div>
 
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" style="background: #95a5a6;" disabled>Vorige</button>
-        <div id="progressText" style="font-weight: bold; line-height: 45px;">Stap 1 van 13</div>
+        <div id="progressText" style="font-weight: bold; line-height: 45px;">Stap 1 van 6</div>
         <button class="btn" id="nextBtn" onclick="changeStep(1)">Volgende</button>
     </div>
 </div>
@@ -171,6 +169,13 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+
+    // RESET FUNCTIE
+    window.clearBoard = () => {
+        if(confirm("Bord wissen voor iedereen?")){
+            remove(ref(db, 'workshop/whiteboard')).then(() => location.reload());
+        }
+    };
 
     window.addTheoryOogst = () => {
         const termen = ["Directe Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap", "Mentale Schema's", "Chunking", "Voorkennis", "Beloning"];
@@ -259,10 +264,8 @@
         const vorm = document.getElementById('les-werkvorm').value;
         if(!name) return alert("Naam verplicht!");
         set(ref(db, 'workshop/users/' + name), { name, doel, vorm });
-        alert("Plan opgeslagen en gedeeld!");
+        alert("Plan opgeslagen!");
     };
-
-    window.clearAllData = () => { if(confirm("Bord wissen voor iedereen?")) remove(ref(db, 'workshop/whiteboard')).then(() => location.reload()); };
 
     let currentStep = 1;
     window.changeStep = (n) => {
@@ -271,7 +274,7 @@
         document.getElementById(`step-${currentStep}`).classList.add('active');
         document.getElementById('prevBtn').disabled = (currentStep === 1);
         document.getElementById('nextBtn').disabled = (currentStep === 6);
-        document.getElementById('progressText').innerText = `Stap ${currentStep} van 13`;
+        document.getElementById('progressText').innerText = `Stap ${currentStep} van 6`;
         window.scrollTo(0,0);
     }
 </script>
