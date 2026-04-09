@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workshop: PV van Bevindingen Opstellen met AI</title>
+    <title>Workshop: PV van Bevindingen met AI</title>
     <style>
         :root {
             --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --text: #333;
-            --white: #ffffff; --danger: #e74c3c; --theory-color: #f1c40f;
-            --github-black: #24292e; --firebase-orange: #f5820d; --gemini-purple: #8e44ad;
+            --white: #ffffff; --danger: #e74c3c; --success: #27ae60;
+            --gemini-purple: #8e44ad; --firebase-orange: #f5820d;
             --col-waarneming: #e6fffa; --col-verklaring: #e3f2fd; --col-conclusie: #fffaf0;
         }
 
@@ -18,7 +18,7 @@
         .step { display: none; animation: fadeIn 0.5s ease-in-out; }
         .step.active { display: block; }
 
-        /* --- Digibord Styling --- */
+        /* --- Whiteboard --- */
         .board-outer-container { width: 100%; overflow: auto; border: 2px solid #ddd; border-radius: 15px; margin: 20px 0; background: #eee; }
         #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; }
         .board-column { flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 2px dashed rgba(0,0,0,0.1); padding: 25px 15px; }
@@ -34,15 +34,15 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.1); cursor: move; font-weight: 600; border-left: 6px solid var(--accent); 
         }
 
-        /* --- UI Elementen --- */
+        /* --- UI Elements --- */
         .btn { background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; margin: 5px; }
-        .btn:hover { filter: brightness(1.1); }
-        .btn-mail { background: #27ae60; }
+        .btn-success { background: var(--success); }
         .btn-danger { background: var(--danger); }
         .navigation { display: flex; justify-content: space-between; margin-top: 40px; border-top: 2px solid #eee; padding-top: 25px; }
-        input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; box-sizing: border-box; }
-        .instr-img { width: 100%; max-width: 600px; border-radius: 10px; border: 1px solid #ddd; margin: 10px 0 20px 0; }
-        
+        input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; box-sizing: border-box; font-family: inherit; }
+        .instr-img { width: 100%; max-width: 600px; border-radius: 10px; border: 1px solid #ddd; margin: 15px 0; }
+        .prompt-box { background: #f0f4f8; padding: 20px; border-radius: 15px; border-left: 10px solid var(--gemini-purple); font-style: italic; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -50,18 +50,19 @@
 
 <div class="container">
     <div class="step active" id="step-1">
-        <h2 style="text-align: center;">🕵️ Routekaart: PV van Bevindingen Opstellen</h2>
+        <h2 style="text-align: center;">🚀 Werkproces: PV van Bevindingen met AI</h2>
+        <p style="text-align: center;">Doorloop de stappen om een professioneel dossier op te bouwen.</p>
         <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
-            <div style="background:#eee; padding: 20px; border-radius: 15px; width: 200px; text-align: center;"><strong>1. Analyse</strong></div>
-            <div style="background:#eee; padding: 20px; border-radius: 15px; width: 200px; text-align: center;"><strong>2. Whiteboard</strong></div>
-            <div style="background:#eee; padding: 20px; border-radius: 15px; width: 200px; text-align: center;"><strong>3. PV Mailen</strong></div>
+            <div style="background:#eee; padding: 20px; border-radius: 15px; text-align: center;"><strong>1. Analyse</strong></div>
+            <div style="background:#eee; padding: 20px; border-radius: 15px; text-align: center;"><strong>2. Gemini</strong></div>
+            <div style="background:#eee; padding: 20px; border-radius: 15px; text-align: center;"><strong>3. Publicatie</strong></div>
         </div>
     </div>
 
     <div class="step" id="step-2">
-        <h2>Stap A: Gezamenlijke Dossieropbouw</h2>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
-            <input type="text" id="word-input" placeholder="Voeg feit of bewijs toe..." style="margin:0; flex-grow: 1;">
+        <h2>Stap A: Gezamenlijke Dossieropbouw (Whiteboard)</h2>
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <input type="text" id="word-input" placeholder="Voeg feit of bewijsstuk toe..." style="margin:0; flex-grow: 1;">
             <button class="btn" onclick="addWordToFirebase()">Plaats op Bord</button>
             <button class="btn btn-danger" onclick="clearFullReset()">🗑️ Wis Alles</button>
         </div>
@@ -73,17 +74,6 @@
                 <canvas id="drawingCanvas" width="1600" height="800"></canvas>
             </div>
         </div>
-        
-        <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
-            <h3>📝 Concept PV van Bevindingen</h3>
-            <input type="text" id="user-name" placeholder="Naam Verbalisant...">
-            <input type="text" id="pv-subject" placeholder="Onderwerp van de bevinding...">
-            <textarea id="pv-body" rows="6" placeholder="Typ hier de volledige tekst van je PV..."></textarea>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" onclick="saveToFeed()">Deel met Klas</button>
-                <button class="btn btn-mail" onclick="sendToPersonalMail()">✉️ Verstuur naar Werkmail</button>
-            </div>
-        </div>
     </div>
 
     <div class="step" id="step-3">
@@ -91,13 +81,31 @@
         <div id="live-feed" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;"></div>
     </div>
 
+    <div class="step" id="step-4">
+        <h2>Stap C: <span style="color:var(--gemini-purple)">Gemini</span> inschakelen</h2>
+        <p>Kopieer je ruwe tekst hieronder en gebruik de prompt voor Gemini om een juridisch correct PV te genereren.</p>
+        
+        <div class="prompt-box">
+            "Ik ben een verbalisant. Maak van de volgende ruwe waarnemingen een officieel PV van Bevindingen in een zakelijke, objectieve toon: [PLAK HIER JE TEKST]"
+        </div>
+
+        <div style="margin-top: 25px; background: #fff; padding: 20px; border: 2px solid var(--gemini-purple); border-radius: 20px;">
+            <h3>💾 Definitieve Opslag & Verzending</h3>
+            <input type="text" id="user-name" placeholder="Naam Verbalisant...">
+            <input type="text" id="pv-subject" placeholder="Onderwerp/Casus...">
+            <textarea id="pv-body" rows="10" placeholder="Plak hier de tekst die Gemini voor je heeft gegenereerd..."></textarea>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-success" onclick="saveAndShare()">Publiceer & Deel</button>
+                <button class="btn" style="background:var(--gemini-purple);" onclick="sendToMail()">✉️ Mail naar Werkaccount</button>
+            </div>
+        </div>
+    </div>
+
     <div class="step" id="step-5">
-        <h2>Stap D: Firebase Instellen</h2>
-        <p>1. Ga naar de console:</p>
+        <h2>Stap D: Firebase Instellingen</h2>
         <img src="Screenshot 2026-04-09 09.29.49.jpg" class="instr-img">
-        <p>2. Selecteer je project:</p>
         <img src="Screenshot 2026-04-09 09.30.58.jpg" class="instr-img">
-        <p>3. Zet de Rules op true:</p>
         <div style="background: #2d3436; color: #fab1a0; padding: 15px; border-radius: 10px; font-family: monospace;">
             { "rules": { ".read": true, ".write": true } }
         </div>
@@ -112,7 +120,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, set, push, onChildAdded, onChildChanged, remove, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getDatabase, ref, set, push, onChildAdded, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4",
@@ -126,26 +134,37 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // MAIL FUNCTIE
-    window.sendToPersonalMail = () => {
-        const naam = document.getElementById('user-name').value;
-        const onderwerp = document.getElementById('pv-subject').value;
-        const tekst = document.getElementById('pv-body').value;
-        if(!naam || !tekst) return alert("Vul je naam en de PV tekst in.");
+    // FUNCTIE: Opslaan in Firebase en tonen in feed
+    window.saveAndShare = () => {
+        const name = document.getElementById('user-name').value;
+        const subj = document.getElementById('pv-subject').value;
+        const body = document.getElementById('pv-body').value;
+        if(!name || !body) return alert("Vul a.u.b. je naam en de PV tekst in.");
 
-        const mailSubject = encodeURIComponent(`PV van Bevindingen: ${onderwerp}`);
-        const mailBody = encodeURIComponent(`Verbalisant: ${naam}\n\nInhoud PV:\n${tekst}`);
+        set(ref(db, 'workshop/users/' + name), { name, subj, body });
+        alert("Je PV is succesvol opgeslagen en gedeeld met de klas!");
+    };
+
+    // FUNCTIE: Mailen
+    window.sendToMail = () => {
+        const name = document.getElementById('user-name').value;
+        const subj = document.getElementById('pv-subject').value;
+        const body = document.getElementById('pv-body').value;
+        if(!body) return alert("Geen tekst om te mailen!");
+
+        const mailSubject = encodeURIComponent(`PV van Bevindingen: ${subj}`);
+        const mailBody = encodeURIComponent(`Verbalisant: ${name}\n\n${body}`);
         window.location.href = `mailto:?subject=${mailSubject}&body=${mailBody}`;
     };
 
-    // RESET FUNCTIE
+    // RESET
     window.clearFullReset = () => {
-        if(confirm("Dit wist het hele bord en alle ingediende PV's van studenten!")){
+        if(confirm("DIT WIST ALLES voor iedereen. Doorgaan?")){
             remove(ref(db, 'workshop')).then(() => location.reload());
         }
     };
 
-    // Whiteboard & Feed Logica
+    // Whiteboard & Feed Logic
     const canvas = document.getElementById('drawingCanvas');
     const ctx = canvas.getContext('2d');
     canvas.onmousedown = () => { ctx.beginPath(); canvas.onmousemove = (e) => {
@@ -167,17 +186,11 @@
         document.getElementById('digibord').appendChild(div);
     });
 
-    window.saveToFeed = () => {
-        const name = document.getElementById('user-name').value;
-        const subj = document.getElementById('pv-subject').value;
-        const body = document.getElementById('pv-body').value;
-        if(name) set(ref(db, 'workshop/users/' + name), { name, subj, body });
-    };
-
     onChildAdded(ref(db, 'workshop/users'), (s) => {
+        const d = s.val();
         const card = document.createElement('div');
-        card.style = "background: #fff; padding: 15px; border-radius: 10px; border-left: 5px solid #27ae60; margin-bottom: 10px;";
-        card.innerHTML = `<strong>${s.val().name}</strong>: ${s.val().subj}<br><p>${s.val().body}</p>`;
+        card.style = "background: #fff; padding: 15px; border-radius: 10px; border-left: 5px solid var(--success); margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);";
+        card.innerHTML = `<strong>${d.name}</strong><br><small>${d.subj}</small><hr><p style="font-size:0.9rem; white-space: pre-wrap;">${d.body}</p>`;
         document.getElementById('live-feed').prepend(card);
     });
 
