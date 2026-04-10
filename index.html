@@ -124,13 +124,40 @@
     <div class="step" id="step-5"><h2>Inspiratie 3</h2><iframe src="https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/" style="width:100%; height:600px; border:none;"></iframe></div>
     <div class="step" id="step-6"><h2>Inspiratie 4</h2><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/" style="width:100%; height:600px; border:none;"></iframe></div>
 
-    <div class="step" id="step-7">
-        <h2>Stap C: Ontwerp je Les</h2>
-        <input type="text" id="user-name" placeholder="Jouw voornaam...">
-        <input type="text" id="les-doel" placeholder="Wat is het leerdoel?">
-        <textarea id="les-werkvorm" rows="3" placeholder="Beschrijf de werkvorm..."></textarea>
-        <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%;">Sla op</button>
-        <div id="live-feed" style="margin-top: 20px;"></div>
+   <div class="step" id="step-7">
+        <h2 style="text-align: center;">Stap C: Ontwerp je Les</h2>
+        <p style="text-align: center; color: #666;">Vul je gegevens in om een persoonlijke AI-prompt te genereren.</p>
+        
+        <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <label><b>Jouw voornaam:</b></label>
+            <input type="text" id="user-name" placeholder="Bijv. Jan of Maria...">
+            
+            <label><b>Wat is het leerdoel?</b></label>
+            <input type="text" id="les-doel" placeholder="Bijv. Studenten kunnen de redenen van wetenschap herkennen...">
+            
+            <label><b>Beschrijf de werkvorm:</b></label>
+            <textarea id="les-werkvorm" rows="4" placeholder="Bijv. Een escape room waarbij studenten vragen over taken en bevoegdheden oplossen..."></textarea>
+            
+            <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%; margin-top: 10px; font-size: 1.1rem; padding: 18px;">
+                Sla op & Genereer Prompt 🚀
+            </button>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <h3 style="font-size: 1rem; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px;">
+                📡 Live Feed: Plannen van collega's
+            </h3>
+            <div id="live-feed" style="
+                margin-top: 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                min-height: 50px;
+                height: auto; /* Zorgt ervoor dat de div langer wordt bij meer content */
+                transition: all 0.5s ease;
+            ">
+                </div>
+        </div>
     </div>
 
     <div class="step" id="step-8">
