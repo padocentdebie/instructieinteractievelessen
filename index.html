@@ -184,10 +184,24 @@
 
     <div class="step" id="step-8">
         <h2>Stap D: De Gemini Prompt Machine</h2>
-        <div style="background: #e3f2fd; padding: 25px; border-radius: 20px; border: 2px solid var(--accent);">
-            <div id="generated-prompt" style="background: white; padding: 20px; border-radius: 10px; font-size: 0.9rem; white-space: pre-wrap; font-style: italic;"></div>
-            <button class="btn" onclick="copyToClipboard()" style="width: 100%; margin-top: 15px; background: var(--primary);">📋 Kopieer de Prompt</button>
+        
+        <div style="background: #fff3f8; padding: 20px; border-radius: 20px; border: 2px solid var(--gemini-vibrant); margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+            <div style="font-size: 2rem;">🤖</div>
+            <div>
+                <strong>Klaar om te genereren?</strong><br>
+                <p style="margin: 5px 0; font-size: 0.9rem;">Klik op de knop hieronder om de prompt te kopiëren en ga daarna direct naar Gemini om de code te laten maken.</p>
+                <a href="https://gemini.google.com/" target="_blank" class="btn" style="background: var(--gemini-vibrant); display: inline-block; text-decoration: none; margin-top: 5px;">Open Gemini Website ↗</a>
+            </div>
         </div>
+
+        <div style="background: #e3f2fd; padding: 25px; border-radius: 20px; border: 2px solid var(--accent);">
+            <div id="generated-prompt" style="background: white; padding: 20px; border-radius: 10px; font-size: 0.9rem; white-space: pre-wrap; font-style: italic; min-height: 50px;"></div>
+            <button class="btn" onclick="copyToClipboard()" style="width: 100%; margin-top: 15px; background: var(--primary);">📋 1. Kopieer de Prompt</button>
+        </div>
+        
+        <p style="text-align: center; color: #666; font-size: 0.85rem; margin-top: 15px;">
+            <i>Nadat je de code van Gemini hebt gekregen, klik je op "Volgende" om naar de publicatie-stap te gaan.</i>
+        </p>
     </div>
 
     <div class="step" id="step-9">
