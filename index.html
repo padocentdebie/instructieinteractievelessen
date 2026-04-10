@@ -107,24 +107,22 @@
         </button>
     </div>
 </div>
-    <div class="step" id="step-2">
+   <div class="step" id="step-2">
     <h2 style="text-align: center;">Stap A: Coöperatief Brainstormen</h2>
     
     <div style="display: flex; gap: 10px; margin-bottom: 15px; background: #f0f4f8; padding: 15px; border-radius: 15px; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
         <input type="text" id="word-input" placeholder="Typ zelf een begrip..." style="flex: 1; margin: 0; padding: 12px; border-radius: 8px; border: 1px solid #ccc;">
         <button class="btn" onclick="addWordToFirebase()" style="background: #3498db;">Voeg toe</button>
-        
         <button class="btn" onclick="plopOogst()" style="background: #27ae60; color: white;">Oogst Begrippen 🌾</button>
-        
         <button class="btn btn-danger" onclick="clearFullReset()" style="background: #e74c3c;">RESET BORD</button>
     </div>
 
     <div style="width: 100%; overflow: auto; border: 3px solid #ddd; border-radius: 20px; background: #fff;">
         <div id="digibord" style="width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none;">
             
-            <div class="board-column" style="flex: 1; padding: 25px; border-right: 2px dashed #ccc; background: var(--col-behaviorisme); position: relative;">
+            <div class="board-column" style="background: var(--col-behaviorisme);">
                 <h3 style="text-align: center;">Behaviorisme</h3>
-                <div class="ghost-tekst" style="position: absolute; top: 80px; left: 20px; opacity: 0.5; pointer-events: none; font-size: 0.9rem;">
+                <div class="ghost-tekst">
                     <b>Waarom?</b> Automatismen inslijpen via herhaling.<br>
                     <b>Wat?</b> Observeerbaar gedrag door conditionering.<br>
                     <b>Rol docent:</b> Instructeur / Trainer<br>
@@ -134,29 +132,28 @@
                 </div>
             </div>
 
-            <div class="board-column" style="flex: 1; padding: 25px; border-right: 2px dashed #ccc; background: var(--col-cognitivisme); position: relative;">
+            <div class="board-column" style="background: var(--col-cognitivisme);">
                 <h3 style="text-align: center;">Cognitivisme</h3>
-                <div class="ghost-tekst" style="position: absolute; top: 80px; left: 20px; opacity: 0.5; pointer-events: none; font-size: 0.9rem;">
+                <div class="ghost-tekst">
                     <b>Waarom?</b> Koppelen aan bestaande kennis.<br>
-                    <b>Wat?</b> Mentale processen en informatieverwerking.<br>
                     <b>Rol docent:</b> Organisator / Facilitator<br>
-                    <b>Rol student:</b> Actieve verwerker<br>
-                    <b>Leerproces:</b> Opslaan in geheugen, schema's<br>
-                    <b>Toetsing:</b> Inzicht en verbanden
+                    <b>Rol student:</b> Actieve verwerker van informatie<br>
+                    <b>Leerproces:</b> Schema's bouwen en chunking<br>
+                    <b>Toetsing:</b> Inzicht en verbanden leggen
                 </div>
             </div>
 
-            <div class="board-column" style="flex: 1; padding: 25px; background: var(--col-constructivisme); position: relative;">
+            <div class="board-column" style="background: var(--col-constructivisme);">
                 <h3 style="text-align: center;">Constructivisme</h3>
-                <div class="ghost-tekst" style="position: absolute; top: 80px; left: 20px; opacity: 0.5; pointer-events: none; font-size: 0.9rem;">
-                    <b>Waarom?</b> Duurzaam leren door interactie.<br>
-                    <b>Wat?</b> Zelf betekenis geven aan werkelijkheid.<br>
+                <div class="ghost-tekst">
+                    <b>Waarom?</b> Duurzaam leren door sociale interactie.<br>
                     <b>Rol docent:</b> Coach / Begeleider<br>
-                    <b>Rol student:</b> Ontdekker / Eigen regie<br>
+                    <b>Rol student:</b> Ontdekker / Eigen regie voeren<br>
                     <b>Leerproces:</b> Betekenisgeving in context<br>
-                    <b>Toetsing:</b> Portfolio en reflectie
-                    </div>
+                    <b>Toetsing:</b> Portfolio en authentieke taken
+                </div>
             </div>
+
         </div>
     </div>
 </div>
