@@ -282,8 +282,24 @@
     onChildAdded(ref(db, 'workshop/users'), (s) => {
         const v = s.val();
         const card = document.createElement('div');
-        card.style = "background:#f0f0f0; padding:10px; border-bottom:1px solid #ddd; font-size:0.8rem; margin-bottom:5px; border-radius:5px;";
-        card.innerHTML = `<strong>👤 ${v.n}</strong>: ${v.d.substring(0,40)}...`;
+        
+        // Stijl voor een volledig leesbaar kaartje
+        card.style = `
+            background: #f8fafc; 
+            padding: 20px; 
+            border-left: 6px solid var(--accent); 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            line-height: 1.5;
+        `;
+
+        // Hier zetten we alle data in het kaartje zonder te knippen
+        card.innerHTML = `
+            <div style="font-weight: bold; color: var(--primary); font-size: 1.1rem; margin-bottom: 8px;">👤 ${v.n}</div>
+            <div style="margin-bottom: 5px;"><strong>Doel:</strong> ${v.d}</div>
+            <div style="color: #555; font-style: italic;"><strong>Werkvorm:</strong> ${v.v}</div>
+        `;
+
         document.getElementById('live-feed').prepend(card);
     });
 </script>
