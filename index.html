@@ -455,16 +455,32 @@
     });
     window.generatePDF = () => {
     const naam = document.getElementById('participant-name').value || "Deelnemer";
-    const element = document.querySelector('.container'); // We maken een PDF van de hele container
     
-    // PDF Opties
-    const opt = {
-        margin:       10,
-        filename:     `Workshop_Resultaten_${naam}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
+    const rapportContent = `
+        <div style="padding: 40px; font-family: sans-serif; line-height: 1.6;">
+            <h1 style="color: #2c3e50; border-bottom: 3px solid #3498db;">Workshop Portfolio: Van Instructie naar Constructie</h1>
+            <p><b>Docent:</b> ${naam}</p>
+            
+            <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                <h3>1. Behaviorisme (Basis Interactiviteit)</h3>
+                <p><i>Mijn inzicht:</i> ${document.getElementById('note-input-beh').value || "Geen opmerking."}</p>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 10px;">
+                <h3>2. Constructivisme (Actieve Interactiviteit)</h3>
+                <p><i>Mijn inzicht:</i> ${document.getElementById('note-input-con').value || "Geen opmerking."}</p>
+            </div>
+
+            <hr style="margin: 30px 0;">
+            <h3>Mijn AI-Lesconcept</h3>
+            <p><b>Doel:</b> ${document.getElementById('les-doel').value}</p>
+            <p><b>De Werkvorm:</b> ${document.getElementById('les-werkvorm').value}</p>
+            <p><b>Publicatie URL:</b> ${document.getElementById('final-lesson-url').value}</p>
+        </div>
+    `;
+
+    html2pdf().from(rapportContent).save(`Portfolio_${naam}.pdf`);
+};
 
     // Genereer de PDF
     html2pdf().set(opt).from(element).save().then(() => {
