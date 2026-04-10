@@ -180,7 +180,7 @@
     };
 
     window.addTheoryOogst = () => {
-        const termen = ["Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap", "Zone naaste ontwikkeling"];
+        const termen = ["Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap", "Motivatie","Doelen bekend","Voorkennis","Zone naaste ontwikkeling"];
         termen.forEach((t, i) => { push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 150+(i*40), y: 150+(i*60), type: 'theory' }); });
     };
 
