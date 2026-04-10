@@ -298,7 +298,37 @@
         const iframe = document.getElementById('final-preview-iframe');
         iframe.src = url; iframe.style.display = 'block';
     };
+window.plopOogst = () => {
+    // Jouw specifieke lijst met begrippen
+    const woorden = [
+        "Chunking", 
+        "Eigen inbreng", 
+        "Formatief toetsen", 
+        "Inbreng student", 
+        "Snelle feedback",
+        "Conditionering",
+        "Schema's bouwen",
+        "Sociaal leren",
+        "Belonen",
+        "Authentieke taken",
+        "Herhaling",
+        "Portfolio"
+    ];
 
+    // Stuur elk woord naar de Firebase database
+    woorden.forEach((tekst) => {
+        // Willekeurige startpositie in het middengebied van het bord
+        const randomX = 650 + (Math.random() * 300);
+        const randomY = 250 + (Math.random() * 300);
+        
+        // Gebruik de bestaande 'push' en 'ref' van je Firebase setup
+        push(ref(db, 'workshop/whiteboard/words'), {
+            text: tekst,
+            x: randomX,
+            y: randomY
+        });
+    });
+};
     onChildAdded(ref(db, 'workshop/users'), (s) => {
         const v = s.val();
         const card = document.createElement('div');
