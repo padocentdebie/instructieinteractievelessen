@@ -99,7 +99,6 @@
             <div class="flow-card">🤖<br><strong>Op welke wijze?</strong><br>Welke leeractiviteiten zet ik in?</div>
             <div class="flow-card">🚀<br><strong>Laat AI het werk doen</strong><br>Hoe gebruik ik Artificiële Intelligentie?</div>
         </div>
-
         <div class="navigation"><button class="btn" onclick="changeStep(1)" style="width: 100%;">Laten we beginnen! →</button></div>
     </div>
 
@@ -116,36 +115,36 @@
                 <div class="board-column" style="background: var(--col-behaviorisme); flex:1; border-right: 2px dashed #ccc; padding: 20px; position: relative;">
                     <h3 style="position: relative; z-index: 2;">Behaviorisme</h3>
                     <div style="color: rgba(0,0,0,0.5); font-size: 0.9rem; pointer-events: none; user-select: none; margin-top: 40px; line-height: 1.8;">
-                        <p><strong>• Leren:</strong> Gedragsverandering door beloning</p>
-                        <p><strong>• Docent:</strong> Instructeur</p>
-                        <p><strong>• Student:</strong> ontvanger en oefent</p>
-                        <p><strong>• Inhoud:</strong> Kleine meetbare brokken</p>
-                        <p><strong>• Activiteit:</strong> Inoefenen en feedback</p>
-                        <p><strong>• Toetsen:</strong> normatieve toetsen</p>
+                        <p>• Leren: Gedragsverandering door beloning</p>
+                        <p>• Docent: Instructeur</p>
+                        <p>• Student: ontvanger en oefent</p>
+                        <p>• Inhoud: Kleine meetbare brokken</p>
+                        <p>• Activiteit: Inoefenen en feedback</p>
+                        <p>• Toetsen: normatieve toetsen</p>
                     </div>
                 </div>
 
                 <div class="board-column" style="background: var(--col-cognitivisme); flex:1; border-right: 2px dashed #ccc; padding: 20px; position: relative;">
                     <h3 style="position: relative; z-index: 2;">Cognitivisme</h3>
                     <div style="color: rgba(0,0,0,0.5); font-size: 0.9rem; pointer-events: none; user-select: none; margin-top: 40px; line-height: 1.8;">
-                        <p><strong>• Leren:</strong> Informatieverwerking aan de hand van schema's</p>
-                        <p><strong>• Docent:</strong> Organisator en legt verbanden</p>
-                        <p><strong>• Student:</strong> Actieve verwerker en koppelt voorkennis aan nieuwe kennis</p>
-                        <p><strong>• Inhoud:</strong> Logische modellen en structuren</p>
-                        <p><strong>• Activiteit:</strong> Chunking,invullessen en mindmapping</p>
-                        <p><strong>• Toetsen:</strong> normatieve toetsen</p>
+                        <p>• Leren: Informatieverwerking aan de hand van schema's</p>
+                        <p>• Docent: Organisator en legt verbanden</p>
+                        <p>• Student: Actieve verwerker en koppelt voorkennis aan nieuwe kennis</p>
+                        <p>• Inhoud: Logische modellen en structuren</p>
+                        <p>• Activiteit: Chunking,invullessen en mindmapping</p>
+                        <p>• Toetsen: normatieve toetsen</p>
                     </div>
                 </div>
 
                 <div class="board-column" style="background: var(--col-constructivisme); flex:1; padding: 20px; position: relative;">
                     <h3 style="position: relative; z-index: 2;">Constructivisme</h3>
                     <div style="color: rgba(0,0,0,0.5); font-size: 0.9rem; pointer-events: none; user-select: none; margin-top: 40px; line-height: 1.8;">
-                        <p><strong>• Leren:</strong> Betekenisgeving en ervaring</p>
-                        <p><strong>• Docent:</strong> Coach en facilitator</p>
-                        <p><strong>• Student:</strong> Eigenaar en onderzoeker</p>
-                        <p><strong>• Inhoud:</strong> Authentieke complexe problemen</p>
-                        <p><strong>• Activiteit:</strong> Gevarieerde werkvormen, samenwerken en reflecteren</p>
-                        <p><strong>• Toetsen:</strong> formatieve toetsen</p>
+                        <p>• Leren: Betekenisgeving en ervaring</p>
+                        <p>• Docent: Coach en facilitator</p>
+                        <p>• Student: Eigenaar en onderzoeker</p>
+                        <p>• Inhoud: Authentieke complexe problemen</p>
+                        <p>• Activiteit: Gevarieerde werkvormen, samenwerken en reflecteren</p>
+                        <p>• Toetsen: formatieve toetsen</p>
                     </div>
                 </div>
             </div>
@@ -191,9 +190,28 @@
         </div>
     </div>
 
+    <div class="step" id="step-9">
+        <h2>Stap E: Publiceren op internet</h2>
+        <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; line-height: 1.6;">
+            <strong>Instructie:</strong>
+            <p>kopieer de code die Gemini maakte.</p>
+            <ul style="list-style-type: decimal; padding-left: 20px;">
+                <li>Open tabblad met <a href="https://github.com/" target="_blank">Github</a></li>
+                <li>klik op 'new' bij 'Repositories'</li>
+                <li>Bedenk een handige naam voor jouw werkvormwebsite en klik op 'create repository'</li>
+                <li>klik op 'creating a new file' , type in het invoer veld 'index.html' (Altijd 'index.html' noemen!)</li>
+                <li>plak de code in het veld en klik op 'commit'</li>
+                <li>klik op 'settings' (menubalk boven)</li>
+                <li>klik op 'pages' (menubalk links, een van de onderste knoppen)</li>
+                <li>klik onder 'branch' 'main'en dan 'save'</li>
+            </ul>
+            <p>minuutje wachten en jouw les is beschikbaar op internet. Er verschijnt een blauwe link in het veld.</p>
+        </div>
+    </div>
+
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
-        <span id="progressText" style="font-weight: bold;">Stap 1 van 8</span>
+        <span id="progressText" style="font-weight: bold;">Stap 1 van 9</span>
         <button class="btn" id="nextBtn" onclick="changeStep(1)">Volgende</button>
     </div>
 </div>
@@ -279,8 +297,8 @@ Zorg voor een schone interface en werkende Firebase-integratie.`;
         step += n;
         document.getElementById(`step-${step}`).classList.add('active');
         document.getElementById('prevBtn').disabled = (step === 1);
-        document.getElementById('nextBtn').style.display = (step === 8) ? 'none' : 'inline-block';
-        document.getElementById('progressText').innerText = `Stap ${step} van 8`;
+        document.getElementById('nextBtn').style.display = (step === 9) ? 'none' : 'inline-block';
+        document.getElementById('progressText').innerText = `Stap ${step} van 9`;
     };
 
     onChildAdded(ref(db, 'workshop/users'), (s) => {
