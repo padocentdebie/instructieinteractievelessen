@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
+<title>Workshop Dashboard 2026</title>
 <style>
     :root {
         --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --text: #333;
@@ -36,7 +37,7 @@
     .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 30px 0; }
     .flow-card { background: var(--bg); padding: 20px; border-radius: 15px; border-top: 5px solid var(--accent); text-align: center; font-size: 0.85rem; line-height: 1.4; }
 
-    .config-area { background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; }
+    .config-area { background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; margin-bottom: 20px; }
 
     #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; }
     .draggable-word { position: absolute; z-index: 10; background: var(--white); padding: 10px 35px 10px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: move; font-weight: 600; border-left: 5px solid var(--accent); }
@@ -70,35 +71,21 @@
         </div>
         <div class="config-area">
             <strong>Koppel je eigen Firebase motor:</strong>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Plak hier je <span style="font-family: monospace;">firebaseConfig</span> uit de console:</p>
             <textarea id="user-firebase-config" placeholder='{ "apiKey": "AIza...", "databaseURL": "https://..." }'></textarea>
         </div>
-      <div class="roadmap">
-            <div class="flow-card">
-                🔍<br>
-                <strong>Waarom?</strong><br>
-                Waarom zou ik de moeite doen? Wat is de meerwaarde voor mijn onderwijs?
-            </div>
-            <div class="flow-card">
-                ✏️<br>
-                <strong>Wat?</strong><br>
-                Wat wil ik de studenten precies leren? Wat is de kern van de lesstof?
-            </div>
-            <div class="flow-card">
-                🤖<br>
-                <strong>Op welke wijze?</strong><br>
-                Welke interactieve leeractiviteiten zet ik in om het doel te bereiken?
-            </div>
-            <div class="flow-card">
-                🚀<br>
-                <strong>Laat AI het werk doen</strong><br>
-                Hoe gebruik ik Artificiële Intelligentie om dit razendsnel te bouwen?
-            </div>
+        <div class="roadmap">
+            <div class="flow-card">🔍<br><strong>Waarom?</strong><br>Waarom zou ik de moeite doen? Wat is de meerwaarde voor mijn onderwijs?</div>
+            <div class="flow-card">✏️<br><strong>Wat?</strong><br>Wat wil ik de studenten precies leren? Wat is de kern van de lesstof?</div>
+            <div class="flow-card">🤖<br><strong>Op welke wijze?</strong><br>Welke interactieve leeractiviteiten zet ik in om het doel te bereiken?</div>
+            <div class="flow-card">🚀<br><strong>Laat AI het werk doen</strong><br>Hoe gebruik ik Artificiële Intelligentie om dit razendsnel te bouwen?</div>
         </div>
+    </div>
 
     <div class="step" id="step-2">
         <h2>Stap A: Coöperatief Brainstormen</h2>
         <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
-            <input type="text" id="word-input" placeholder="Voeg begrip toe...">
+            <input type="text" id="word-input" placeholder="Voeg begrip toe..." style="flex: 1;">
             <button class="btn" onclick="addWordToFirebase()">Voeg toe</button>
             <button class="btn" onclick="addTheoryOogst()" style="background: var(--theory-color); color: #333;">🎓 Theorie Oogst</button>
             <button class="btn btn-danger" onclick="clearFullReset()">⚠️ RESET</button>
@@ -138,15 +125,14 @@
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/"></iframe></div>
     </div>
 
-   <div class="step" id="step-7">
+    <div class="step" id="step-7">
         <h2>Stap C: Ontwerp je Les</h2>
         <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #ddd; margin-bottom: 30px;">
             <input type="text" id="user-name" placeholder="Jouw voornaam...">
             <input type="text" id="les-doel" placeholder="Wat is het leerdoel?">
-            <textarea id="les-werkvorm" rows="3" placeholder="Beschrijf de interactieve vorm (bijv: Escape room, Bingo, Live quiz)..."></textarea>
+            <textarea id="les-werkvorm" rows="3" placeholder="Beschrijf de interactieve vorm..."></textarea>
             <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%;">Sla op en deel met de groep ↓</button>
         </div>
-
         <h3 style="margin-top: 40px; border-bottom: 2px solid var(--accent); padding-bottom: 10px;">Gedeelde Ontwerpen:</h3>
         <div id="live-feed" style="display: flex; flex-direction: column; gap: 15px;"></div>
     </div>
@@ -167,46 +153,22 @@
         </div>
     </div>
 
-   <div class="step" id="step-9">
+    <div class="step" id="step-9">
         <h2>Stap E: Publiceren op internet</h2>
         <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; line-height: 1.6;">
             <p>Kopieer de volledige code die Gemini zojuist voor je heeft gegenereerd. We gaan deze nu "hosten" zodat je studenten erbij kunnen.</p>
-            
             <ul style="list-style-type: decimal; padding-left: 20px;">
-                <li style="margin-bottom: 10px;">
-                    Open het tabblad met <strong><a href="https://github.com/" target="_blank">GitHub</a></strong>.
-                </li>
-                <li style="margin-bottom: 10px;">
-                    Klik aan de linkerkant op de groene knop <strong>'New'</strong> bij 'Repositories'.
-                </li>
-                <li style="margin-bottom: 10px;">
-                    Bedenk een handige naam voor jouw werkvorm (bijv. <em>'woordenschat-bingo'</em>) en klik onderaan op <strong>'Create repository'</strong>.
-                </li>
-                <li style="margin-bottom: 10px;">
-                    Klik in het midden van het scherm op de blauwe link <strong>'creating a new file'</strong>.
-                </li>
-                <li style="margin-bottom: 10px;">
-                    Typ in het invoerveld voor de bestandsnaam: <strong style="color: var(--danger);">index.html</strong><br>
-                    <small><i>(Let op: Het MOET precies 'index.html' zijn, anders werkt de website niet!)</i></small>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    Plak de volledige code van Gemini in het grote tekstveld en klik rechtsboven op de groene knop <strong>'Commit changes...'</strong> en daarna nogmaals op <strong>'Commit changes'</strong>.
-                </li>
-                <li style="margin-bottom: 10px;">
-                    Ga nu in de bovenste menubalk naar <strong>'Settings'</strong> (het tandwiel-icoon).
-                </li>
-                <li style="margin-bottom: 10px;">
-                    Klik in de linkerkolom op <strong>'Pages'</strong> (onder het kopje Code and automation).
-                </li>
-                <li style="margin-bottom: 10px;">
-                    Kies onder 'Branch' voor <strong>'main'</strong> en klik op de knop <strong>'Save'</strong>.
-                </li>
+                <li>Open <strong>GitHub</strong>.</li>
+                <li>Klik op <strong>'New'</strong> bij 'Repositories'.</li>
+                <li>Bedenk een naam en klik op <strong>'Create repository'</strong>.</li>
+                <li>Klik op <strong>'creating a new file'</strong>.</li>
+                <li>Naam bestand: <strong style="color: var(--danger);">index.html</strong></li>
+                <li>Plak de code en klik 2x op <strong>'Commit changes'</strong>.</li>
+                <li>Ga naar <strong>Settings -> Pages</strong>.</li>
+                <li>Kies branch <strong>'main'</strong> en klik op <strong>'Save'</strong>.</li>
             </ul>
-            
-            <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; border: 1px solid var(--accent); margin-top: 20px;">
-                <strong>Bijna klaar!</strong> Het duurt ongeveer een minuutje voordat GitHub je website heeft gebouwd. Er verschijnt straks bovenaan een balk met een link: <em>"Your site is live at..."</em>.
-            </div>
         </div>
+    </div>
 
     <div class="step" id="step-10">
         <h2>Stap F: Jouw les is LIVE! 🚀</h2>
@@ -294,47 +256,18 @@
     window.removeItem = (key) => remove(ref(db, `workshop/whiteboard/words/${key}`));
     window.clearFullReset = () => { if(confirm("Bord wissen?")) remove(ref(db, 'workshop/whiteboard')); };
 
-   window.saveDesignAndProceed = () => {
-        // 1. Haal de waarden op uit de velden van Stap 7
+    window.saveDesignAndProceed = () => {
         const n = document.getElementById('user-name').value;
         const d = document.getElementById('les-doel').value;
         const v = document.getElementById('les-werkvorm').value;
         const uConf = document.getElementById('user-firebase-config').value || "// Geen eigen config ingevoerd";
         
-        // 2. Controleer of de verplichte velden zijn ingevuld
-        if(!n || !d || !v) {
-            return alert("Vul je naam, leerdoel en werkvorm in voordat je verder gaat!");
-        }
+        if(!n || !d || !v) { return alert("Vul je naam, leerdoel en werkvorm in!"); }
 
-        // 3. Bouw de prompt-tekst voor Stap 8
-        const promptTekst = `Handel als een expert in onderwijstechnologie en webdevelopment. 
-Bouw een interactieve, didactisch verantwoorde web-app voor docent ${n}.
+        const promptTekst = `Handel als een expert in onderwijstechnologie. Bouw een interactieve les voor docent ${n}.\nDoel: ${d}\nWerkvorm: ${v}\nFirebase: ${uConf}`;
+        document.getElementById('generated-prompt').innerText = promptTekst;
 
-CONTEXT & DOEL:
-- Het leerdoel van de les is: ${d}
-- De gekozen werkvorm is: ${v}
-
-TECHNISCHE EISEN:
-- Gebruik HTML5, CSS3 en vanilla JavaScript.
-- Zorg voor een modern, responsive design (gebruik een professioneel kleurenpalet).
-- Implementeer een live-verbinding via Firebase (gebruik de onderstaande configuratie).
-- De app moet direct werken als de code in een index.html wordt geplakt.
-
-FIREBASE CONFIGURATIE:
-${uConf}
-
-Genereer nu de volledige code voor deze interactieve les.`;
-
-        // 4. PLAATS de tekst in het vak van Stap 8
-        const promptContainer = document.getElementById('generated-prompt');
-        if(promptContainer) {
-            promptContainer.innerText = promptTekst;
-        }
-
-        // 5. Sla de gegevens op in de centrale database voor de live-feed
         set(ref(db, 'workshop/users/' + n.replace(/\s/g, '_')), { n, d, v });
-
-        // 6. Ga naar de volgende stap (Stap 8)
         changeStep(1);
     };
 
@@ -357,24 +290,8 @@ Genereer nu de volledige code voor deze interactieve les.`;
     onChildAdded(ref(db, 'workshop/users'), (s) => {
         const v = s.val();
         const card = document.createElement('div');
-        
-        // Stijl voor een volledig leesbaar kaartje
-        card.style = `
-            background: #f8fafc; 
-            padding: 20px; 
-            border-left: 6px solid var(--accent); 
-            border-radius: 12px; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            line-height: 1.5;
-        `;
-
-        // Hier zetten we alle data in het kaartje zonder te knippen
-        card.innerHTML = `
-            <div style="font-weight: bold; color: var(--primary); font-size: 1.1rem; margin-bottom: 8px;">👤 ${v.n}</div>
-            <div style="margin-bottom: 5px;"><strong>Doel:</strong> ${v.d}</div>
-            <div style="color: #555; font-style: italic;"><strong>Werkvorm:</strong> ${v.v}</div>
-        `;
-
+        card.style = "background:#f8fafc; padding:20px; border-left:6px solid var(--accent); border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.05); line-height:1.5;";
+        card.innerHTML = `<div><strong>👤 ${v.n}</strong></div><div>Doel: ${v.d}</div><div style="font-style:italic;">Werkvorm: ${v.v}</div>`;
         document.getElementById('live-feed').prepend(card);
     });
 </script>
