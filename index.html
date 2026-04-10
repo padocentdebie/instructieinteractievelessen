@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+<meta charset="UTF-8">
 <style>
     :root {
         --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --text: #333;
         --white: #ffffff; --danger: #e74c3c; --theory-color: #f1c40f;
-        
-        /* De drie nieuwe vrolijke eenheidskleuren */
         --github-vibrant: #3b82f6;   
         --firebase-vibrant: #fbbf24; 
         --gemini-vibrant: #ec4899;   
-
         --col-behaviorisme: #e6fffa; --col-cognitivisme: #e3f2fd; --col-constructivisme: #fffaf0;
     }
 
@@ -22,7 +20,6 @@
 
     .global-privacy-alert { background: #fee2e2; border: 2px solid var(--danger); color: #991b1b; padding: 20px; border-radius: 15px; margin-bottom: 25px; text-align: center; font-weight: bold; }
 
-    /* De vrolijke materials-grid */
     .materials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
     .material-card { 
         padding: 25px; border-radius: 20px; text-align: center; color: white; 
@@ -41,7 +38,6 @@
 
     .config-area { background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; }
 
-    /* Dragables: Tekst en kleur ongewijzigd */
     #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; }
     .draggable-word { position: absolute; z-index: 10; background: var(--white); padding: 10px 35px 10px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: move; font-weight: 600; border-left: 5px solid var(--accent); }
     .draggable-word.theory { border-left-color: var(--theory-color); background: #fffdf0; }
@@ -58,7 +54,6 @@
     .navigation { display: flex; justify-content: space-between; margin-top: 40px; border-top: 2px solid #eee; padding-top: 25px; align-items: center; }
     input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; }
 
-    /* Fade-in animatie blijft uiteraard staan */
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
@@ -66,38 +61,22 @@
 
 <div class="container">
     <div class="step active" id="step-1">
-        <div class="global-privacy-alert">
-            ⚠️ BELANGRIJK: Voer NOOIT echte persoonsgegevens of vertrouwelijke informatie in!
-        </div>
-
+        <div class="global-privacy-alert">⚠️ BELANGRIJK: Voer NOOIT echte persoonsgegevens in!</div>
         <h2 style="text-align: center;">🚀 Workshop Dashboard</h2>
-
         <div class="materials-grid">
-            <a href="https://github.com/" target="_blank" class="material-card github-card">
-                <h3>GitHub</h3>
-                <p>Code Opslag</p>
-            </a>
-            <a href="https://console.firebase.google.com/" target="_blank" class="material-card firebase-card">
-                <h3>Firebase</h3>
-                <p>Live Database<br>Motor achter interactie</p>
-            </a>
-            <a href="https://gemini.google.com/" target="_blank" class="material-card gemini-card">
-                <h3>Gemini</h3>
-                <p>AI Lesontwerper<br>Laat Artificiële Intelligentie het werk doen</p>
-            </a>
+            <a href="https://github.com/" target="_blank" class="material-card github-card"><h3>GitHub</h3><p>Code Opslag</p></a>
+            <a href="https://console.firebase.google.com/" target="_blank" class="material-card firebase-card"><h3>Firebase</h3><p>Live Database Motor</p></a>
+            <a href="https://gemini.google.com/" target="_blank" class="material-card gemini-card"><h3>Gemini</h3><p>AI Lesontwerper</p></a>
         </div>
-
         <div class="config-area">
             <strong>Koppel je eigen Firebase motor:</strong>
-            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Plak hier je <span style="font-family: monospace;">firebaseConfig</span> uit de console:</p>
             <textarea id="user-firebase-config" placeholder='{ "apiKey": "AIza...", "databaseURL": "https://..." }'></textarea>
         </div>
-
         <div class="roadmap">
-            <div class="flow-card">🔍<br><strong>Waarom?</strong><br>Waarom zou ik de moeite doen?</div>
-            <div class="flow-card">✏️<br><strong>Wat?</strong><br>Wat wil ik de studenten leren?</div>
-            <div class="flow-card">🤖<br><strong>Op welke wijze?</strong><br>Welke leeractiviteiten zet ik in?</div>
-            <div class="flow-card">🚀<br><strong>Laat AI het werk doen</strong><br>Hoe gebruik ik Artificiële Intelligentie?</div>
+            <div class="flow-card">🔍<br><strong>Waarom?</strong></div>
+            <div class="flow-card">✏️<br><strong>Wat?</strong></div>
+            <div class="flow-card">🤖<br><strong>Op welke wijze?</strong></div>
+            <div class="flow-card">🚀<br><strong>Laat AI werken</strong></div>
         </div>
         <div class="navigation"><button class="btn" onclick="changeStep(1)" style="width: 100%;">Laten we beginnen! →</button></div>
     </div>
@@ -105,69 +84,43 @@
     <div class="step" id="step-2">
         <h2>Stap A: Coöperatief Brainstormen</h2>
         <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
-            <input type="text" id="word-input" placeholder="Voeg begrip toe..." style="flex:1;">
+            <input type="text" id="word-input" placeholder="Voeg begrip toe...">
             <button class="btn" onclick="addWordToFirebase()">Voeg toe</button>
             <button class="btn" onclick="addTheoryOogst()" style="background: var(--theory-color); color: #333;">🎓 Theorie Oogst</button>
             <button class="btn btn-danger" onclick="clearFullReset()">⚠️ RESET</button>
         </div>
         <div style="width: 100%; overflow: auto; border: 2px solid #ddd; border-radius: 15px; background: #eee;">
             <div id="digibord">
-                <div class="board-column" style="background: var(--col-behaviorisme); flex:1; border-right: 2px dashed #ccc; padding: 20px; position: relative;">
-                    <h3 style="position: relative; z-index: 2;">Behaviorisme</h3>
-                    <div style="color: rgba(0,0,0,0.5); font-size: 0.9rem; pointer-events: none; user-select: none; margin-top: 40px; line-height: 1.8;">
-                        <p>• Leren: Gedragsverandering door beloning</p>
-                        <p>• Docent: Instructeur</p>
-                        <p>• Student: ontvanger en oefent</p>
-                        <p>• Inhoud: Kleine meetbare brokken</p>
-                        <p>• Activiteit: Inoefenen en feedback</p>
-                        <p>• Toetsen: normatieve toetsen</p>
-                    </div>
+                <div class="board-column" style="background: var(--col-behaviorisme); flex:1; border-right: 2px dashed #ccc; padding: 20px;">
+                    <h3>Behaviorisme</h3>
+                    <p style="font-size:0.8rem; color:#666;">• Beloning • Instructeur • Kleine brokken</p>
                 </div>
-
-                <div class="board-column" style="background: var(--col-cognitivisme); flex:1; border-right: 2px dashed #ccc; padding: 20px; position: relative;">
-                    <h3 style="position: relative; z-index: 2;">Cognitivisme</h3>
-                    <div style="color: rgba(0,0,0,0.5); font-size: 0.9rem; pointer-events: none; user-select: none; margin-top: 40px; line-height: 1.8;">
-                        <p>• Leren: Informatieverwerking aan de hand van schema's</p>
-                        <p>• Docent: Organisator en legt verbanden</p>
-                        <p>• Student: Actieve verwerker en koppelt voorkennis aan nieuwe kennis</p>
-                        <p>• Inhoud: Logische modellen en structuren</p>
-                        <p>• Activiteit: Chunking,invullessen en mindmapping</p>
-                        <p>• Toetsen: normatieve toetsen</p>
-                    </div>
+                <div class="board-column" style="background: var(--col-cognitivisme); flex:1; border-right: 2px dashed #ccc; padding: 20px;">
+                    <h3>Cognitivisme</h3>
+                    <p style="font-size:0.8rem; color:#666;">• Informatieverwerking • Schema's • Chunking</p>
                 </div>
-
-                <div class="board-column" style="background: var(--col-constructivisme); flex:1; padding: 20px; position: relative;">
-                    <h3 style="position: relative; z-index: 2;">Constructivisme</h3>
-                    <div style="color: rgba(0,0,0,0.5); font-size: 0.9rem; pointer-events: none; user-select: none; margin-top: 40px; line-height: 1.8;">
-                        <p>• Leren: Betekenisgeving en ervaring</p>
-                        <p>• Docent: Coach en facilitator</p>
-                        <p>• Student: Eigenaar en onderzoeker</p>
-                        <p>• Inhoud: Authentieke complexe problemen</p>
-                        <p>• Activiteit: Gevarieerde werkvormen, samenwerken en reflecteren</p>
-                        <p>• Toetsen: formatieve toetsen</p>
-                    </div>
+                <div class="board-column" style="background: var(--col-constructivisme); flex:1; padding: 20px;">
+                    <h3>Constructivisme</h3>
+                    <p style="font-size:0.8rem; color:#666;">• Betekenisgeving • Coach • Onderzoeker</p>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="step" id="step-3">
-        <div class="example-header"><h2>Inspiratie 1: Feedback-Regie</h2><span class="tag">Filmisch Schrijven (OVT)</span></div>
+        <div class="example-header"><h2>Inspiratie 1</h2><span class="tag">Filmisch Schrijven</span></div>
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/"></iframe></div>
     </div>
-
     <div class="step" id="step-4">
-        <div class="example-header"><h2>Inspiratie 2: Gamificatie</h2><span class="tag">Woordenschat Bingo</span></div>
+        <div class="example-header"><h2>Inspiratie 2</h2><span class="tag">Woordenschat Bingo</span></div>
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingen5woordenschatbingo/"></iframe></div>
     </div>
-
     <div class="step" id="step-5">
-        <div class="example-header"><h2>Inspiratie 3: Samenstellingen</h2><span class="tag">Grammatica Mutaties</span></div>
+        <div class="example-header"><h2>Inspiratie 3</h2><span class="tag">Grammatica Mutaties</span></div>
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/"></iframe></div>
     </div>
-
     <div class="step" id="step-6">
-        <div class="example-header"><h2>Inspiratie 4: Beroepspraktijk</h2><span class="tag">Objectief Rapporteren (PV)</span></div>
+        <div class="example-header"><h2>Inspiratie 4</h2><span class="tag">Objectief Rapporteren</span></div>
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/"></iframe></div>
     </div>
 
@@ -184,74 +137,53 @@
 
     <div class="step" id="step-8">
         <h2>Stap D: De Gemini Prompt Machine</h2>
-        
         <div style="background: #fff3f8; padding: 20px; border-radius: 20px; border: 2px solid var(--gemini-vibrant); margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
             <div style="font-size: 2rem;">🤖</div>
             <div>
                 <strong>Klaar om te genereren?</strong><br>
-                <p style="margin: 5px 0; font-size: 0.9rem;">Klik op de knop hieronder om de prompt te kopiëren en ga daarna direct naar Gemini om de code te laten maken.</p>
-                <a href="https://gemini.google.com/" target="_blank" class="btn" style="background: var(--gemini-vibrant); display: inline-block; text-decoration: none; margin-top: 5px;">Open Gemini Website ↗</a>
+                <p style="margin: 5px 0; font-size: 0.9rem;">Kopieer eerst de prompt hieronder en open dan Gemini.</p>
+                <a href="https://gemini.google.com/" target="_blank" class="btn" style="background: var(--gemini-vibrant); display: inline-block; text-decoration: none;">Open Gemini Website ↗</a>
             </div>
         </div>
-
         <div style="background: #e3f2fd; padding: 25px; border-radius: 20px; border: 2px solid var(--accent);">
             <div id="generated-prompt" style="background: white; padding: 20px; border-radius: 10px; font-size: 0.9rem; white-space: pre-wrap; font-style: italic; min-height: 50px;"></div>
             <button class="btn" onclick="copyToClipboard()" style="width: 100%; margin-top: 15px; background: var(--primary);">📋 1. Kopieer de Prompt</button>
         </div>
-        
-        <p style="text-align: center; color: #666; font-size: 0.85rem; margin-top: 15px;">
-            <i>Nadat je de code van Gemini hebt gekregen, klik je op "Volgende" om naar de publicatie-stap te gaan.</i>
-        </p>
     </div>
 
     <div class="step" id="step-9">
-        <h2>Stap E: Publiceren op internet</h2>
+        <h2>Stap E: Publiceren op GitHub</h2>
         <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; line-height: 1.6;">
-            <strong>Instructie:</strong>
-            <p>kopieer de code die Gemini maakte.</p>
             <ul style="list-style-type: decimal; padding-left: 20px;">
-                <li>Open tabblad met <a href="https://github.com/" target="_blank">Github</a></li>
-                <li>klik op 'new' bij 'Repositories'</li>
-                <li>Bedenk een handige naam voor jouw werkvormwebsite en klik op 'create repository'</li>
-                <li>klik op 'creating a new file' , type in het invoer veld 'index.html' (Altijd 'index.html' noemen!)</li>
-                <li>plak de code in het veld en klik op 'commit'</li>
-                <li>klik op 'settings' (menubalk boven)</li>
-                <li>klik op 'pages' (menubalk links, een van de onderste knoppen)</li>
-                <li>klik onder 'branch' 'main'en dan 'save'</li>
+                <li>Open <a href="https://github.com/" target="_blank">GitHub</a> en maak een 'New Repository'.</li>
+                <li>Maak een nieuwe file: <b>index.html</b>.</li>
+                <li>Plak de code van Gemini en 'Commit'.</li>
+                <li>Ga naar Settings -> Pages en zet de Branch op 'main'.</li>
             </ul>
-            <p>minuutje wachten en jouw les is beschikbaar op internet. Er verschijnt een blauwe link in het veld.</p>
         </div>
     </div>
-<div class="step" id="step-10">
+
+    <div class="step" id="step-10">
         <h2>Stap F: Jouw les is LIVE! 🚀</h2>
         <div style="background: #f0fdf4; border: 2px solid #10b981; padding: 25px; border-radius: 20px; margin-bottom: 20px;">
-            <p><strong>De laatste stap:</strong> Plak hieronder de link die je van GitHub Pages hebt gekregen:</p>
+            <p>Plak hieronder de link van GitHub Pages:</p>
             <div style="display: flex; gap: 10px;">
-                <input type="text" id="final-lesson-url" placeholder="https://jouwnaam.github.io/projectnaam/" style="flex: 1; margin: 0;">
-                <button class="btn btn-success" onclick="loadFinalPreview()" style="margin: 0;">Bekijk resultaat</button>
+                <input type="text" id="final-lesson-url" placeholder="https://jouwnaam.github.io/project/" style="flex: 1; margin: 0;">
+                <button class="btn btn-success" onclick="loadFinalPreview()" style="margin:0;">Bekijk resultaat</button>
             </div>
         </div>
-
         <div id="preview-container" style="display: none; border: 3px solid #333; border-radius: 20px; overflow: hidden; background: #fff; height: 600px; flex-direction: column;">
             <div style="background: #333; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;">
-                <span id="display-url" style="font-size: 0.8rem; font-family: monospace;">Jouw les preview</span>
-                <a id="external-link" href="#" target="_blank" style="color: #3498db; text-decoration: none; font-size: 0.8rem; font-weight: bold;">Open in nieuw tabblad ↗</a>
+                <span id="display-url" style="font-size: 0.8rem;">Preview</span>
+                <a id="external-link" href="#" target="_blank" style="color: #3498db; text-decoration: none;">Open extern ↗</a>
             </div>
-            <iframe id="final-preview-iframe" style="flex-grow: 1; border: none;" title="Les Preview"></iframe>
+            <iframe id="final-preview-iframe" style="flex-grow: 1; border: none;"></iframe>
         </div>
     </div>
 
-    ```
-
-### Controleer nog even deze twee dingen:
-
-1.  **Staat de JavaScript-functie `loadFinalPreview` in je script?** Zonder die functie gebeurt er namelijk niets als je op de groene knop "Bekijk resultaat" klikt.
-2.  **Staat de nieuwe `changeStep` erin?** De versie die automatisch telt, zorgt ervoor dat de navigatiebalk onderaan nu keurig aangeeft: **"Stap 1 van 10"**.
-
-Je bent nu technisch helemaal voorzien. Wil je dat ik de complete JavaScript-sectie nog één keer voor je uitschrijf zodat je die in zijn geheel kunt vervangen en zeker weet dat alles werkt?
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
-        <span id="progressText" style="font-weight: bold;">Stap 1 van 9</span>
+        <span id="progressText" style="font-weight: bold;">Stap 1 van 10</span>
         <button class="btn" id="nextBtn" onclick="changeStep(1)">Volgende</button>
     </div>
 </div>
@@ -267,7 +199,17 @@ Je bent nu technisch helemaal voorzien. Wil je dat ik de complete JavaScript-sec
     const app = initializeApp(masterConfig);
     const db = getDatabase(app);
 
-    window.removeItem = (key) => remove(ref(db, `workshop/whiteboard/words/${key}`));
+    let step = 1;
+    window.changeStep = (n) => {
+        const totalSteps = document.querySelectorAll('.step').length;
+        document.getElementById(`step-${step}`).classList.remove('active');
+        step += n;
+        document.getElementById(`step-${step}`).classList.add('active');
+        document.getElementById('prevBtn').disabled = (step === 1);
+        document.getElementById('nextBtn').style.display = (step === totalSteps) ? 'none' : 'inline-block';
+        document.getElementById('progressText').innerText = `Stap ${step} van ${totalSteps}`;
+        window.scrollTo(0,0);
+    };
 
     window.addWordToFirebase = () => {
         const val = document.getElementById('word-input').value;
@@ -275,7 +217,7 @@ Je bent nu technisch helemaal voorzien. Wil je dat ik de complete JavaScript-sec
     };
 
     window.addTheoryOogst = () => {
-        const termen = ["Feedback","Methodisch","Adaptief", "Scaffolding","Doelen", "Docent doceert","Docent coacht","Chunking","Gevarieerde leeractiviteiten","Voorkennis","Sociaal Leren", "Eigenaarschap Ik weet het nog niet, ik moet mij ... eigen maken", "Zone naaste ontwikkeling"];
+        const termen = ["Feedback","Scaffolding","Chunking","Zone naaste ontwikkeling"];
         termen.forEach((t, i) => { push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 150+(i*40), y: 150+(i*60), type: 'theory' }); });
     };
 
@@ -285,7 +227,6 @@ Je bent nu technisch helemaal voorzien. Wil je dat ik de complete JavaScript-sec
         div.innerHTML = `${(d.type==='theory'?'🎓 ':'📌 ')}${d.text} <span class="delete-btn" onclick="removeItem('${s.key}')">×</span>`;
         div.style.left = d.x+'px'; div.style.top = d.y+'px';
         document.getElementById('digibord').appendChild(div);
-        
         div.onmousedown = (e) => {
             if(e.target.className === 'delete-btn') return;
             document.onmousemove = (m) => {
@@ -305,20 +246,16 @@ Je bent nu technisch helemaal voorzien. Wil je dat ik de complete JavaScript-sec
         if(el) el.remove();
     });
 
+    window.removeItem = (key) => remove(ref(db, `workshop/whiteboard/words/${key}`));
+    window.clearFullReset = () => { if(confirm("Bord wissen?")) remove(ref(db, 'workshop/whiteboard')); };
+
     window.saveDesignAndProceed = () => {
         const n = document.getElementById('user-name').value;
         const d = document.getElementById('les-doel').value;
         const v = document.getElementById('les-werkvorm').value;
         const uConf = document.getElementById('user-firebase-config').value || "// Geen config";
-        
-        if(!n || !d || !v) return alert("Vul alle velden in!");
-
-        const prompt = `Handel als een expert in onderwijstechnologie. Bouw een interactieve web-app voor ${n}.
-LEERDOEL: ${d}
-WERKVORM: ${v}
-CONFIG: ${uConf}
-Zorg voor een schone interface en werkende Firebase-integratie.`;
-
+        if(!n || !d || !v) return alert("Vul alles in!");
+        const prompt = `Bouw een web-app voor ${n}.\nDOEL: ${d}\nWERKVORM: ${v}\nCONFIG: ${uConf}`;
         document.getElementById('generated-prompt').innerText = prompt;
         set(ref(db, 'workshop/users/' + n.replace(/\s/g, '_')), { n, d, v });
         changeStep(1);
@@ -329,53 +266,21 @@ Zorg voor een schone interface en werkende Firebase-integratie.`;
         alert("Gekopieerd!");
     };
 
-    window.clearFullReset = () => { if(confirm("Data wissen?")) remove(ref(db, 'workshop/whiteboard')); };
-
-    let step = 1;
-window.changeStep = (n) => {
-    // Deze regel telt automatisch alle div's met de class 'step'
-    const totalSteps = document.querySelectorAll('.step').length;
-
-    document.getElementById(`step-${step}`).classList.remove('active');
-    step += n;
-    document.getElementById(`step-${step}`).classList.add('active');
-
-    document.getElementById('prevBtn').disabled = (step === 1);
-    
-    // Gebruik de variabele 'totalSteps' in plaats van een vast getal
-    document.getElementById('nextBtn').style.display = (step === totalSteps) ? 'none' : 'inline-block';
-    document.getElementById('progressText').innerText = `Stap ${step} van ${totalSteps}`;
-};
     window.loadFinalPreview = () => {
-    // 1. Zoek het invoerveld en pak de tekst (URL) die de cursist heeft getypt
-    const inputField = document.getElementById('final-lesson-url');
-    const url = inputField.value.trim();
-    
-    if (url) {
-        // 2. Controleer of de URL begint met https:// (voeg toe als dat niet zo is)
-        const validUrl = url.startsWith('http') ? url : 'https://' + url;
-        
-        // 3. Stuur het iframe naar deze nieuwe URL
-        document.getElementById('final-preview-iframe').src = validUrl;
-        
-        // 4. Verander de tekst in de zwarte balk (de ghosttekst wordt de echte link)
-        document.getElementById('display-url').innerText = validUrl;
-        
-        // 5. Update de link voor het 'nieuw tabblad' knopje
-        document.getElementById('external-link').href = validUrl;
-        
-        // 6. Maak het hele preview-blok (het frame) zichtbaar op het scherm
-        document.getElementById('preview-container').style.display = 'flex';
-    } else {
-        // Als het veld leeg is, geef een melding
-        alert("Plak eerst de link van je GitHub website!");
-    }
-};
+        const url = document.getElementById('final-lesson-url').value.trim();
+        if (url) {
+            const validUrl = url.startsWith('http') ? url : 'https://' + url;
+            document.getElementById('final-preview-iframe').src = validUrl;
+            document.getElementById('display-url').innerText = validUrl;
+            document.getElementById('external-link').href = validUrl;
+            document.getElementById('preview-container').style.display = 'flex';
+        }
+    };
 
     onChildAdded(ref(db, 'workshop/users'), (s) => {
         const v = s.val();
         const card = document.createElement('div');
-        card.style = "background:#f0f0f0; padding:10px; border-bottom:1px solid #ddd; font-size:0.8rem;";
+        card.style = "background:#f0f0f0; padding:10px; border-bottom:1px solid #ddd; font-size:0.8rem; margin-bottom:5px; border-radius:5px;";
         card.innerHTML = `<strong>👤 ${v.n}</strong>: ${v.d.substring(0,40)}...`;
         document.getElementById('live-feed').prepend(card);
     });
