@@ -167,7 +167,7 @@
     };
 
     window.addTheoryOogst = () => {
-        const termen = ["Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap", "Zone naaste ontwikkeling"];
+        const termen = ["Feedback", "Scaffolding","Doelen", "Docent doceert","Docent coacht","Chunking","Gevarieerde leeractiviteiten","Voorkennis","Sociaal Leren", "Eigenaarschap Ik weet het nog niet, ik moet mij ... eigen maken", "Zone naaste ontwikkeling"];
         termen.forEach((t, i) => { push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 150+(i*40), y: 150+(i*60), type: 'theory' }); });
     };
 
