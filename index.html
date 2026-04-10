@@ -124,15 +124,17 @@
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/"></iframe></div>
     </div>
 
-    <div class="step" id="step-7">
+   <div class="step" id="step-7">
         <h2>Stap C: Ontwerp je Les</h2>
-        <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
+        <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #ddd; margin-bottom: 30px;">
             <input type="text" id="user-name" placeholder="Jouw voornaam...">
             <input type="text" id="les-doel" placeholder="Wat is het leerdoel?">
-            <textarea id="les-werkvorm" rows="3" placeholder="Beschrijf de interactieve vorm..."></textarea>
-            <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%;">Sla op en Genereer Prompt →</button>
+            <textarea id="les-werkvorm" rows="3" placeholder="Beschrijf de interactieve vorm (bijv: Escape room, Bingo, Live quiz)..."></textarea>
+            <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%;">Sla op en deel met de groep ↓</button>
         </div>
-        <div id="live-feed" style="margin-top: 20px; max-height: 200px; overflow-y: auto;"></div>
+
+        <h3 style="margin-top: 40px; border-bottom: 2px solid var(--accent); padding-bottom: 10px;">Gedeelde Ontwerpen:</h3>
+        <div id="live-feed" style="display: flex; flex-direction: column; gap: 15px;"></div>
     </div>
 
     <div class="step" id="step-8">
