@@ -155,42 +155,105 @@
     <div class="step" id="step-5"><h2>Inspiratie 3</h2><iframe src="https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/" style="width:100%; height:600px; border:none;"></iframe></div>
     <div class="step" id="step-6"><h2>Inspiratie 4</h2><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/" style="width:100%; height:600px; border:none;"></iframe></div>
 
-   <div class="step" id="step-7">
-        <h2 style="text-align: center;">Stap C: Ontwerp je Les</h2>
-        <p style="text-align: center; color: #666;">Vul je gegevens in om een persoonlijke AI-prompt te genereren.</p>
+  <div class="step" id="step-7">
+    <h2 style="text-align: center;">Stap C: Ontwerp je Les</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 25px;">
+        Beschrijf je didactische plannen. Jouw idee verschijnt direct op de muur hieronder om collega's te inspireren.
+    </p>
+    
+    <div style="background: #fff; padding: 30px; border-radius: 20px; border: 1px solid #eee; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 40px;">
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #333;">🎯 Wat is het leerdoel?</label>
+            <input type="text" id="les-doel" placeholder="Bijv. Studenten kunnen de 3 leerstromingen herkennen..." style="width: 100%; padding: 15px; border: 2px solid #f0f0f0; border-radius: 10px; font-size: 1rem;">
+        </div>
         
-        <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <label><b>Jouw voornaam:</b></label>
-            <input type="text" id="user-name" placeholder="Bijv. Jan of Maria...">
-            
-            <label><b>Wat is het leerdoel?</b></label>
-            <input type="text" id="les-doel" placeholder="Bijv. Studenten kunnen de redenen van wetenschap herkennen...">
-            
-            <label><b>Beschrijf de werkvorm:</b></label>
-            <textarea id="les-werkvorm" rows="4" placeholder="Bijv. Een escape room waarbij studenten vragen over taken en bevoegdheden oplossen..."></textarea>
-            
-            <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%; margin-top: 10px; font-size: 1.1rem; padding: 18px;">
-                Sla op & Genereer Prompt 🚀
-            </button>
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #333;">🧩 Beschrijf de werkvorm:</label>
+            <textarea id="les-werkvorm" rows="4" placeholder="Bijv. Een interactieve quiz waarbij studenten casussen moeten indelen bij de juiste stroming..." style="width: 100%; padding: 15px; border: 2px solid #f0f0f0; border-radius: 10px; font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
         </div>
-
-        <div style="margin-top: 30px;">
-            <h3 style="font-size: 1rem; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px;">
-                📡 Live Feed: Plannen van collega's
-            </h3>
-            <div id="live-feed" style="
-                margin-top: 15px;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                min-height: 50px;
-                height: auto; /* Zorgt ervoor dat de div langer wordt bij meer content */
-                transition: all 0.5s ease;
-            ">
-                </div>
-        </div>
+        
+        <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%; padding: 20px; font-size: 1.2rem; font-weight: bold; background: #27ae60; border: none; border-radius: 12px; cursor: pointer; transition: 0.3s;">
+            Sla op & Bekijk Prompt 🚀
+        </button>
     </div>
 
+    <div style="border-top: 2px dashed #ddd; padding-top: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <h3 style="font-size: 1.3rem; color: #2c3e50; margin: 0; display: flex; align-items: center; gap: 10px;">
+                📡 Inspiratie-muur van collega's
+            </h3>
+            <span class="live-badge">LIVE FEED</span>
+        </div>
+        
+        <div id="live-feed" style="
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 25px; 
+            width: 100%;
+            min-height: 150px;
+            height: auto;
+        ">
+            </div>
+    </div>
+</div>
+
+<style>
+/* CSS voor de Live-feed en animaties */
+.live-badge {
+    background: #e74c3c; 
+    color: white; 
+    padding: 5px 15px; 
+    border-radius: 20px; 
+    font-size: 0.8rem; 
+    font-weight: bold; 
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Styling voor de kaartjes die via JS worden toegevoegd */
+.idea-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.idea-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+}
+
+.idea-card-name {
+    font-weight: bold; 
+    color: #3498db; 
+    margin-bottom: 8px; 
+    border-bottom: 1px solid #f0f0f0; 
+    padding-bottom: 5px;
+}
+
+.idea-card-goal {
+    font-size: 0.95rem; 
+    margin-bottom: 10px;
+}
+
+.idea-card-desc {
+    font-size: 0.9rem; 
+    font-style: italic; 
+    color: #777; 
+    background: #f9f9f9; 
+    padding: 10px; 
+    border-radius: 8px;
+}
+</style>
     <div class="step" id="step-8">
         <h2>Stap D: De Gemini Prompt Machine</h2>
         <p>Kopieer de onderstaande prompt en plak deze in Gemini.</p>
