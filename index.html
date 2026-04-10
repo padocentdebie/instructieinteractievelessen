@@ -18,6 +18,10 @@
         .step { display: none; animation: fadeIn 0.5s ease-in-out; }
         .step.active { display: block; }
 
+        /* Styling voor het ingebedde venster */
+        .example-frame-container { border: 2px solid #ddd; border-radius: 15px; overflow: hidden; background: #fff; margin-top: 20px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); }
+        iframe { width: 100%; height: 600px; border: none; }
+
         .instruction-alert { background: #fff4e5; border-left: 6px solid #ffa000; padding: 20px; border-radius: 12px; margin: 25px 0; }
         .instruction-alert h4 { margin-top: 0; color: #e65100; display: flex; align-items: center; gap: 10px; }
         .code-snippet { background: #333; color: #7cfc00; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
@@ -36,7 +40,6 @@
         #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; }
         .board-column { flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 2px dashed rgba(0,0,0,0.1); padding: 25px 15px; text-align: center; }
         .board-column h3 { font-size: 1.6rem; text-transform: uppercase; color: var(--primary); font-weight: 800; }
-        .board-column .features { font-size: 0.9rem; color: #555; font-style: italic; line-height: 1.5; max-width: 85%; }
         
         .draggable-word { position: absolute; z-index: 10; background: var(--white); padding: 10px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: move; font-weight: 600; border-left: 5px solid var(--accent); }
         .draggable-word.theory { border-left-color: var(--theory-color); background: #fffdf0; }
@@ -57,31 +60,23 @@
 <div class="container">
     <div class="step active" id="step-1">
         <h2 style="text-align: center;">🚀 De Route naar jouw Interactieve Les</h2>
-        
         <div class="instruction-alert">
             <h4>⚠️ Belangrijk: Voorbereiding</h4>
             <p>1. Log overal in met je <strong>Google-account</strong>.<br>
             2. <strong>Firebase Rules:</strong> Zet bij Realtime Database de regels op <span class="code-snippet">true</span>.<br>
             3. <strong>Tabbladen:</strong> Laat de tools hieronder openstaan tijdens de sessie.</p>
         </div>
-
         <div class="roadmap">
             <div class="flow-card"><h3>💡 Motivatie</h3><p>Waarom maken we lessen interactief? (Activeer en motiveer de lerende)</p></div>
             <div class="flow-card"><h3>🎯 Zelf doelen bedenken</h3><p>Wat: Jij bepaalt de kern van je les.</p></div>
             <div class="flow-card"><h3>🧩 Zelf werkvormen bedenken</h3><p>Hoe: Ontwerp de juiste interactie.</p></div>
         </div>
-
         <div class="materials-box">
             <h3 style="color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px;">🛠️ Materialen</h3>
             <a href="https://gemini.google.com/" target="_blank" class="tool">
                 <div class="tool-icon" style="color: var(--gemini-purple);">A</div>
-                <div class="tool-info"><h4>Gemini ('denken')</h4><p>Onze AI-partner voor het genereren van code en inhoud.</p></div>
+                <div class="tool-info"><h4>Gemini ('denken')</h4><p>Onze AI-partner voor het genereren van code.</p></div>
             </a>
-            <a href="https://github.com/" target="_blank" class="tool">
-                <div class="tool-icon" style="color: var(--github-black);">B</div>
-                <div class="tool-info"><h4>GitHub</h4><p>Live publicatie van je interactieve les op het web.</p></div>
-            </a>
-            
             <div>
                 <a href="https://console.firebase.google.com/" target="_blank" class="tool" style="border-radius: 12px 12px 0 0; border-bottom: none;">
                     <div class="tool-icon" style="color: var(--firebase-orange);">C</div>
@@ -89,11 +84,11 @@
                 </a>
                 <div class="config-input-area">
                     <strong>Plak hier je firebaseConfig { ... }:</strong>
-                    <textarea id="user-firebase-config" placeholder='{ "apiKey": "...", "authDomain": "...", ... }'></textarea>
+                    <textarea id="user-firebase-config" placeholder='{ "apiKey": "...", ... }'></textarea>
                 </div>
             </div>
         </div>
-        <div class="navigation"><button class="btn" onclick="changeStep(1)" style="width: 100%; margin-top: 20px;">Alles gereed? Start de sessie! →</button></div>
+        <div class="navigation"><button class="btn" onclick="changeStep(1)" style="width: 100%; margin-top: 20px;">Alles gereed? Naar de theorie! →</button></div>
     </div>
 
     <div class="step" id="step-2">
@@ -106,25 +101,24 @@
         </div>
         <div class="board-outer-container">
             <div id="digibord">
-                <div class="board-column" style="background: var(--col-behaviorisme);">
-                    <h3>Behaviorisme</h3>
-                    <div class="features">Conditionering, herhaling, directe beloning, meetbaar gedrag</div>
-                </div>
-                <div class="board-column" style="background: var(--col-cognitivisme);">
-                    <h3>Cognitivisme</h3>
-                    <div class="features">Informatieverwerking, geheugen, schema's, logisch denken</div>
-                </div>
-                <div class="board-column" style="background: var(--col-constructivisme);">
-                    <h3>Constructivisme</h3>
-                    <div class="features">Zelf ontdekken, sociaal leren, context, actieve kennisbouw</div>
-                </div>
+                <div class="board-column" style="background: var(--col-behaviorisme);"><h3>Behaviorisme</h3></div>
+                <div class="board-column" style="background: var(--col-cognitivisme);"><h3>Cognitivisme</h3></div>
+                <div class="board-column" style="background: var(--col-constructivisme);"><h3>Constructivisme</h3></div>
                 <canvas id="drawingCanvas" width="1600" height="800"></canvas>
             </div>
         </div>
     </div>
 
     <div class="step" id="step-3">
-        <h2>Stap B: Ontwerp je Les</h2>
+        <h2>Stap B: Inspiratie - Wat gaan we bouwen?</h2>
+        <p>Hieronder zie je een voorbeeld van een les die met deze methode is gemaakt. Probeer het even uit!</p>
+        <div class="example-frame-container">
+            <iframe src="https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/" title="Voorbeeld Interactieve Les"></iframe>
+        </div>
+    </div>
+
+    <div class="step" id="step-4">
+        <h2>Stap C: Ontwerp je Les</h2>
         <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
             <input type="text" id="user-name" placeholder="Jouw voornaam...">
             <input type="text" id="les-doel" placeholder="Wat is het leerdoel?">
@@ -134,27 +128,26 @@
         <div id="live-feed" class="feed-container"></div>
     </div>
 
-    <div class="step" id="step-4">
-        <h2>Stap C: De Gemini Prompt Machine</h2>
+    <div class="step" id="step-5">
+        <h2>Stap D: De Gemini Prompt Machine</h2>
         <div class="prompt-box">
             <h3 style="margin-top: 0; color: var(--primary);">Kopieer de prompt en plak deze in de chat van Gemini:</h3>
             <div id="generated-prompt"></div>
             <button class="btn" onclick="copyToClipboard()" style="background: var(--primary); width: 100%;">📋 Kopieer de Prompt</button>
         </div>
-        <textarea id="gemini-code-input" rows="8" placeholder="Plak hier de HTML code van Gemini..."></textarea>
-        <button class="btn btn-success" onclick="saveGeminiCode()" style="width: 100%;">💾 Sla definitieve les op</button>
+        <p>Plak de code die Gemini teruggeeft in GitHub om je les live te zetten!</p>
     </div>
 
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
-        <span id="progressText" style="font-weight: bold;">Stap 1 van 4</span>
+        <span id="progressText" style="font-weight: bold;">Stap 1 van 5</span>
         <button class="btn" id="nextBtn" onclick="changeStep(1)">Volgende</button>
     </div>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, set, push, onChildAdded, onChildRemoved, remove, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getDatabase, ref, set, push, onChildAdded, remove, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const masterConfig = {
         apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4",
@@ -237,7 +230,8 @@ TECHNISCHE SPECIFICATIES:
         step += n;
         document.getElementById(`step-${step}`).classList.add('active');
         document.getElementById('prevBtn').disabled = (step === 1);
-        document.getElementById('progressText').innerText = `Stap ${step} van 4`;
+        document.getElementById('nextBtn').style.display = (step === 5) ? 'none' : 'inline-block';
+        document.getElementById('progressText').innerText = `Stap ${step} van 5`;
     };
 </script>
 </body>
