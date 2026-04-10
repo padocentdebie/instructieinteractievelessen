@@ -208,7 +208,33 @@
             <p>minuutje wachten en jouw les is beschikbaar op internet. Er verschijnt een blauwe link in het veld.</p>
         </div>
     </div>
+<div class="step" id="step-10">
+        <h2>Stap F: Jouw les is LIVE! 🚀</h2>
+        <div style="background: #f0fdf4; border: 2px solid #10b981; padding: 25px; border-radius: 20px; margin-bottom: 20px;">
+            <p><strong>De laatste stap:</strong> Plak hieronder de link die je van GitHub Pages hebt gekregen:</p>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="final-lesson-url" placeholder="https://jouwnaam.github.io/projectnaam/" style="flex: 1; margin: 0;">
+                <button class="btn btn-success" onclick="loadFinalPreview()" style="margin: 0;">Bekijk resultaat</button>
+            </div>
+        </div>
 
+        <div id="preview-container" style="display: none; border: 3px solid #333; border-radius: 20px; overflow: hidden; background: #fff; height: 600px; flex-direction: column;">
+            <div style="background: #333; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;">
+                <span id="display-url" style="font-size: 0.8rem; font-family: monospace;">Jouw les preview</span>
+                <a id="external-link" href="#" target="_blank" style="color: #3498db; text-decoration: none; font-size: 0.8rem; font-weight: bold;">Open in nieuw tabblad ↗</a>
+            </div>
+            <iframe id="final-preview-iframe" style="flex-grow: 1; border: none;" title="Les Preview"></iframe>
+        </div>
+    </div>
+
+    ```
+
+### Controleer nog even deze twee dingen:
+
+1.  **Staat de JavaScript-functie `loadFinalPreview` in je script?** Zonder die functie gebeurt er namelijk niets als je op de groene knop "Bekijk resultaat" klikt.
+2.  **Staat de nieuwe `changeStep` erin?** De versie die automatisch telt, zorgt ervoor dat de navigatiebalk onderaan nu keurig aangeeft: **"Stap 1 van 10"**.
+
+Je bent nu technisch helemaal voorzien. Wil je dat ik de complete JavaScript-sectie nog één keer voor je uitschrijf zodat je die in zijn geheel kunt vervangen en zeker weet dat alles werkt?
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
         <span id="progressText" style="font-weight: bold;">Stap 1 van 9</span>
@@ -292,14 +318,45 @@ Zorg voor een schone interface en werkende Firebase-integratie.`;
     window.clearFullReset = () => { if(confirm("Data wissen?")) remove(ref(db, 'workshop/whiteboard')); };
 
     let step = 1;
-    window.changeStep = (n) => {
-        document.getElementById(`step-${step}`).classList.remove('active');
-        step += n;
-        document.getElementById(`step-${step}`).classList.add('active');
-        document.getElementById('prevBtn').disabled = (step === 1);
-        document.getElementById('nextBtn').style.display = (step === 9) ? 'none' : 'inline-block';
-        document.getElementById('progressText').innerText = `Stap ${step} van 9`;
-    };
+window.changeStep = (n) => {
+    // Deze regel telt automatisch alle div's met de class 'step'
+    const totalSteps = document.querySelectorAll('.step').length;
+
+    document.getElementById(`step-${step}`).classList.remove('active');
+    step += n;
+    document.getElementById(`step-${step}`).classList.add('active');
+
+    document.getElementById('prevBtn').disabled = (step === 1);
+    
+    // Gebruik de variabele 'totalSteps' in plaats van een vast getal
+    document.getElementById('nextBtn').style.display = (step === totalSteps) ? 'none' : 'inline-block';
+    document.getElementById('progressText').innerText = `Stap ${step} van ${totalSteps}`;
+};
+    window.loadFinalPreview = () => {
+    // 1. Zoek het invoerveld en pak de tekst (URL) die de cursist heeft getypt
+    const inputField = document.getElementById('final-lesson-url');
+    const url = inputField.value.trim();
+    
+    if (url) {
+        // 2. Controleer of de URL begint met https:// (voeg toe als dat niet zo is)
+        const validUrl = url.startsWith('http') ? url : 'https://' + url;
+        
+        // 3. Stuur het iframe naar deze nieuwe URL
+        document.getElementById('final-preview-iframe').src = validUrl;
+        
+        // 4. Verander de tekst in de zwarte balk (de ghosttekst wordt de echte link)
+        document.getElementById('display-url').innerText = validUrl;
+        
+        // 5. Update de link voor het 'nieuw tabblad' knopje
+        document.getElementById('external-link').href = validUrl;
+        
+        // 6. Maak het hele preview-blok (het frame) zichtbaar op het scherm
+        document.getElementById('preview-container').style.display = 'flex';
+    } else {
+        // Als het veld leeg is, geef een melding
+        alert("Plak eerst de link van je GitHub website!");
+    }
+};
 
     onChildAdded(ref(db, 'workshop/users'), (s) => {
         const v = s.val();
