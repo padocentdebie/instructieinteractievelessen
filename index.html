@@ -39,7 +39,7 @@
 
     .config-area { background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; margin-bottom: 20px; }
 
-    #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; }
+    #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; border: 1px solid #ccc; }
     .draggable-word { position: absolute; z-index: 10; background: var(--white); padding: 10px 35px 10px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: move; font-weight: 600; border-left: 5px solid var(--accent); }
     .draggable-word.theory { border-left-color: var(--theory-color); background: #fffdf0; }
     .delete-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--danger); cursor: pointer; font-weight: bold; font-size: 1.2rem; }
@@ -108,22 +108,10 @@
         </div>
     </div>
 
-    <div class="step" id="step-3">
-        <div class="example-header"><h2>Inspiratie 1</h2><span class="tag">Filmisch Schrijven</span></div>
-        <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/"></iframe></div>
-    </div>
-    <div class="step" id="step-4">
-        <div class="example-header"><h2>Inspiratie 2</h2><span class="tag">Woordenschat Bingo</span></div>
-        <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingen5woordenschatbingo/"></iframe></div>
-    </div>
-    <div class="step" id="step-5">
-        <div class="example-header"><h2>Inspiratie 3</h2><span class="tag">Grammatica Mutaties</span></div>
-        <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/"></iframe></div>
-    </div>
-    <div class="step" id="step-6">
-        <div class="example-header"><h2>Inspiratie 4</h2><span class="tag">Objectief Rapporteren</span></div>
-        <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/"></iframe></div>
-    </div>
+    <div class="step" id="step-3"><div class="example-header"><h2>Inspiratie 1</h2><span class="tag">Filmisch Schrijven</span></div><div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/"></iframe></div></div>
+    <div class="step" id="step-4"><div class="example-header"><h2>Inspiratie 2</h2><span class="tag">Woordenschat Bingo</span></div><div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingen5woordenschatbingo/"></iframe></div></div>
+    <div class="step" id="step-5"><div class="example-header"><h2>Inspiratie 3</h2><span class="tag">Grammatica Mutaties</span></div><div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/"></iframe></div></div>
+    <div class="step" id="step-6"><div class="example-header"><h2>Inspiratie 4</h2><span class="tag">Objectief Rapporteren</span></div><div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/"></iframe></div></div>
 
     <div class="step" id="step-7">
         <h2>Stap C: Ontwerp je Les</h2>
@@ -143,12 +131,12 @@
             <div style="font-size: 2rem;">🤖</div>
             <div>
                 <strong>Klaar om te genereren?</strong><br>
-                <p style="margin: 5px 0; font-size: 0.9rem;">Kopieer eerst de prompt hieronder en open dan Gemini.</p>
+                <p style="margin: 5px 0; font-size: 0.9rem;">Kopieer de prompt en vraag Gemini om de les te bouwen.</p>
                 <a href="https://gemini.google.com/" target="_blank" class="btn" style="background: var(--gemini-vibrant); display: inline-block; text-decoration: none;">Open Gemini Website ↗</a>
             </div>
         </div>
         <div style="background: #e3f2fd; padding: 25px; border-radius: 20px; border: 2px solid var(--accent);">
-            <div id="generated-prompt" style="background: white; padding: 20px; border-radius: 10px; font-size: 0.9rem; white-space: pre-wrap; font-style: italic; min-height: 50px;"></div>
+            <div id="generated-prompt" style="background: white; padding: 20px; border-radius: 10px; font-size: 0.9rem; white-space: pre-wrap; font-style: italic; min-height: 50px;">Vul eerst stap C in...</div>
             <button class="btn" onclick="copyToClipboard()" style="width: 100%; margin-top: 15px; background: var(--primary);">📋 1. Kopieer de Prompt</button>
         </div>
     </div>
@@ -156,16 +144,13 @@
     <div class="step" id="step-9">
         <h2>Stap E: Publiceren op internet</h2>
         <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; line-height: 1.6;">
-            <p>Kopieer de volledige code die Gemini zojuist voor je heeft gegenereerd. We gaan deze nu "hosten" zodat je studenten erbij kunnen.</p>
+            <p>Kopieer de code van Gemini naar GitHub:</p>
             <ul style="list-style-type: decimal; padding-left: 20px;">
-                <li>Open <strong>GitHub</strong>.</li>
-                <li>Klik op <strong>'New'</strong> bij 'Repositories'.</li>
-                <li>Bedenk een naam en klik op <strong>'Create repository'</strong>.</li>
-                <li>Klik op <strong>'creating a new file'</strong>.</li>
-                <li>Naam bestand: <strong style="color: var(--danger);">index.html</strong></li>
-                <li>Plak de code en klik 2x op <strong>'Commit changes'</strong>.</li>
-                <li>Ga naar <strong>Settings -> Pages</strong>.</li>
-                <li>Kies branch <strong>'main'</strong> en klik op <strong>'Save'</strong>.</li>
+                <li>Open <strong>GitHub</strong> en maak een 'New Repository'.</li>
+                <li>Klik op 'creating a new file'.</li>
+                <li>Naam: <strong style="color: var(--danger);">index.html</strong></li>
+                <li>Plak de code en 'Commit changes'.</li>
+                <li>Zet bij <strong>Settings -> Pages</strong> de branch op 'main' en klik 'Save'.</li>
             </ul>
         </div>
     </div>
@@ -181,8 +166,8 @@
         </div>
         <div id="preview-container" style="display: none; border: 3px solid #333; border-radius: 20px; overflow: hidden; background: #fff; height: 600px; flex-direction: column;">
             <div style="background: #333; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;">
-                <span id="display-url" style="font-size: 0.8rem;">Preview</span>
-                <a id="external-link" href="#" target="_blank" style="color: #3498db; text-decoration: none;">Open extern ↗</a>
+                <span id="display-url">Preview</span>
+                <a id="external-link" href="#" target="_blank" style="color: #3498db;">Open extern ↗</a>
             </div>
             <iframe id="final-preview-iframe" style="flex-grow: 1; border: none;"></iframe>
         </div>
@@ -262,9 +247,9 @@
         const v = document.getElementById('les-werkvorm').value;
         const uConf = document.getElementById('user-firebase-config').value || "// Geen eigen config ingevoerd";
         
-        if(!n || !d || !v) { return alert("Vul je naam, leerdoel en werkvorm in!"); }
+        if(!n || !d || !v) return alert("Vul alles in!");
 
-        const promptTekst = `Handel als een expert in onderwijstechnologie. Bouw een interactieve les voor docent ${n}.\nDoel: ${d}\nWerkvorm: ${v}\nFirebase: ${uConf}`;
+        const promptTekst = `Bouw als expert in onderwijstechnologie een volledig werkende interactieve les in html-code voor docent ${n}.\n\nDOEL: ${d}\nWERKVORM: ${v}\nFIREBASE CONFIG: ${uConf}\n\nEisen aan de output:\n1. Genereer ALLES in één HTML bestand (inclusief CSS en JS).\n2. Zorg dat de les direct functioneel is.\n3. Gebruik een modern en aantrekkelijk design.\n4. De les moet passen bij de gekozen werkvorm.`;
         document.getElementById('generated-prompt').innerText = promptTekst;
 
         set(ref(db, 'workshop/users/' + n.replace(/\s/g, '_')), { n, d, v });
@@ -273,7 +258,7 @@
 
     window.copyToClipboard = () => {
         navigator.clipboard.writeText(document.getElementById('generated-prompt').innerText);
-        alert("Gekopieerd!");
+        alert("Prompt gekopieerd naar klembord!");
     };
 
     window.loadFinalPreview = () => {
@@ -290,8 +275,8 @@
     onChildAdded(ref(db, 'workshop/users'), (s) => {
         const v = s.val();
         const card = document.createElement('div');
-        card.style = "background:#f8fafc; padding:20px; border-left:6px solid var(--accent); border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.05); line-height:1.5;";
-        card.innerHTML = `<div><strong>👤 ${v.n}</strong></div><div>Doel: ${v.d}</div><div style="font-style:italic;">Werkvorm: ${v.v}</div>`;
+        card.style = "background:#f8fafc; padding:20px; border-left:6px solid var(--accent); border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.05);";
+        card.innerHTML = `<div><strong>👤 ${v.n}</strong></div><div>Doel: ${v.d}</div><div style="font-style:italic;">Vorm: ${v.v}</div>`;
         document.getElementById('live-feed').prepend(card);
     });
 </script>
