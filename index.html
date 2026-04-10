@@ -134,9 +134,36 @@
     </div>
 
     <div class="step" id="step-8">
-        <h2>Stap D: Gemini Prompt</h2>
-        <div id="generated-prompt" class="code-box">...</div>
-        <button class="btn" onclick="copyToClipboard('generated-prompt')">Kopieer Prompt</button>
+        <h2>Stap D: De Gemini Prompt Machine</h2>
+        <p>Kopieer de onderstaande prompt en plak deze in Gemini.</p>
+        
+        <div id="generated-prompt" class="code-box" style="position: relative; padding-bottom: 50px;">
+            ...
+        </div>
+        
+        <div style="display: flex; gap: 10px; align-items: center; margin-top: 15px;">
+            <button class="btn" onclick="copyToClipboard('generated-prompt')" style="background: #333;">Kopieer Prompt</button>
+            
+            <a href="https://gemini.google.com/" target="_blank" class="gemini-card" style="
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                background: var(--gemini-vibrant);
+                color: white;
+                text-decoration: none;
+                padding: 15px;
+                border-radius: 12px;
+                font-weight: bold;
+                transition: 0.3s;
+                animation: float 3s ease-in-out infinite;
+                box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+            ">
+                <span style="font-size: 1.3rem;">✨</span>
+                Open Gemini & Plak Prompt
+            </a>
+        </div>
     </div>
 
     <div class="step" id="step-9"><h2>Stap E: GitHub</h2><p>Upload je <strong>index.html</strong> naar GitHub.</p></div>
@@ -225,9 +252,23 @@
         const n = document.getElementById('user-name').value;
         const d = document.getElementById('les-doel').value;
         const v = document.getElementById('les-werkvorm').value;
-        const uConf = document.getElementById('user-firebase-config').value || "// Geen config";
-        document.getElementById('generated-prompt').innerText = `Bouw les voor ${n}.\nDoel: ${d}\nWerkvorm: ${v}\nFirebase: ${uConf}`;
+        const uConf = document.getElementById('user-firebase-config').value || "// Geen eigen Firebase config ingevoerd.";
+        
+        // --- DE VERBETERDE PROMPT TEKST ---
+        const promptTekst = `Bouw een interactieve leswerkvormwebsite voor docent ${n}.\n\n` +
+                           `Didactisch Doel: ${d}\n` +
+                           `Beschrijving Werkvorm: ${v}\n\n` +
+                           `Gebruik de volgende Firebase configuratie voor de live-verbinding:\n${uConf}\n\n` +
+                           `Zorg ervoor dat de website direct bruikbaar is, modern oogt en functioneert binnen een iFrame.\n` +
+                           `### BELANGRIJK: Genereer de volledige, werkende HTML-code in één blok, inclusief CSS en JavaScript.`;
+
+        // Toon de prompt in het code-vak
+        document.getElementById('generated-prompt').innerText = promptTekst;
+        
+        // Sla op in Firebase (Master DB)
         set(ref(db, 'workshop/users/' + n.replace(/\s/g, '_')), { n, d, v });
+        
+        // Ga naar de volgende stap
         changeStep(1);
     };
 
