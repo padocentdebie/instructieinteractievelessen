@@ -8,7 +8,6 @@
         :root {
             --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --text: #333;
             --white: #ffffff; --danger: #e74c3c; --theory-color: #f1c40f;
-            --github-black: #24292e; --firebase-orange: #f5820d; --gemini-purple: #8e44ad;
             --col-behaviorisme: #e6fffa; --col-cognitivisme: #e3f2fd; --col-constructivisme: #fffaf0;
         }
 
@@ -18,33 +17,27 @@
         .step { display: none; animation: fadeIn 0.5s ease-in-out; }
         .step.active { display: block; }
 
-        .example-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
-        .example-header h2 { margin: 0; color: var(--primary); }
-        .tag { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        /* PRIVACY WAARSCHUWING BOVENAAN */
+        .global-privacy-alert { background: #fee2e2; border: 2px solid var(--danger); color: #991b1b; padding: 20px; border-radius: 15px; margin-bottom: 25px; text-align: center; font-weight: bold; }
 
-        .frame-wrapper { border: 2px solid #ddd; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        iframe { width: 100%; height: 600px; border: none; display: block; }
-
-        .instruction-alert { background: #fff4e5; border-left: 6px solid #ffa000; padding: 20px; border-radius: 12px; margin: 25px 0; }
-        .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 30px 0; }
-        .flow-card { background: var(--bg); padding: 20px; border-radius: 15px; border-top: 5px solid var(--accent); font-size: 0.9rem; }
-
-        .config-input-area { margin-top: 10px; padding: 15px; background: #f9f9f9; border-radius: 12px; border: 1px solid #eee; }
-        .config-input-area textarea { height: 80px; font-family: monospace; font-size: 0.85rem; }
+        .instruction-alert { background: #fff4e5; border-left: 6px solid #ffa000; padding: 20px; border-radius: 12px; margin: 15px 0; }
+        
+        /* FIREBASE CONFIG AREA */
+        .config-input-area { background: #f0f4f8; padding: 20px; border-radius: 15px; border: 1px solid #d1d9e6; margin: 20px 0; }
+        
+        /* DRAGGABLES & KRUISJES */
+        #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; }
+        .draggable-word { position: absolute; z-index: 10; background: var(--white); padding: 10px 35px 10px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: move; font-weight: 600; border-left: 5px solid var(--accent); white-space: nowrap; }
+        .draggable-word.theory { border-left-color: var(--theory-color); background: #fffdf0; }
+        .delete-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); color: var(--danger); cursor: pointer; font-size: 1.2rem; font-weight: bold; padding: 0 5px; }
+        .delete-btn:hover { color: #000; }
 
         .board-outer-container { width: 100%; overflow: auto; border: 2px solid #ddd; border-radius: 15px; margin: 20px 0; background: #eee; }
-        #digibord { width: 1600px; height: 800px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; }
         .board-column { flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 2px dashed rgba(0,0,0,0.1); padding: 25px 15px; text-align: center; }
-        .board-column h3 { font-size: 1.6rem; text-transform: uppercase; color: var(--primary); font-weight: 800; }
         
-        .draggable-word { position: absolute; z-index: 10; background: var(--white); padding: 10px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: move; font-weight: 600; border-left: 5px solid var(--accent); white-space: nowrap; }
-        .draggable-word.theory { border-left-color: var(--theory-color); background: #fffdf0; }
-
-        .prompt-box { background: #e3f2fd; border: 2px solid var(--accent); padding: 25px; border-radius: 20px; margin: 20px 0; }
-        #generated-prompt { background: white; padding: 15px; border-radius: 10px; border: 1px solid #bbdefb; font-style: italic; white-space: pre-wrap; font-size: 0.9rem; min-height: 60px; }
-
         .btn { background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; margin: 5px; }
         .btn-success { background: #27ae60; }
+        .btn-danger { background: var(--danger); }
         .navigation { display: flex; justify-content: space-between; margin-top: 40px; border-top: 2px solid #eee; padding-top: 25px; }
         input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; }
 
@@ -55,33 +48,33 @@
 
 <div class="container">
     <div class="step active" id="step-1">
+        <div class="global-privacy-alert">
+            ⚠️ PRIVACY-PROTOCOL: Voer NOOIT echte namen van burgers, collega's of vertrouwelijke werkgegevens in tijdens deze workshop.
+        </div>
+
         <h2 style="text-align: center;">🚀 De Route naar jouw Interactieve Les</h2>
+        
         <div class="instruction-alert">
-            <h4>⚠️ Belangrijk: Voorbereiding</h4>
-            <p>1. Log overal in met je <strong>Google-account</strong>.<br>
-            2. <strong>Firebase Rules:</strong> Zet bij Realtime Database de regels op <span class="code-snippet">true</span>.<br>
-            3. <strong>Tabbladen:</strong> Laat de tools openstaan.</p>
+            <h4>1. Voorbereiding</h4>
+            <p>Zorg dat je Realtime Database regels in Firebase op <span style="font-family: monospace; background: #eee;">true</span> staan.</p>
         </div>
-        <div class="roadmap">
-            <div class="flow-card"><h3>💡 Motivatie</h3><p>Waarom interactie?</p></div>
-            <div class="flow-card"><h3>🎯 Doelen</h3><p>Didactische kern.</p></div>
-            <div class="flow-card"><h3>🧩 Werkvorm</h3><p>De interactie.</p></div>
-            <div class="flow-card"><h3>🛠️ Bouwen</h3><p>AI & Firebase.</p></div>
-        </div>
+
         <div class="config-input-area">
-            <strong>Plak hier je firebaseConfig { ... }:</strong>
-            <textarea id="user-firebase-config" placeholder='{ "apiKey": "...", "authDomain": "...", ... }'></textarea>
+            <strong>Stap 2: Jouw Firebase Connectie</strong><br>
+            <p style="font-size: 0.8rem; color: #666;">Plak hier je volledige configuratie object of specifiek je API Key voor de prompt-generator.</p>
+            <textarea id="user-firebase-config" placeholder='{ "apiKey": "JOUW_KEY", "databaseURL": "JOUW_URL", ... }'></textarea>
         </div>
-        <div class="navigation"><button class="btn" onclick="changeStep(1)" style="width: 100%; margin-top: 20px;">Start de sessie! →</button></div>
+
+        <div class="navigation"><button class="btn" onclick="changeStep(1)" style="width: 100%;">Start de sessie! →</button></div>
     </div>
 
     <div class="step" id="step-2">
         <h2>Stap A: Coöperatief Brainstormen</h2>
         <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
-            <input type="text" id="word-input" placeholder="Voeg begrip toe...">
+            <input type="text" id="word-input" placeholder="Voeg begrip toe..." style="flex: 1;">
             <button class="btn" onclick="addWordToFirebase()">Voeg toe</button>
             <button class="btn" onclick="addTheoryOogst()" style="background: var(--theory-color); color: #333;">🎓 Theorie Oogst</button>
-            <button class="btn btn-danger" onclick="clearFullReset()">⚠️ RESET</button>
+            <button class="btn btn-danger" onclick="clearFullReset()">⚠️ RESET BORD</button>
         </div>
         <div class="board-outer-container">
             <div id="digibord">
@@ -94,25 +87,18 @@
 
     <div class="step" id="step-3">
         <div class="example-header"><h2>Inspiratie 1: Feedback-Regie</h2><span class="tag">Filmisch Schrijven (OVT)</span></div>
-        <p>Directe bijsturing door de docent op basis van real-time leerlinginvoer.</p>
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/"></iframe></div>
     </div>
-
     <div class="step" id="step-4">
         <div class="example-header"><h2>Inspiratie 2: Gamificatie</h2><span class="tag">Woordenschat Bingo</span></div>
-        <p>Interactie verhoogt de betrokkenheid bij het aanleren van nieuwe begrippen.</p>
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingen5woordenschatbingo/"></iframe></div>
     </div>
-
     <div class="step" id="step-5">
         <div class="example-header"><h2>Inspiratie 3: Samenstellingen</h2><span class="tag">Grammatica Mutaties</span></div>
-        <p>Het samen ontdekken en veranderen van taalelementen.</p>
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/"></iframe></div>
     </div>
-
     <div class="step" id="step-6">
         <div class="example-header"><h2>Inspiratie 4: Beroepspraktijk</h2><span class="tag">Objectief Rapporteren (PV)</span></div>
-        <p>Trainen van een zakelijke schrijfstijl door het gezamenlijk beoordelen van beweringen.</p>
         <div class="frame-wrapper"><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/"></iframe></div>
     </div>
 
@@ -124,17 +110,17 @@
             <textarea id="les-werkvorm" rows="3" placeholder="Beschrijf de interactieve vorm..."></textarea>
             <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%;">Sla op & Genereer Prompt →</button>
         </div>
-        <div id="live-feed" style="margin-top: 20px;"></div>
+        <div id="live-feed" style="margin-top: 20px; max-height: 200px; overflow-y: auto;"></div>
     </div>
 
     <div class="step" id="step-8">
         <h2>Stap D: De Gemini Prompt Machine</h2>
         <div class="prompt-box">
-            <h3>Kopieer de prompt voor Gemini:</h3>
+            <h3>Kopieer deze gepersonaliseerde prompt:</h3>
             <div id="generated-prompt"></div>
-            <button class="btn" onclick="copyToClipboard()" style="background: var(--primary); width: 100%;">📋 Kopieer de Prompt</button>
+            <button class="btn" onclick="copyToClipboard()" style="background: var(--primary); width: 100%; margin-top: 15px;">📋 Kopieer de Prompt</button>
         </div>
-        <p style="font-size: 0.9rem;"><strong>Didactische instructie:</strong> De term <em>"filmisch"</em> wordt alleen gebruikt in de uitleg als de oefening de <em>ovt</em> betreft.</p>
+        <p><em>De AI verwerkt nu automatisch jouw ingevoerde Firebase gegevens in de code.</em></p>
     </div>
 
     <div class="navigation">
@@ -146,60 +132,54 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, set, push, onChildAdded, remove, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getDatabase, ref, set, push, onChildAdded, onChildRemoved, remove, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
+    // Master config voor de workshop besturing
     const masterConfig = {
         apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4",
-        authDomain: "pvaangifteinleveren-77dbe.firebaseapp.com",
-        databaseURL: "https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app",
-        projectId: "pvaangifteinleveren-77dbe",
-        appId: "1:20239054410:web:264b3c759312248d9f18b3"
+        databaseURL: "https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app"
     };
     const app = initializeApp(masterConfig);
     const db = getDatabase(app);
 
-    window.saveDesignAndProceed = () => {
-        const n = document.getElementById('user-name').value;
-        const d = document.getElementById('les-doel').value;
-        const v = document.getElementById('les-werkvorm').value;
-        const uConf = document.getElementById('user-firebase-config').value || "// Geen eigen config";
-        if(!n || !d || !v) return alert("Vul alles in!");
+    // --- FUNCTIES ---
 
-        const promptText = `Handel als een expert in onderwijstechnologie. Bouw een interactieve web-app voor ${n}. 
-LEERDOEL: ${d}
-WERKVORM: ${v}
-CONFIG: ${uConf}
-Gebruik de term "filmisch" in de uitleg bij OVT-oefeningen.`;
-
-        document.getElementById('generated-prompt').innerText = promptText;
-        set(ref(db, 'workshop/users/' + n.replace(/\s/g, '_')), { n, d, v });
-        changeStep(1); 
-    };
-
-    window.copyToClipboard = () => {
-        navigator.clipboard.writeText(document.getElementById('generated-prompt').innerText);
-        alert("Gekopieerd!");
+    window.addWordToFirebase = () => {
+        const val = document.getElementById('word-input').value;
+        if(val) { 
+            push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 400, y: 300, type: 'user' }); 
+            document.getElementById('word-input').value = ''; 
+        }
     };
 
     window.addTheoryOogst = () => {
         const termen = ["Feedback", "Scaffolding", "Sociaal Leren", "Eigenaarschap", "Zone naaste ontwikkeling"];
-        termen.forEach((t, i) => { push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 150+(i*30), y: 150+(i*50), type: 'theory' }); });
+        termen.forEach((t, i) => { 
+            push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 150+(i*40), y: 150+(i*60), type: 'theory' }); 
+        });
     };
 
-    window.addWordToFirebase = () => {
-        const val = document.getElementById('word-input').value;
-        if(val) { push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 400, y: 300 }); document.getElementById('word-input').value = ''; }
+    // WEGWERPKRUISJE FUNCTIE
+    window.deleteWord = (key) => {
+        remove(ref(db, `workshop/whiteboard/words/${key}`));
     };
 
     onChildAdded(ref(db, 'workshop/whiteboard/words'), (s) => {
-        const d = s.val(); const div = document.createElement('div');
-        div.id = 'word-'+s.key; div.className = 'draggable-word' + (d.type==='theory'?' theory':'');
-        div.innerText = (d.type==='theory'?'🎓 ':'📌 ')+d.text;
-        div.style.left = d.x+'px'; div.style.top = d.y+'px';
+        const d = s.val(); 
+        const div = document.createElement('div');
+        div.id = 'word-'+s.key; 
+        div.className = 'draggable-word' + (d.type==='theory'?' theory':'');
+        div.innerHTML = `${(d.type==='theory'?'🎓 ':'📌 ')}${d.text} <span class="delete-btn" onclick="deleteWord('${s.key}')">×</span>`;
+        div.style.left = d.x+'px'; 
+        div.style.top = d.y+'px';
         document.getElementById('digibord').appendChild(div);
+        
         div.onmousedown = (e) => {
+            if(e.target.classList.contains('delete-btn')) return;
             document.onmousemove = (m) => {
-                div.style.top = (m.pageY - 100) + "px"; div.style.left = (m.pageX - 100) + "px";
+                const board = document.getElementById('digibord').getBoundingClientRect();
+                div.style.top = (m.clientY - board.top - 20) + "px";
+                div.style.left = (m.clientX - board.left - 50) + "px";
             };
             document.onmouseup = () => {
                 document.onmousemove = null;
@@ -208,25 +188,67 @@ Gebruik de term "filmisch" in de uitleg bij OVT-oefeningen.`;
         };
     });
 
-    onChildAdded(ref(db, 'workshop/users'), (s) => {
-        const v = s.val();
-        const card = document.createElement('div');
-        card.style = "background:#eee; padding:10px; margin-bottom:5px; border-radius:8px; font-size:0.8rem;";
-        card.innerHTML = `<strong>👤 ${v.n}</strong>: ${v.d.substring(0,40)}...`;
-        document.getElementById('live-feed').prepend(card);
+    onChildRemoved(ref(db, 'workshop/whiteboard/words'), (s) => {
+        const el = document.getElementById('word-'+s.key);
+        if(el) el.remove();
     });
 
-    window.clearFullReset = () => { if(confirm("Data wissen?")) { remove(ref(db, 'workshop/whiteboard')); remove(ref(db, 'workshop/users')); } };
+    window.saveDesignAndProceed = () => {
+        const n = document.getElementById('user-name').value;
+        const d = document.getElementById('les-doel').value;
+        const v = document.getElementById('les-werkvorm').value;
+        const uConf = document.getElementById('user-firebase-config').value || "// Gebruik standaard config";
+        
+        if(!n || !d || !v) return alert("Vul a.u.b. je naam, doel en werkvorm in.");
 
+        const promptText = `Handel als een ervaren Front-end Developer en Onderwijs-expert. 
+Bouw een interactieve web-app voor docent ${n}.
+DOEL: ${d}
+WERKVORM: ${v}
+FIREBASE_CONFIG: ${uConf}
+
+STRIKTE INSTRUCTIE:
+1. Gebruik uitsluitend HTML/JS (CDN Firebase).
+2. Gebruik de term "filmisch" alleen in de uitleg als de oefening de OVT (Onvoltooid Verleden Tijd) behandelt.
+3. Zorg voor een modern, responsief design.`;
+
+        document.getElementById('generated-prompt').innerText = promptText;
+        set(ref(db, 'workshop/users/' + n.replace(/\s/g, '_')), { n, d, v });
+        changeStep(1); 
+    };
+
+    window.copyToClipboard = () => {
+        navigator.clipboard.writeText(document.getElementById('generated-prompt').innerText);
+        alert("Prompt gekopieerd naar klembord!");
+    };
+
+    window.clearFullReset = () => { 
+        if(confirm("Weet je het zeker? Dit wist het hele bord voor iedereen!")) { 
+            remove(ref(db, 'workshop/whiteboard')); 
+        } 
+    };
+
+    // Navigatie logica
     let step = 1;
     window.changeStep = (n) => {
-        document.getElementById(`step-${step}`).classList.remove('active');
+        const current = document.getElementById(`step-${step}`);
+        if(current) current.classList.remove('active');
         step += n;
-        document.getElementById(`step-${step}`).classList.add('active');
+        const next = document.getElementById(`step-${step}`);
+        if(next) next.classList.add('active');
+        
         document.getElementById('prevBtn').disabled = (step === 1);
         document.getElementById('nextBtn').style.display = (step === 8) ? 'none' : 'inline-block';
         document.getElementById('progressText').innerText = `Stap ${step} van 8`;
     };
+
+    onChildAdded(ref(db, 'workshop/users'), (s) => {
+        const v = s.val();
+        const card = document.createElement('div');
+        card.style = "background:#f8f9fa; padding:10px; border-bottom:1px solid #ddd; font-size:0.8rem;";
+        card.innerHTML = `<strong>👤 ${v.n}</strong> ontwerpt: ${v.d.substring(0,50)}...`;
+        document.getElementById('live-feed').prepend(card);
+    });
 </script>
 </body>
 </html>
