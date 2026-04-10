@@ -265,15 +265,47 @@
     window.removeItem = (key) => remove(ref(db, `workshop/whiteboard/words/${key}`));
     window.clearFullReset = () => { if(confirm("Bord wissen?")) remove(ref(db, 'workshop/whiteboard')); };
 
-    window.saveDesignAndProceed = () => {
+   window.saveDesignAndProceed = () => {
+        // 1. Haal de waarden op uit de velden van Stap 7
         const n = document.getElementById('user-name').value;
         const d = document.getElementById('les-doel').value;
         const v = document.getElementById('les-werkvorm').value;
-        const uConf = document.getElementById('user-firebase-config').value || "// Geen config";
-        if(!n || !d || !v) return alert("Vul alles in!");
-        const prompt = `Bouw een web-app voor ${n}.\nDOEL: ${d}\nWERKVORM: ${v}\nCONFIG: ${uConf}`;
-        document.getElementById('generated-prompt').innerText = prompt;
+        const uConf = document.getElementById('user-firebase-config').value || "// Geen eigen config ingevoerd";
+        
+        // 2. Controleer of de verplichte velden zijn ingevuld
+        if(!n || !d || !v) {
+            return alert("Vul je naam, leerdoel en werkvorm in voordat je verder gaat!");
+        }
+
+        // 3. Bouw de prompt-tekst voor Stap 8
+        const promptTekst = `Handel als een expert in onderwijstechnologie en webdevelopment. 
+Bouw een interactieve, didactisch verantwoorde web-app voor docent ${n}.
+
+CONTEXT & DOEL:
+- Het leerdoel van de les is: ${d}
+- De gekozen werkvorm is: ${v}
+
+TECHNISCHE EISEN:
+- Gebruik HTML5, CSS3 en vanilla JavaScript.
+- Zorg voor een modern, responsive design (gebruik een professioneel kleurenpalet).
+- Implementeer een live-verbinding via Firebase (gebruik de onderstaande configuratie).
+- De app moet direct werken als de code in een index.html wordt geplakt.
+
+FIREBASE CONFIGURATIE:
+${uConf}
+
+Genereer nu de volledige code voor deze interactieve les.`;
+
+        // 4. PLAATS de tekst in het vak van Stap 8
+        const promptContainer = document.getElementById('generated-prompt');
+        if(promptContainer) {
+            promptContainer.innerText = promptTekst;
+        }
+
+        // 5. Sla de gegevens op in de centrale database voor de live-feed
         set(ref(db, 'workshop/users/' + n.replace(/\s/g, '_')), { n, d, v });
+
+        // 6. Ga naar de volgende stap (Stap 8)
         changeStep(1);
     };
 
