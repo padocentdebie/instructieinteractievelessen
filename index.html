@@ -43,83 +43,82 @@
 
 <div class="container">
     <div class="step active" id="step-1">
-    <div class="global-privacy-alert">⚠️ BELANGRIJK: Voer NOOIT echte persoonsgegevens of vertrouwelijke informatie in!</div>
-    <h2 style="text-align: center;">🚀 Workshop Dashboard</h2>
-    
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px;">
-        <div class="flow-card" style="background: #e3f2fd; border-top: 5px solid #3498db; padding: 20px; border-radius: 15px; text-align: center;"><strong>Waarom?</strong><br><small>Waarom al deze moeite?</small></div>
-        <div class="flow-card" style="background: #e8f5e9; border-top: 5px solid #27ae60; padding: 20px; border-radius: 15px; text-align: center;"><strong>Wat?</strong><br><small>Wat moet er geleerd worden?</small></div>
-        <div class="flow-card" style="background: #fff3e0; border-top: 5px solid #f39c12; padding: 20px; border-radius: 15px; text-align: center;"><strong>Hoe?</strong><br><small>Welke leeractiviteiten?</small></div>
-        <div class="flow-card" style="background: #f3e5f5; border-top: 5px solid #9b59b6; padding: 20px; border-radius: 15px; text-align: center;"><strong>AI?</strong><br><small>Laat Artificiële Intelligentie het werk doen.</small></div>
-    </div>
-
-    <div class="materials-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
-        <a href="https://github.com/" target="_blank" class="material-card" style="background: #3b82f6; padding: 25px; border-radius: 20px; text-align: center; color: white; text-decoration: none;"><h3>GitHub<br><small>Bezorgt jouw les-link op internet</small></h3></a>
-        <a href="https://console.firebase.google.com/" target="_blank" class="material-card" style="background: #fbbf24; padding: 25px; border-radius: 20px; text-align: center; color: #4d3a00; text-decoration: none;"><h3>Firebase<br><small>De motor voor interactie</small></h3></a>
-        <a href="https://gemini.google.com/" target="_blank" class="material-card" style="background: #ec4899; padding: 25px; border-radius: 20px; text-align: center; color: white; text-decoration: none;"><h3>Gemini<br>Ontwerpt jouw lessen</h3></a>
-    </div>
-
-    <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
-        <label><b>Voornaam Deelnemer:</b></label>
-        <input type="text" id="participant-name" placeholder="Typ je voornaam..." style="width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box;">
+        <div class="global-privacy-alert">⚠️ BELANGRIJK: Voer NOOIT echte persoonsgegevens of vertrouwelijke informatie in!</div>
+        <h2 style="text-align: center;">🚀 Workshop Dashboard</h2>
         
-        <label><b>Firebase Config:</b></label>
-        <textarea id="user-firebase-config" placeholder="Firebase Config hier..." style="width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box;" rows="4"></textarea>
-        
-        <button class="btn" onclick="changeStep(1)" style="width: 100%; margin-top: 10px; background: #3498db; color: white; border: none; padding: 14px; border-radius: 12px; cursor: pointer; font-weight: bold;">Laten we beginnen! →</button>
-    </div>
-</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px;">
+            <div class="flow-card" style="background: #e3f2fd; border-top: 5px solid #3498db; padding: 20px; border-radius: 15px; text-align: center;"><strong>Waarom?</strong><br><small>Waarom al deze moeite?</small></div>
+            <div class="flow-card" style="background: #e8f5e9; border-top: 5px solid #27ae60; padding: 20px; border-radius: 15px; text-align: center;"><strong>Wat?</strong><br><small>Wat moet er geleerd worden?</small></div>
+            <div class="flow-card" style="background: #fff3e0; border-top: 5px solid #f39c12; padding: 20px; border-radius: 15px; text-align: center;"><strong>Hoe?</strong><br><small>Welke leeractiviteiten?</small></div>
+            <div class="flow-card" style="background: #f3e5f5; border-top: 5px solid #9b59b6; padding: 20px; border-radius: 15px; text-align: center;"><strong>AI?</strong><br><small>Laat Artificiële Intelligentie het werk doen.</small></div>
+        </div>
 
- <div class="step" id="step-2">
-    <h2 style="text-align: center;">Stap A: Coöperatief Brainstormen</h2>
-    
-    <div style="display: flex; gap: 10px; margin-bottom: 15px; background: #f0f4f8; padding: 15px; border-radius: 15px; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-        <input type="text" id="word-input" placeholder="Typ zelf een begrip..." style="flex: 1; margin: 0; padding: 12px; border-radius: 8px; border: 1px solid #ccc;">
-        <button class="btn" onclick="addWordToFirebase()" style="background: #3498db;">Voeg toe</button>
-        <button class="btn" onclick="plopOogst()" style="background: #27ae60; color: white;">Oogst Begrippen 🌾</button>
-        <button class="btn btn-danger" onclick="clearFullReset()" style="background: #e74c3c;">RESET BORD</button>
-    </div>
+        <div class="materials-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
+            <a href="[https://github.com/](https://github.com/)" target="_blank" class="material-card" style="background: #3b82f6; padding: 25px; border-radius: 20px; text-align: center; color: white; text-decoration: none;"><h3>GitHub<br><small>Bezorgt jouw les-link op internet</small></h3></a>
+            <a href="[https://console.firebase.google.com/](https://console.firebase.google.com/)" target="_blank" class="material-card" style="background: #fbbf24; padding: 25px; border-radius: 20px; text-align: center; color: #4d3a00; text-decoration: none;"><h3>Firebase<br><small>De motor voor interactie</small></h3></a>
+            <a href="[https://gemini.google.com/](https://gemini.google.com/)" target="_blank" class="material-card" style="background: #ec4899; padding: 25px; border-radius: 20px; text-align: center; color: white; text-decoration: none;"><h3>Gemini<br>Ontwerpt jouw lessen</h3></a>
+        </div>
 
-    <div style="width: 100%; overflow: auto; border: 3px solid #ddd; border-radius: 20px; background: #fff;">
-        <div id="digibord" style="width: 1600px; height: 900px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none;">
+        <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
+            <label><b>Voornaam Deelnemer:</b></label>
+            <input type="text" id="participant-name" placeholder="Typ je voornaam..." style="width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box;">
             
-            <div class="board-column" style="background: var(--col-behaviorisme);">
-                <h3 style="text-align: center;">Behaviorisme</h3>
-                <div class="ghost-tekst">
-                    <b>Rol Docent:</b> De docent is de regisseur. Hij of zij bepaalt exact welk gedrag gewenst is, deelt de stof op in kleine stapjes en geeft direct feedback (beloning/straf).<br><br>
-                    <b>Rol Leerinhoud:</b> De leerinhoud is gefragmenteerd en lineair. Het bestaat uit objectieve feiten en vaardigheden die stap voor stap opgebouwd worden.<br><br>
-                    <b>Rol Student:</b> De student is een reactieve volger. Succes wordt bepaald door hoe nauwkeurig de student de instructies opvolgt en de juiste respons geeft op een prikkel.<br><br>
-                    <b>Rol Leeractiviteiten:</b> Veel herhaling en imitatie. Denk aan "drill & practice" software, invuloefeningen en het aanleren van automatismen.<br><br>
-                    <b>Rol Toetsen:</b> Toetsen zijn kwantitatief. Er wordt puur gekeken naar het eindproduct: is het antwoord goed of fout?
-                </div>
-            </div>
+            <label><b>Firebase Config:</b></label>
+            <textarea id="user-firebase-config" placeholder="Firebase Config hier..." style="width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box;" rows="4"></textarea>
+            
+            <button class="btn" onclick="changeStep(1)" style="width: 100%; margin-top: 10px; background: #3498db; color: white; border: none; padding: 14px; border-radius: 12px; cursor: pointer; font-weight: bold;">Laten we beginnen! →</button>
+        </div>
+    </div>
 
-            <div class="board-column" style="background: var(--col-cognitivisme);">
-                <h3 style="text-align: center;">Cognitivisme</h3>
-                <div class="ghost-tekst">
-                    <b>Rol Docent:</b> De docent is de expert en organisator. De taak is om informatie zo aan te bieden dat deze aansluit bij wat de student al weet, om zo de "cognitieve belasting" te beheersen.<br><br>
-                    <b>Rol Leerinhoud:</b> De inhoud is gestructureerd en hiërarchisch. Er wordt veel gewerkt met schema’s, modellen en logische verbanden tussen concepten.<br><br>
-                    <b>Rol Student:</b> De student is een actieve informatieverwerker. Hij moet actief nadenken, informatie coderen en strategieën gebruiken om kennis op te slaan.<br><br>
-                    <b>Rol Leeractiviteiten:</b> Activiteiten die begrip stimuleren, zoals het maken van samenvattingen, mindmaps, het uitleggen van concepten en het leggen van verbanden met voorkennis.<br><br>
-                    <b>Rol Toetsen:</b> Toetsen richten zich op inzicht. Niet alleen "wat" weet de student, maar kan hij de regels ook toepassen in een vergelijkbare, nieuwe context?
-                </div>
-            </div>
+    <div class="step" id="step-2">
+        <h2 style="text-align: center;">Stap A: Coöperatief Brainstormen</h2>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 15px; background: #f0f4f8; padding: 15px; border-radius: 15px; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <input type="text" id="word-input" placeholder="Typ zelf een begrip..." style="flex: 1; margin: 0; padding: 12px; border-radius: 8px; border: 1px solid #ccc;">
+            <button class="btn" onclick="addWordToFirebase()" style="background: #3498db;">Voeg toe</button>
+            <button class="btn" onclick="plopOogst()" style="background: #27ae60; color: white;">Oogst Begrippen 🌾</button>
+            <button class="btn btn-danger" onclick="clearFullReset()" style="background: #e74c3c;">RESET BORD</button>
+        </div>
 
-            <div class="board-column" style="background: var(--col-constructivisme);">
-                <h3 style="text-align: center;">Constructivisme</h3>
-                <div class="ghost-tekst">
-                    <b>Rol Docent:</b> De docent is de coach of facilitator. Hij creëert een rijke omgeving en stelt vragen die de student aanzetten tot zelfontdekking, in plaats van de antwoorden direct te geven.<br><br>
-                    <b>Rol Leerinhoud:</b> De inhoud is complex en authentiek. Er wordt gewerkt met "vage" problemen uit de echte wereld die vanuit meerdere perspectieven bekeken kunnen worden.<br><br>
-                    <b>Rol Student:</b> De student is de eigenaar van het leerproces. Hij bouwt zijn eigen unieke begrip op door ervaringen op te doen en daarover te reflecteren.<br><br>
-                    <b>Rol Leeractiviteiten:</b> Samenwerkend en onderzoekend leren. Denk aan projecten, discussies, casussen uit de praktijk en sociale interactie (sociaal-constructivisme).<br><br>
-                    <b>Rol Toetsen:</b> Toetsen zijn holistisch. Er wordt gekeken naar het proces en de groei (bijvoorbeeld via een portfolio) en het vermogen om in complexe situaties te handelen.
+        <div style="width: 100%; overflow: auto; border: 3px solid #ddd; border-radius: 20px; background: #fff;">
+            <div id="digibord" style="width: 1600px; height: 900px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none;">
+                
+                <div class="board-column" style="background: var(--col-behaviorisme);">
+                    <h3 style="text-align: center;">Behaviorisme</h3>
+                    <div class="ghost-tekst">
+                        <b>Rol Docent:</b> De docent is de regisseur. Hij of zij bepaalt exact welk gedrag gewenst is, deelt de stof op in kleine stapjes en geeft direct feedback (beloning/straf).<br><br>
+                        <b>Rol Leerinhoud:</b> De leerinhoud is gefragmenteerd en lineair. Het bestaat uit objectieve feiten en vaardigheden die stap voor stap opgebouwd worden.<br><br>
+                        <b>Rol Student:</b> De student is een reactieve volger. Succes wordt bepaald door hoe nauwkeurig de student de instructies opvolgt en de juiste respons geeft op een prikkel.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Veel herhaling en imitatie. Denk aan "drill & practice" software, invuloefeningen en het aanleren van automatismen.<br><br>
+                        <b>Rol Toetsen:</b> Toetsen zijn kwantitatief. Er wordt puur gekeken naar het eindproduct: is het antwoord goed of fout?
+                    </div>
                 </div>
-            </div> </div> </div> </div> ```
 
-    <div class="step" id="step-3"><h2>Inspiratie 1</h2><iframe src="https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/" style="width:100%; height:600px; border:none;"></iframe></div>
-    <div class="step" id="step-4"><h2>Inspiratie 2</h2><iframe src="https://padocentdebie.github.io/Q2PVBevindingen5woordenschatbingo/" style="width:100%; height:600px; border:none;"></iframe></div>
-    <div class="step" id="step-5"><h2>Inspiratie 3</h2><iframe src="https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/" style="width:100%; height:600px; border:none;"></iframe></div>
-    <div class="step" id="step-6"><h2>Inspiratie 4</h2><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/" style="width:100%; height:600px; border:none;"></iframe></div>
+                <div class="board-column" style="background: var(--col-cognitivisme);">
+                    <h3 style="text-align: center;">Cognitivisme</h3>
+                    <div class="ghost-tekst">
+                        <b>Rol Docent:</b> De docent is de expert en organisator. De taak is om informatie zo aan te bieden dat deze aansluit bij wat de student al weet, om zo de "cognitieve belasting" te beheersen.<br><br>
+                        <b>Rol Leerinhoud:</b> De inhoud is gestructureerd en hiërarchisch. Er wordt veel gewerkt met schema’s, modellen en logische verbanden tussen concepten.<br><br>
+                        <b>Rol Student:</b> De student is een actieve informatieverwerker. Hij moet actief nadenken, informatie coderen en strategieën gebruiken om kennis op te slaan.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Activiteiten die begrip stimuleren, zoals het maken van samenvattingen, mindmaps, het uitleggen van concepten en het leggen van verbanden met voorkennis.<br><br>
+                        <b>Rol Toetsen:</b> Toetsen richten zich op inzicht. Niet alleen "wat" weet de student, maar kan hij de regels ook toepassen in een vergelijkbare, nieuwe context?
+                    </div>
+                </div>
+
+                <div class="board-column" style="background: var(--col-constructivisme);">
+                    <h3 style="text-align: center;">Constructivisme</h3>
+                    <div class="ghost-tekst">
+                        <b>Rol Docent:</b> De docent is de coach of facilitator. Hij creëert een rijke omgeving en stelt vragen die de student aanzetten tot zelfontdekking, in plaats van de antwoorden direct te geven.<br><br>
+                        <b>Rol Leerinhoud:</b> De inhoud is complex en authentiek. Er wordt gewerkt met "vage" problemen uit de echte wereld die vanuit meerdere perspectieven bekeken kunnen worden.<br><br>
+                        <b>Rol Student:</b> De student is de eigenaar van het leerproces. Hij bouwt zijn eigen unieke begrip op door ervaringen op te doen en daarover te reflecteren.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Samenwerkend en onderzoekend leren. Denk aan projecten, discussies, casussen uit de praktijk en sociale interactie (sociaal-constructivisme).<br><br>
+                        <b>Rol Toetsen:</b> Toetsen zijn holistisch. Er wordt gekeken naar het proces en de groei (bijvoorbeeld via een portfolio) en het vermogen om in complexe situaties te handelen.
+                    </div>
+                </div>
+            </div> </div> </div> <div class="step" id="step-3"><h2>Inspiratie 1</h2><iframe src="[https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/](https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/)" style="width:100%; height:600px; border:none;"></iframe></div>
+    <div class="step" id="step-4"><h2>Inspiratie 2</h2><iframe src="[https://padocentdebie.github.io/Q2PVBevindingen5woordenschatbingo/](https://padocentdebie.github.io/Q2PVBevindingen5woordenschatbingo/)" style="width:100%; height:600px; border:none;"></iframe></div>
+    <div class="step" id="step-5"><h2>Inspiratie 3</h2><iframe src="[https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/](https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/)" style="width:100%; height:600px; border:none;"></iframe></div>
+    <div class="step" id="step-6"><h2>Inspiratie 4</h2><iframe src="[https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/](https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/)" style="width:100%; height:600px; border:none;"></iframe></div>
 
     <div class="step" id="step-7">
         <h2 style="text-align: center;">Stap C: Ontwerp je Les</h2>
@@ -135,53 +134,26 @@
     </div>
 
     <div class="step" id="step-8">
-    <h2>Stap D: De Gemini Prompt Machine</h2>
-    <p>Kopieer de onderstaande prompt en plak deze in Gemini.</p>
-    
-    <div id="generated-prompt" class="code-box" style="background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 10px; font-family: monospace; min-height: 100px; white-space: pre-wrap; margin-bottom: 15px;">
+        <h2>Stap D: De Gemini Prompt Machine</h2>
+        <p>Kopieer de onderstaande prompt en plak deze in Gemini.</p>
+        <div id="generated-prompt" class="code-box"></div>
+        <button class="btn" onclick="copyToClipboard('generated-prompt')">Kopieer Prompt</button>
+    </div>
+
+    <div class="step" id="step-9">
+        <h2 style="text-align: center;">Stap E: Genereer de Code met Gemini</h2>
+        <div style="background: #f0f7ff; padding: 25px; border-radius: 15px; border-left: 5px solid #3498db; margin-bottom: 25px;">
+            <p><b>Instructie:</b> Plak deze prompt-tekst in de chatruimte van Gemini.</p>
         </div>
-    
-    <button class="btn" onclick="copyToClipboard('generated-prompt')">Kopieer Prompt</button>
-</div>
-
-   <div class="step" id="step-9">
-    <h2 style="text-align: center;">Stap E: Genereer de Code met Gemini</h2>
-    
-    <div style="background: #f0f7ff; padding: 25px; border-radius: 15px; border-left: 5px solid #3498db; margin-bottom: 25px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
-        <p style="margin: 0; line-height: 1.6; font-size: 1.1rem; color: #2c3e50;">
-            <b>Instructie:</b> Plak deze prompt-tekst in de chatruimte van Gemini.
-        </p>
+        <div style="display: flex; justify-content: center; margin: 30px 0;">
+            <a href="[https://gemini.google.com/](https://gemini.google.com/)" target="_blank" style="background: #ec4899; color: white; padding: 30px; border-radius: 20px; text-decoration: none; font-weight: bold;"> Open Gemini & Plak Prompt</a>
+        </div>
     </div>
 
-    <div style="display: flex; justify-content: center; margin: 30px 0;">
-        <a href="https://gemini.google.com/" target="_blank" class="gemini-card" style="
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #ec4899; /* Gemini Vibrant Color */
-            color: white;
-            text-decoration: none;
-            padding: 30px;
-            border-radius: 20px;
-            font-weight: bold;
-            transition: 0.3s;
-            animation: float 3s ease-in-out infinite;
-            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
-        ">
-            <span style="font-size: 2.5rem;">✨</span>
-            <h3 style="margin: 0; font-size: 1.5rem;">Open Gemini & Plak Prompt</h3>
-            <small style="opacity: 0.9;">Klik hier om naar de chatruimte te gaan</small>
-        </a>
+    <div class="step" id="step-10">
+        <h2 style="text-align: center;">Stap 10: Plak je Code</h2>
+        <p>Hier gaat de workshop verder...</p>
     </div>
-
-    <p style="text-align: center; color: #666; font-style: italic;">
-        Zodra de AI de code heeft gegenereerd, kun je door naar de volgende stap.
-    </p>
-</div>
 
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
@@ -191,50 +163,33 @@
 </div>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, set, push, onChildAdded, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { initializeApp } from "[https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js](https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js)";
+    import { getDatabase, ref, set, push, onChildAdded, remove } from "[https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js](https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js)";
 
-    const masterConfig = { apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4", databaseURL: "https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app" };
+    const masterConfig = { apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4", databaseURL: "[https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app](https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app)" };
     const app = initializeApp(masterConfig);
     const db = getDatabase(app);
 
     let step = 1;
-    // Zorg dat deze functie de globale changeStep vervangt
-window.changeStep = (n) => {
-    const nextStep = step + n;
-    
-    // Check of de volgende stap wel bestaat in de HTML
-    const nextStepElement = document.getElementById(`step-${nextStep}`);
-    
-    if (nextStepElement) {
-        // Verberg huidige stap
-        document.getElementById(`step-${step}`).classList.remove('active');
+
+    window.changeStep = (n) => {
+        const nextStep = step + n;
+        const nextStepElement = document.getElementById(`step-${nextStep}`);
         
-        // Update stap nummer
-        step = nextStep;
-        
-        // Toon nieuwe stap
-        nextStepElement.classList.add('active');
-        
-        // Update navigatie balk
-        document.getElementById('prevBtn').disabled = (step === 1);
-        
-        // Zorg dat de 'Volgende' knop zichtbaar blijft tot de allerlaatste stap (13)
-        if (document.getElementById('nextBtn')) {
-            document.getElementById('nextBtn').style.display = (step >= 13) ? 'none' : 'inline-block';
+        if (nextStepElement) {
+            document.getElementById(`step-${step}`).classList.remove('active');
+            step = nextStep;
+            nextStepElement.classList.add('active');
+            document.getElementById('prevBtn').disabled = (step === 1);
+            if (document.getElementById('nextBtn')) {
+                document.getElementById('nextBtn').style.display = (step >= 13) ? 'none' : 'inline-block';
+            }
+            document.getElementById('progressText').innerText = `Stap ${step} van 13`;
+            window.scrollTo(0, 0);
         }
-        
-        // Update de tekst onderin
-        document.getElementById('progressText').innerText = `Stap ${step} van 13`;
-        
-        // Scroll naar boven voor gebruiksgemak
-        window.scrollTo(0, 0);
-    } else {
-        console.error("Stap " + nextStep + " bestaat niet in de HTML.");
-    }
-};
+    };
+
     window.saveDesignAndProceed = () => {
-        // GEWIJZIGD: Haalt nu de naam op uit het inlogveld van stap 1
         const naam = document.getElementById('participant-name').value || "Deelnemer";
         const doel = document.getElementById('les-doel').value;
         const vorm = document.getElementById('les-werkvorm').value;
@@ -245,36 +200,7 @@ window.changeStep = (n) => {
                                 `Opdracht voor jou: ontwerp de les in html-code, maak er een rustige lay-out bij en doe voorstellen voor interactie.`;
         
         document.getElementById('generated-prompt').innerText = volledigePrompt;
-        changeStep(1); // Gaat van stap 7 naar stap 8
-    };
-
-    window.mailAllesNaarMij = () => {
-        // GEWIJZIGD: Gebruikt ook hier de naam uit stap 1
-        const naam = document.getElementById('participant-name').value || "Deelnemer";
-        const doel = document.getElementById('les-doel').value;
-        const vorm = document.getElementById('les-werkvorm').value;
-        const prompt = document.getElementById('generated-prompt').innerText;
-        const url = document.getElementById('final-lesson-url') ? document.getElementById('final-lesson-url').value : "";
-
-        const body = `Mijn Workshop Resultaten:%0D%0A%0D%0A` +
-                     `Naam: ${naam}%0D%0A` +
-                     `Leerdoel: ${doel}%0D%0A` +
-                     `Werkvorm: ${vorm}%0D%0A` +
-                     `Gegenereerde Prompt:%0D%0A${prompt}%0D%0A%0D%0A` +
-                     `Live Link: ${url}`;
-        
-        window.location.href = `mailto:?subject=Mijn Workshop Dashboard Resultaten&body=${body}`;
-    };
-
-    window.hardResetAlles = () => {
-        if(confirm("Weet je zeker dat je alle invoer wilt wissen en terug wilt naar stap 1?")) {
-            document.querySelectorAll('input, textarea').forEach(el => el.value = '');
-            document.getElementById('generated-prompt').innerText = '...';
-            step = 1;
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step-1').classList.add('active');
-            window.changeStep(0);
-        }
+        changeStep(1); 
     };
 
     window.addWordToFirebase = () => {
@@ -283,34 +209,22 @@ window.changeStep = (n) => {
         document.getElementById('word-input').value = '';
     };
 
+    window.plopOogst = () => {
+        const woorden = ["Chunking", "Eigen inbreng", "Formatief toetsen", "Inbreng student", "Snelle feedback", "Conditionering", "Schema's bouwen", "Sociaal leren", "Belonen", "Authentieke taken", "Herhaling", "Portfolio"];
+        woorden.forEach((t) => {
+            push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 650 + (Math.random() * 300), y: 350 + (Math.random() * 200) });
+        });
+    };
+
+    window.clearFullReset = () => {
+        if(confirm("Bord leegmaken?")) remove(ref(db, 'workshop/whiteboard/words'));
+    };
+
     window.copyToClipboard = (id) => {
         const text = document.getElementById(id).innerText;
         navigator.clipboard.writeText(text);
-        alert("Gekopieerd naar klembord!");
+        alert("Gekopieerd!");
     };
-    window.plopOogst = () => {
-    const woorden = [
-        "Chunking", "Eigen inbreng", "Formatief toetsen", 
-        "Inbreng student", "Snelle feedback", "Conditionering", 
-        "Schema's bouwen", "Sociaal leren", "Belonen", 
-        "Authentieke taken", "Herhaling", "Portfolio"
-    ];
-    
-    woorden.forEach((t) => {
-        // Verspreid de woorden een beetje willekeurig in het midden van het bord
-        push(ref(db, 'workshop/whiteboard/words'), { 
-            text: t, 
-            x: 650 + (Math.random() * 300), 
-            y: 350 + (Math.random() * 200) 
-        });
-    });
-};
-
-window.clearFullReset = () => {
-    if(confirm("Weet je zeker dat je het hele bord wilt leegmaken voor iedereen?")) {
-        remove(ref(db, 'workshop/whiteboard/words'));
-    }
-};
 </script>
 </body>
 </html>
