@@ -47,7 +47,6 @@
         border: none;
         display: block;
     }
-    /* -------------------------------------------------- */
 
     #digibord { width: 1600px; height: 900px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; border: 1px solid #ccc; }
     .board-column { flex: 1; padding: 25px; border-right: 2px dashed #ccc; position: relative; }
@@ -64,19 +63,20 @@
     .code-box { background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin: 15px 0; overflow-x: auto; border: 1px solid #334155; white-space: pre-wrap; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    
     .btn-reset { 
-    background: #4a5568; 
-    color: white; 
-    border: none; 
-    padding: 20px; 
-    border-radius: 15px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    width: 100%; 
-    font-size: 1.1rem;
-    transition: 0.3s;
-}
-.btn-reset:hover { background: #2d3748; }
+        background: #4a5568; 
+        color: white; 
+        border: none; 
+        padding: 20px; 
+        border-radius: 15px; 
+        cursor: pointer; 
+        font-weight: bold; 
+        width: 100%; 
+        font-size: 1.1rem;
+        transition: 0.3s;
+    }
+    .btn-reset:hover { background: #2d3748; }
 </style>
 </head>
 <body>
@@ -179,37 +179,35 @@
         </div>
     </div>
     
-
     <div class="step" id="step-10">
-              <h2 style="text-align: center;">Stap F: Je les op internet zetten (GitHub)</h2>
-        
+        <h2 style="text-align: center;">Stap F: Je les op internet zetten (GitHub)</h2>
         <div style="background: #f6f8fa; border-left: 5px solid #24292f; padding: 25px; border-radius: 15px; margin-bottom: 25px;">
             <p><strong>Volg deze stappen in het GitHub-tabblad dat je in stap 1 hebt geopend:</strong></p>
             <ol style="line-height: 1.8;">
                 <li>Klik in GitHub bij <strong>'Repositories'</strong> op de groene knop <strong>'New'</strong>.</li>
-                <li><strong>Bedenk een handige naam</strong> voor de les (denk aan: <em>vak-lesnummer-doel</em>).</li>
+                <li><strong>Bedenk een handige naam</strong> voor de les.</li>
                 <li>Scroll iets naar beneden en klik op de blauwe link <strong>'creating a new file'</strong>.</li>
                 <li>Noem het bestand altijd exact: <code style="background: #eee; padding: 2px 5px; border-radius: 4px;">index.html</code></li>
-                <li><strong>Plak de code</strong> die je van Gemini hebt gekregen in het grote tekstveld.</li>
-                <li>Klik rechtsboven (of onderaan) op de groene knop <strong>'Commit changes...'</strong>.</li>
-                <li>Klik op <strong>'Settings'</strong> in de bovenste menubalk van je repository.</li>
-                <li>Klik in de linkerkolom op <strong>'Pages'</strong> (onder het kopje 'Code and automation').</li>
+                <li><strong>Plak de code</strong> die je van Gemini hebt gekregen.</li>
+                <li>Klik op de groene knop <strong>'Commit changes...'</strong>.</li>
+                <li>Klik op <strong>'Settings'</strong> in de bovenste menubalk.</li>
+                <li>Klik in de linkerkolom op <strong>'Pages'</strong>.</li>
                 <li>Zet bij 'Branch' de selectie op <strong>'main'</strong> en klik op <strong>'Save'</strong>.</li>
-                <li><strong>Wacht een minuutje</strong> en ververs de pagina.</li>
-                <li>De blauwe link van jouw les verschijnt bovenaan in het scherm.</li>
-                <li><strong>Kopieer de hele link</strong> (van <code style="color: #0969da;">https://...</code> tot het einde).</li>
+                <li><strong>Wacht een minuutje</strong> en ververs de pagina voor de blauwe link.</li>
+                <li><strong>Kopieer de hele link</strong>.</li>
             </ol>
         </div>
 
         <div style="background: #fff5f5; padding: 20px; border-radius: 15px; border: 1px solid #feb2b2;">
             <label><strong>Plak hier de link van je live les:</strong></label>
             <input type="text" id="github-url" placeholder="https://jouwnaam.github.io/jouw-les/" style="border-color: #fc8181;">
+            <button class="btn btn-success" onclick="saveGithubLink()" style="width: 100%; margin-top: 10px;">Deel mijn les met de groep! 🚀</button>
             <p><small><i>Deze link hebben we in de volgende stap nodig om de interactie te activeren.</i></small></p>
         </div>
     </div>
+
     <div class="step" id="step-11">
         <h2 style="text-align: center;">Stap 11: Plaats je les in It's Learning (LMS)</h2>
-        
         <div style="background: #e3f2fd; border-left: 5px solid #3498db; padding: 25px; border-radius: 15px; margin-bottom: 25px;">
             <p><strong>Om je les in een LMS zoals It's Learning te tonen, gebruiken we een 'iframe'.</strong></p>
             <p>1. Plak hieronder je gekopieerde GitHub-link.<br>
@@ -220,41 +218,33 @@
         <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
             <label><b>Stap 1: Plak je GitHub link:</b></label>
             <input type="text" id="github-input-lms" placeholder="https://jouwnaam.github.io/jouw-les/" oninput="generateIframe()" style="width: 100%;">
-
             <label style="margin-top: 20px; display: block;"><b>Stap 2: Kopieer deze Iframe-code:</b></label>
             <div id="iframe-output" class="code-box" style="min-height: 50px; background: #2d3748; color: #a0aec0;">
                 De code verschijnt hier zodra je een link plakt...
             </div>
             <button class="btn btn-success" onclick="copyToClipboard('iframe-output')" style="width: 100%; margin-top: 10px;">Kopieer Iframe-code 📋</button>
         </div>
-
-        <div style="margin-top: 25px; font-size: 0.9rem; color: #666;">
-            <p><i>Tip: In It's Learning kies je voor 'Inhoud toevoegen' > 'Pagina' > 'Rich content' > 'broncode' of klik op het &lt;&gt; icoontje in de teksteditor.</i></p>
-        </div>
     </div>
+
     <div class="step" id="step-12">
-        <div class="step" id="step-12">
-    <h2 style="text-align: center;">Stap 12: Feedback & Resultaten 🎓</h2>
-    <p style="text-align: center;">Bekijk hieronder de live lessen die zojuist zijn gepubliceerd.</p>
-    
-    <div id="github-live-feed">
-        </div>
-</div>
-    <div class="step" id="step-13"><div class="step" id="step-13">
-    <h2 style="text-align: center;">Stap 13: Afronden & Opruimen 🧹</h2>
-    
-    <div style="background: #f0fdf4; padding: 25px; border-radius: 20px; border: 1px solid #bbf7d0; margin-bottom: 20px;">
-        <h3>📧 Resultaten bewaren</h3>
-        <p>Wil je de ontwerpen en links van deze sessie bewaren? Gebruik de knop hieronder om een verzamelmail op te stellen.</p>
-        <button class="btn btn-success" onclick="mailAlleSchermen()" style="width: 100%; padding: 15px;">Mail alle schermen naar mij ✉️</button>
+        <h2 style="text-align: center;">Stap 12: Feedback & Resultaten 🎓</h2>
+        <p style="text-align: center;">Bekijk hieronder de live lessen die zojuist zijn gepubliceerd.</p>
+        <div id="github-live-feed"></div>
     </div>
 
-    <div style="background: #fff5f5; padding: 25px; border-radius: 20px; border: 1px solid #fed7d7;">
-        <h3>⚠️ Grote Reset</h3>
-        <p>Klaar voor de volgende groep? Deze knop maakt het whiteboard leeg en wist alle ingezonden lessen uit de database.</p>
-        <button class="btn-reset" onclick="hardResetAlles()">VOLLEDIGE RESET (Bord + Lessen) 🔥</button>
+    <div class="step" id="step-13">
+        <h2 style="text-align: center;">Stap 13: Afronden & Opruimen 🧹</h2>
+        <div style="background: #f0fdf4; padding: 25px; border-radius: 20px; border: 1px solid #bbf7d0; margin-bottom: 20px;">
+            <h3>📧 Resultaten bewaren</h3>
+            <p>Wil je de ontwerpen en links van deze sessie bewaren? Gebruik de knop hieronder om een verzamelmail op te stellen.</p>
+            <button class="btn btn-success" onclick="mailAlleSchermen()" style="width: 100%; padding: 15px;">Mail alle schermen naar mij ✉️</button>
+        </div>
+        <div style="background: #fff5f5; padding: 25px; border-radius: 20px; border: 1px solid #fed7d7;">
+            <h3>⚠️ Grote Reset</h3>
+            <p>Klaar voor de volgende groep? Deze knop maakt het whiteboard leeg en wist alle ingezonden lessen uit de database.</p>
+            <button class="btn-reset" onclick="hardResetAlles()">VOLLEDIGE RESET (Bord + Lessen) 🔥</button>
+        </div>
     </div>
-</div>
 
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
@@ -265,7 +255,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, push, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const masterConfig = { apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4", databaseURL: "https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app" };
     const app = initializeApp(masterConfig);
@@ -276,12 +266,10 @@
     window.changeStep = (n) => {
         const nextStepNum = currentStep + n;
         const nextStepEl = document.getElementById(`step-${nextStepNum}`);
-        
         if (nextStepEl) {
             document.getElementById(`step-${currentStep}`).classList.remove('active');
             currentStep = nextStepNum;
             nextStepEl.classList.add('active');
-            
             document.getElementById('prevBtn').disabled = (currentStep === 1);
             document.getElementById('nextBtn').style.display = (currentStep >= 13) ? 'none' : 'inline-block';
             document.getElementById('progressText').innerText = `Stap ${currentStep} van 13`;
@@ -293,12 +281,10 @@
         const naam = document.getElementById('participant-name').value || "Deelnemer";
         const doel = document.getElementById('les-doel').value;
         const vorm = document.getElementById('les-werkvorm').value;
-        
         const volledigePrompt = `Hoi Gemini, ik ben ${naam}. Ik wil een digitale les ontwerpen.\n\n` +
                                 `Leerdoel: ${doel}\n` +
                                 `Werkvorm: ${vorm}\n\n` +
                                 `Opdracht voor jou: ontwerp de les in html-code, maak er een rustige lay-out bij en doe voorstellen voor interactie.`;
-        
         document.getElementById('generated-prompt').innerText = volledigePrompt;
         window.changeStep(1); 
     };
@@ -325,93 +311,68 @@
         navigator.clipboard.writeText(text);
         alert("Gekopieerd!");
     };
+
     window.generateIframe = () => {
         const url = document.getElementById('github-input-lms').value.trim();
         const output = document.getElementById('iframe-output');
-        
         if (url.startsWith('http')) {
-            const iframeCode = `<iframe src="${url}" width="100%" height="800px" frameborder="0" allowfullscreen></iframe>`;
-            output.innerText = iframeCode;
-            output.style.color = "#f8fafc"; // Maak tekst wit als er code is
+            output.innerText = `<iframe src="${url}" width="100%" height="800px" frameborder="0" allowfullscreen></iframe>`;
+            output.style.color = "#f8fafc";
         } else {
             output.innerText = "Wacht op geldige link...";
             output.style.color = "#a0aec0";
         }
     };
-    import { onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-// Functie om de link op te slaan (aanroepen bij de knop in stap 10)
-window.saveGithubLink = () => {
-    const url = document.getElementById('github-url').value.trim();
-    const naam = document.getElementById('participant-name').value || "Anoniem";
+    window.saveGithubLink = () => {
+        const url = document.getElementById('github-url').value.trim();
+        const naam = document.getElementById('participant-name').value || "Anoniem";
+        if (url.startsWith('http')) {
+            push(ref(db, 'workshop/links'), { url, naam, timestamp: Date.now() });
+            alert("Link succesvol gedeeld!");
+            window.changeStep(2); // Direct naar stap 12 (resultaten)
+        } else {
+            alert("Voer a.u.b. een geldige URL in.");
+        }
+    };
 
-    if (url.startsWith('http')) {
-        push(ref(db, 'workshop/links'), {
-            url: url,
-            naam: naam,
-            timestamp: Date.now()
-        });
-        alert("Link succesvol gedeeld met de groep!");
-        window.changeStep(1);
-    } else {
-        alert("Voer a.u.b. een geldige URL in.");
-    }
-};
+    const feedContainer = document.getElementById('github-live-feed');
+    onValue(ref(db, 'workshop/links'), (snapshot) => {
+        feedContainer.innerHTML = '';
+        const data = snapshot.val();
+        if (data) {
+            Object.values(data).reverse().forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'repo-card';
+                card.innerHTML = `
+                    <div style="padding: 10px; background: #eee; border-bottom: 1px solid #ddd;"><strong>Les van: ${item.naam}</strong></div>
+                    <iframe src="${item.url}"></iframe>
+                    <div style="padding: 10px; text-align: right;"><a href="${item.url}" target="_blank" class="btn" style="font-size: 0.8rem;">Open volledig ↗</a></div>`;
+                feedContainer.appendChild(card);
+            });
+        } else {
+            feedContainer.innerHTML = '<p style="text-align:center; padding: 20px;">Nog geen lessen ingezonden...</p>';
+        }
+    });
 
-// Luister naar nieuwe links en toon ze in Stap 12
-const feedContainer = document.getElementById('github-live-feed');
-onValue(ref(db, 'workshop/links'), (snapshot) => {
-    feedContainer.innerHTML = ''; // Maak container leeg voor verversing
-    const data = snapshot.val();
-    
-    if (data) {
-        Object.values(data).reverse().forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'repo-card';
-            card.innerHTML = `
-                <div style="padding: 10px; background: #eee; border-bottom: 1px solid #ddd;">
-                    <strong>Les van: ${item.naam}</strong>
-                </div>
-                <iframe src="${item.url}" title="Les van ${item.naam}"></iframe>
-                <div style="padding: 10px; text-align: right;">
-                    <a href="${item.url}" target="_blank" class="btn" style="font-size: 0.8rem; padding: 5px 10px;">Open volledig ↗</a>
-                </div>
-            `;
-            feedContainer.appendChild(card);
-        });
-    } else {
-        feedContainer.innerHTML = '<p style="text-align:center; padding: 20px;">Nog geen lessen ingezonden...</p>';
-    }
-});
     window.mailAlleSchermen = () => {
-    const naam = document.getElementById('participant-name').value || "Deelnemer";
-    const doel = document.getElementById('les-doel').value || "Niet ingevuld";
-    const vorm = document.getElementById('les-werkvorm').value || "Niet ingevuld";
-    const githubLink = document.getElementById('github-url').value || "Geen link ingevoerd";
+        const naam = document.getElementById('participant-name').value || "Deelnemer";
+        const doel = document.getElementById('les-doel').value || "Niet ingevuld";
+        const vorm = document.getElementById('les-werkvorm').value || "Niet ingevuld";
+        const githubLink = document.getElementById('github-url').value || "Geen link";
+        const subject = encodeURIComponent(`Workshop Resultaten 2026 - ${naam}`);
+        const body = encodeURIComponent(`Hoi ${naam},\n\nHier zijn je resultaten:\nLeerdoel: ${doel}\nWerkvorm: ${vorm}\nLink: ${githubLink}`);
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=${subject}&body=${body}`, '_blank');
+    };
 
-    const subject = encodeURIComponent(`Workshop Resultaten 2026 - ${naam}`);
-    const body = encodeURIComponent(
-        `Hoi ${naam},\n\nHier zijn je resultaten van de workshop:\n\n` +
-        `Leerdoel: ${doel}\n` +
-        `Werkvorm: ${vorm}\n\n` +
-        `Live les link: ${githubLink}\n\n` +
-        `Met vriendelijke groet,\nWorkshop Dashboard`
-    );
-
-    window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=${subject}&body=${body}`, '_blank');
-};
-
-window.hardResetAlles = () => {
-    if (confirm("WEET JE HET ZEKER? Dit wist het whiteboard EN alle ingezonden lessen voor iedereen!")) {
-        // Wis het whiteboard
-        remove(ref(db, 'workshop/whiteboard/words'));
-        // Wis de ingezonden links
-        remove(ref(db, 'workshop/links'));
-        
-        alert("Systeem is volledig gereset.");
-        location.reload(); // Herlaad de pagina om alle lokale velden ook te wissen
-    }
-};
+    window.hardResetAlles = () => {
+        if (confirm("WEET JE HET ZEKER? Dit wist ALLES!")) {
+            remove(ref(db, 'workshop/whiteboard/words'));
+            remove(ref(db, 'workshop/links'));
+            alert("Systeem gereset.");
+            location.reload();
+        }
+    };
 </script>
 </body>
 </html>
