@@ -207,12 +207,26 @@
 
     window.changeStep = (n) => {
         const nextStepNum = currentStep + n;
-        if (document.getElementById(`step-${nextStepNum}`)) {
-            document.getElementById(`step-${currentStep}`).classList.remove('active');
+        const currentStepEl = document.getElementById(`step-${currentStep}`);
+        const nextStepEl = document.getElementById(`step-${nextStepNum}`);
+
+        if (nextStepEl) {
+            // Verberg huidige stap
+            currentStepEl.classList.remove('active');
+            // Update nummer
             currentStep = nextStepNum;
-            document.getElementById(`step-${currentStep}`).classList.add('active');
+            // Toon nieuwe stap
+            nextStepEl.classList.add('active');
+            
+            // Update knoppen en tekst
             document.getElementById('prevBtn').disabled = (currentStep === 1);
+            document.getElementById('nextBtn').style.display = (currentStep >= 13) ? 'none' : 'inline-block';
             document.getElementById('progressText').innerText = `Stap ${currentStep} van 13`;
+            
+            // Scroll naar boven voor gebruiksgemak
+            window.scrollTo(0, 0);
+        } else {
+            console.error("Stap niet gevonden:", nextStepNum);
         }
     };
 
