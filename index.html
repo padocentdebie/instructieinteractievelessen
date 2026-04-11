@@ -195,7 +195,7 @@
     };
 
     window.plopOogst = () => {
-        const woorden = ["Chunking", "Eigen inbreng", "Formatief toetsen", "Inbreng student", "Snelle feedback", "Conditionering", "Schema's bouwen", "Sociaal leren", "Belonen", "Authentieke taken", "Herhaling", "Portfolio"];
+        const woorden = ["Chunking", "Eigen inbreng", "Formatief toetsen", "Inbreng student", "Snelle feedback", "Conditionering", "Sociaal leren", "Belonen", "Authentieke taken", "Herhaling", "Portfolio"];
         woorden.forEach((t) => {
             push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 650 + (Math.random() * 300), y: 350 + (Math.random() * 200) });
         });
