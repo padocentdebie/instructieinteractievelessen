@@ -263,6 +263,29 @@
         navigator.clipboard.writeText(text);
         alert("Gekopieerd naar klembord!");
     };
+    window.plopOogst = () => {
+    const woorden = [
+        "Chunking", "Eigen inbreng", "Formatief toetsen", 
+        "Inbreng student", "Snelle feedback", "Conditionering", 
+        "Schema's bouwen", "Sociaal leren", "Belonen", 
+        "Authentieke taken", "Herhaling", "Portfolio"
+    ];
+    
+    woorden.forEach((t) => {
+        // Verspreid de woorden een beetje willekeurig in het midden van het bord
+        push(ref(db, 'workshop/whiteboard/words'), { 
+            text: t, 
+            x: 650 + (Math.random() * 300), 
+            y: 350 + (Math.random() * 200) 
+        });
+    });
+};
+
+window.clearFullReset = () => {
+    if(confirm("Weet je zeker dat je het hele bord wilt leegmaken voor iedereen?")) {
+        remove(ref(db, 'workshop/whiteboard/words'));
+    }
+};
 </script>
 </body>
 </html>
