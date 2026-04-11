@@ -128,29 +128,53 @@
     </div>
 
     <div class="step" id="step-8">
-        <h2>Stap D: De Gemini Prompt Machine</h2>
-        <div id="generated-prompt" class="code-box">...</div>
-        <button class="btn" onclick="copyToClipboard('generated-prompt')">Kopieer Prompt</button>
-    </div>
-
-    <div class="step" id="step-9"><h2>Stap E: GitHub Publicatie</h2><p>Volg het stappenplan op het scherm...</p></div>
-    <div class="step" id="step-10">
-        <h2>Stap F: Live Preview</h2>
-        <input type="text" id="final-lesson-url" placeholder="GitHub Pages URL...">
-        <button class="btn btn-success" onclick="loadFinalPreview()">Bekijk</button>
-        <iframe id="final-preview-iframe" style="width:100%; height:500px; display:none; border:2px solid #333; margin-top:20px;"></iframe>
-    </div>
-    <div class="step" id="step-11"><h2>Stap G: iFrame Code</h2><div class="code-box" id="iframe-code-display">&lt;iframe src="..."&gt;&lt;/iframe&gt;</div></div>
-    <div class="step" id="step-12"><h2>Stap H: LMS</h2><p>Plaats de code in je LMS.</p></div>
-
-    <div class="step" id="step-13">
-        <h2 style="text-align: center;">🏁 Klaar!</h2>
-        <p style="text-align: center;">Je kunt nu al je werk naar jezelf mailen of alles resetten voor een nieuwe ronde.</p>
-        <div style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
-            <button class="btn" onclick="mailAllesNaarMij()" style="background: #9b59b6; padding: 20px; font-size: 1.2rem;">📧 Mail alle schermen naar mijzelf</button>
-            <button class="btn btn-danger" onclick="hardResetAlles()" style="padding: 15px;">♻️ Volledige Reset (Terug naar Start)</button>
+    <h2>Stap D: De Gemini Prompt Machine</h2>
+    <p>Kopieer de onderstaande prompt en plak deze in Gemini.</p>
+    
+    <div id="generated-prompt" class="code-box" style="background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 10px; font-family: monospace; min-height: 100px; white-space: pre-wrap; margin-bottom: 15px;">
         </div>
+    
+    <button class="btn" onclick="copyToClipboard('generated-prompt')">Kopieer Prompt</button>
+</div>
+
+   <div class="step" id="step-9">
+    <h2 style="text-align: center;">Stap E: Genereer de Code met Gemini</h2>
+    
+    <div style="background: #f0f7ff; padding: 25px; border-radius: 15px; border-left: 5px solid #3498db; margin-bottom: 25px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+        <p style="margin: 0; line-height: 1.6; font-size: 1.1rem; color: #2c3e50;">
+            <b>Instructie:</b> Plak deze prompt-tekst in de chatruimte van Gemini.
+        </p>
     </div>
+
+    <div style="display: flex; justify-content: center; margin: 30px 0;">
+        <a href="https://gemini.google.com/" target="_blank" class="gemini-card" style="
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #ec4899; /* Gemini Vibrant Color */
+            color: white;
+            text-decoration: none;
+            padding: 30px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+        ">
+            <span style="font-size: 2.5rem;">✨</span>
+            <h3 style="margin: 0; font-size: 1.5rem;">Open Gemini & Plak Prompt</h3>
+            <small style="opacity: 0.9;">Klik hier om naar de chatruimte te gaan</small>
+        </a>
+    </div>
+
+    <p style="text-align: center; color: #666; font-style: italic;">
+        Zodra de AI de code heeft gegenereerd, kun je door naar de volgende stap.
+    </p>
+</div>
 
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
