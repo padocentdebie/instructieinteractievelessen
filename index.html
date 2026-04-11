@@ -64,6 +64,19 @@
     .code-box { background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin: 15px 0; overflow-x: auto; border: 1px solid #334155; white-space: pre-wrap; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    .btn-reset { 
+    background: #4a5568; 
+    color: white; 
+    border: none; 
+    padding: 20px; 
+    border-radius: 15px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    width: 100%; 
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+.btn-reset:hover { background: #2d3748; }
 </style>
 </head>
 <body>
@@ -227,7 +240,21 @@
     <div id="github-live-feed">
         </div>
 </div>
-    <div class="step" id="step-13"><h2>Stap 13: Afronden</h2><p>Klaar voor gebruik!</p></div>
+    <div class="step" id="step-13"><div class="step" id="step-13">
+    <h2 style="text-align: center;">Stap 13: Afronden & Opruimen 🧹</h2>
+    
+    <div style="background: #f0fdf4; padding: 25px; border-radius: 20px; border: 1px solid #bbf7d0; margin-bottom: 20px;">
+        <h3>📧 Resultaten bewaren</h3>
+        <p>Wil je de ontwerpen en links van deze sessie bewaren? Gebruik de knop hieronder om een verzamelmail op te stellen.</p>
+        <button class="btn btn-success" onclick="mailAlleSchermen()" style="width: 100%; padding: 15px;">Mail alle schermen naar mij ✉️</button>
+    </div>
+
+    <div style="background: #fff5f5; padding: 25px; border-radius: 20px; border: 1px solid #fed7d7;">
+        <h3>⚠️ Grote Reset</h3>
+        <p>Klaar voor de volgende groep? Deze knop maakt het whiteboard leeg en wist alle ingezonden lessen uit de database.</p>
+        <button class="btn-reset" onclick="hardResetAlles()">VOLLEDIGE RESET (Bord + Lessen) 🔥</button>
+    </div>
+</div>
 
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
@@ -356,6 +383,35 @@ onValue(ref(db, 'workshop/links'), (snapshot) => {
         feedContainer.innerHTML = '<p style="text-align:center; padding: 20px;">Nog geen lessen ingezonden...</p>';
     }
 });
+    window.mailAlleSchermen = () => {
+    const naam = document.getElementById('participant-name').value || "Deelnemer";
+    const doel = document.getElementById('les-doel').value || "Niet ingevuld";
+    const vorm = document.getElementById('les-werkvorm').value || "Niet ingevuld";
+    const githubLink = document.getElementById('github-url').value || "Geen link ingevoerd";
+
+    const subject = encodeURIComponent(`Workshop Resultaten 2026 - ${naam}`);
+    const body = encodeURIComponent(
+        `Hoi ${naam},\n\nHier zijn je resultaten van de workshop:\n\n` +
+        `Leerdoel: ${doel}\n` +
+        `Werkvorm: ${vorm}\n\n` +
+        `Live les link: ${githubLink}\n\n` +
+        `Met vriendelijke groet,\nWorkshop Dashboard`
+    );
+
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=${subject}&body=${body}`, '_blank');
+};
+
+window.hardResetAlles = () => {
+    if (confirm("WEET JE HET ZEKER? Dit wist het whiteboard EN alle ingezonden lessen voor iedereen!")) {
+        // Wis het whiteboard
+        remove(ref(db, 'workshop/whiteboard/words'));
+        // Wis de ingezonden links
+        remove(ref(db, 'workshop/links'));
+        
+        alert("Systeem is volledig gereset.");
+        location.reload(); // Herlaad de pagina om alle lokale velden ook te wissen
+    }
+};
 </script>
 </body>
 </html>
