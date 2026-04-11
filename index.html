@@ -199,15 +199,40 @@
     const db = getDatabase(app);
 
     let step = 1;
-    window.changeStep = (n) => {
+    // Zorg dat deze functie de globale changeStep vervangt
+window.changeStep = (n) => {
+    const nextStep = step + n;
+    
+    // Check of de volgende stap wel bestaat in de HTML
+    const nextStepElement = document.getElementById(`step-${nextStep}`);
+    
+    if (nextStepElement) {
+        // Verberg huidige stap
         document.getElementById(`step-${step}`).classList.remove('active');
-        step += n;
-        document.getElementById(`step-${step}`).classList.add('active');
+        
+        // Update stap nummer
+        step = nextStep;
+        
+        // Toon nieuwe stap
+        nextStepElement.classList.add('active');
+        
+        // Update navigatie balk
         document.getElementById('prevBtn').disabled = (step === 1);
-        document.getElementById('nextBtn').style.display = (step === 13) ? 'none' : 'inline-block';
+        
+        // Zorg dat de 'Volgende' knop zichtbaar blijft tot de allerlaatste stap (13)
+        if (document.getElementById('nextBtn')) {
+            document.getElementById('nextBtn').style.display = (step >= 13) ? 'none' : 'inline-block';
+        }
+        
+        // Update de tekst onderin
         document.getElementById('progressText').innerText = `Stap ${step} van 13`;
-    };
-
+        
+        // Scroll naar boven voor gebruiksgemak
+        window.scrollTo(0, 0);
+    } else {
+        console.error("Stap " + nextStep + " bestaat niet in de HTML.");
+    }
+};
     window.saveDesignAndProceed = () => {
         // GEWIJZIGD: Haalt nu de naam op uit het inlogveld van stap 1
         const naam = document.getElementById('participant-name').value || "Deelnemer";
