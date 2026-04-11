@@ -164,7 +164,31 @@
             <p><small><i>Deze link hebben we in de volgende stap nodig om de interactie te activeren.</i></small></p>
         </div>
     </div>
-    <div class="step" id="step-11"><h2>Stap 11: Hosting</h2><p>Je les online zetten.</p></div>
+    <div class="step" id="step-11"><div class="step" id="step-11">
+        <h2 style="text-align: center;">Stap 11: Plaats je les in It's Learning (LMS)</h2>
+        
+        <div style="background: #e3f2fd; border-left: 5px solid #3498db; padding: 25px; border-radius: 15px; margin-bottom: 25px;">
+            <p><strong>Om je les in een LMS zoals It's Learning te tonen, gebruiken we een 'iframe'.</strong></p>
+            <p>1. Plak hieronder je gekopieerde GitHub-link.<br>
+               2. Kopieer daarna de gegenereerde iframe-code.<br>
+               3. Plak deze code in je LMS (gebruik de 'Broncode' of 'Embed' knop).</p>
+        </div>
+
+        <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
+            <label><b>Stap 1: Plak je GitHub link:</b></label>
+            <input type="text" id="github-input-lms" placeholder="https://jouwnaam.github.io/jouw-les/" oninput="generateIframe()" style="width: 100%;">
+
+            <label style="margin-top: 20px; display: block;"><b>Stap 2: Kopieer deze Iframe-code:</b></label>
+            <div id="iframe-output" class="code-box" style="min-height: 50px; background: #2d3748; color: #a0aec0;">
+                De code verschijnt hier zodra je een link plakt...
+            </div>
+            <button class="btn btn-success" onclick="copyToClipboard('iframe-output')" style="width: 100%; margin-top: 10px;">Kopieer Iframe-code 📋</button>
+        </div>
+
+        <div style="margin-top: 25px; font-size: 0.9rem; color: #666;">
+            <p><i>Tip: In It's Learning kies je voor 'Inhoud toevoegen' > 'Pagina' > 'Rich content' > 'broncode' of klik op het &lt;&gt; icoontje in de teksteditor.</i></p>
+        </div>
+    </div>
     <div class="step" id="step-12"><h2>Stap 12: Feedback</h2><p>Samen de resultaten bekijken.</p></div>
     <div class="step" id="step-13"><h2>Stap 13: Afronden</h2><p>Klaar voor gebruik!</p></div>
 
@@ -236,6 +260,19 @@
         const text = document.getElementById(id).innerText;
         navigator.clipboard.writeText(text);
         alert("Gekopieerd!");
+    };
+    window.generateIframe = () => {
+        const url = document.getElementById('github-input-lms').value.trim();
+        const output = document.getElementById('iframe-output');
+        
+        if (url.startsWith('http')) {
+            const iframeCode = `<iframe src="${url}" width="100%" height="800px" frameborder="0" allowfullscreen></iframe>`;
+            output.innerText = iframeCode;
+            output.style.color = "#f8fafc"; // Maak tekst wit als er code is
+        } else {
+            output.innerText = "Wacht op geldige link...";
+            output.style.color = "#a0aec0";
+        }
     };
 </script>
 </body>
