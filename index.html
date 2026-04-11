@@ -19,6 +19,8 @@
     .step { display: none; animation: fadeIn 0.5s ease-in-out; }
     .step.active { display: block; }
 
+    .global-privacy-alert { background: #fff3cd; color: #856404; padding: 15px; border-radius: 10px; border: 1px solid #ffeeba; margin-bottom: 20px; text-align: center; font-weight: bold; }
+
     #digibord { width: 1600px; height: 900px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; border: 1px solid #ccc; }
     .board-column { flex: 1; padding: 25px; border-right: 2px dashed #ccc; position: relative; }
     .board-column:last-child { border-right: none; }
@@ -36,9 +38,6 @@
     input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; }
     .code-box { background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin: 15px 0; overflow-x: auto; border: 1px solid #334155; white-space: pre-wrap; }
 
-    .live-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; margin-top: 20px; }
-    .idea-card { background: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 4px solid var(--accent); font-size: 0.9rem; }
-
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
@@ -46,60 +45,87 @@
 
 <div class="container">
     <div class="step active" id="step-1">
-        <h2 style="text-align: center;">🚀 Workshop Dashboard 2026</h2>
+        <div class="global-privacy-alert">⚠️ BELANGRIJK: Voer NOOIT echte persoonsgegevens of vertrouwelijke informatie in!</div>
+        <h2 style="text-align: center;">🚀 Workshop Dashboard</h2>
         
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px;">
-            <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; text-align: center; border-top: 4px solid #3498db;"><strong>Waarom?</strong></div>
-            <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center; border-top: 4px solid #27ae60;"><strong>Wat?</strong></div>
-            <div style="background: #fff3e0; padding: 15px; border-radius: 10px; text-align: center; border-top: 4px solid #f39c12;"><strong>Hoe?</strong></div>
-            <div style="background: #f3e5f5; padding: 15px; border-radius: 10px; text-align: center; border-top: 4px solid #9b59b6;"><strong>AI?</strong></div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px;">
+            <div style="background: #e3f2fd; border-top: 5px solid #3498db; padding: 20px; border-radius: 15px; text-align: center;">
+                <strong>Waarom?</strong><br><small>Waarom al deze moeite?</small>
+            </div>
+            <div style="background: #e8f5e green; border-top: 5px solid #27ae60; padding: 20px; border-radius: 15px; text-align: center; background-color: #e8f5e9;">
+                <strong>Wat?</strong><br><small>Wat moet er geleerd worden?</small>
+            </div>
+            <div style="background: #fff3e0; border-top: 5px solid #f39c12; padding: 20px; border-radius: 15px; text-align: center;">
+                <strong>Hoe?</strong><br><small>Welke leeractiviteiten?</small>
+            </div>
+            <div style="background: #f3e5f5; border-top: 5px solid #9b59b6; padding: 20px; border-radius: 15px; text-align: center;">
+                <strong>AI?</strong><br><small>Laat AI het werk doen.</small>
+            </div>
         </div>
 
-        <div class="config-area" style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
-            <label><b>Jouw Voornaam:</b></label>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
+            <a href="https://github.com/" target="_blank" style="background: #3b82f6; padding: 25px; border-radius: 20px; text-align: center; color: white; text-decoration: none; box-shadow: 0 10px 15px rgba(0,0,0,0.1);">
+                <h3 style="margin: 0 0 10px 0;">GitHub</h3>
+                <p style="margin: 0; font-size: 0.9rem;">Code Opslag</p>
+            </a>
+            <a href="https://console.firebase.google.com/" target="_blank" style="background: #fbbf24; padding: 25px; border-radius: 20px; text-align: center; color: #4d3a00; text-decoration: none; box-shadow: 0 10px 15px rgba(0,0,0,0.1);">
+                <h3 style="margin: 0 0 10px 0;">Firebase</h3>
+                <p style="margin: 0; font-size: 0.9rem;">Database</p>
+            </a>
+            <a href="https://gemini.google.com/" target="_blank" style="background: #ec4899; padding: 25px; border-radius: 20px; text-align: center; color: white; text-decoration: none; box-shadow: 0 10px 15px rgba(0,0,0,0.1);">
+                <h3 style="margin: 0 0 10px 0;">Gemini</h3>
+                <p style="margin: 0; font-size: 0.9rem;">AI Programmeur</p>
+            </a>
+        </div>
+
+        <div class="config-area" style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd; margin-top: 25px;">
+            <label><b>Jouw Voornaam (nodig voor het eindrapport):</b></label>
             <input type="text" id="participant-name" placeholder="Typ je voornaam...">
-            <label><b>Eigen Firebase motor (optioneel):</b></label>
+            <label><b>Koppel je eigen Firebase motor (optioneel):</b></label>
             <textarea id="user-firebase-config" placeholder='{ "apiKey": "AIza...", ... }'></textarea>
         </div>
-        <button class="btn" onclick="changeStep(1)" style="width: 100%; margin-top: 20px;">Start de Workshop →</button>
+
+        <div class="navigation" style="margin-top: 30px;">
+            <button class="btn" onclick="changeStep(1)" style="width: 100%; font-size: 1.1rem;">Laten we beginnen! →</button>
+        </div>
     </div>
 
     <div class="step" id="step-2">
         <h2 style="text-align: center;">Stap A: Coöperatief Brainstormen</h2>
-        <div style="display: flex; gap: 10px; margin-bottom: 15px; background: #eee; padding: 10px; border-radius: 10px;">
-            <input type="text" id="word-input" placeholder="Typ een begrip..." style="margin:0;">
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <input type="text" id="word-input" placeholder="Typ zelf een begrip..." style="margin:0;">
             <button class="btn" onclick="addWordToFirebase()">Voeg toe</button>
             <button class="btn btn-success" onclick="plopOogst()">Oogst 🌾</button>
             <button class="btn btn-danger" onclick="clearFullReset()">RESET</button>
         </div>
         
-        <div style="width: 100%; overflow: auto; border: 2px solid #ccc; border-radius: 15px;">
+        <div style="width: 100%; overflow: auto; border: 3px solid #ddd; border-radius: 20px;">
             <div id="digibord">
                 <div class="board-column" style="background: var(--col-behaviorisme);">
-                    <h3>Behaviorisme</h3>
+                    <h3 style="text-align: center;">Behaviorisme</h3>
                     <div class="ghost-tekst">
-                        <b>Rol Docent:</b> Regisseur. Bepaalt gedrag, kleine stapjes, directe feedback.<br><br>
-                        <b>Leerinhoud:</b> Gefragmenteerd en lineair. Objectieve feiten.<br><br>
-                        <b>Student:</b> Reactieve volger. Juiste respons op prikkels.<br><br>
-                        <b>Activiteiten:</b> Drill & practice, imitatie, herhaling.
+                        <b>Rol Docent:</b> De docent is de regisseur. Hij of zij bepaalt exact welk gedrag gewenst is...<br><br>
+                        <b>Rol Leerinhoud:</b> De leerinhoud is gefragmenteerd en lineair. Objectieve feiten.<br><br>
+                        <b>Rol Student:</b> De student is een reactieve volger. Succes door nauwkeurigheid.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Veel herhaling en imitatie (drill & practice).
                     </div>
                 </div>
                 <div class="board-column" style="background: var(--col-cognitivisme);">
-                    <h3>Cognitivisme</h3>
+                    <h3 style="text-align: center;">Cognitivisme</h3>
                     <div class="ghost-tekst">
-                        <b>Rol Docent:</b> Expert/organisator. Beheersen cognitieve belasting.<br><br>
-                        <b>Leerinhoud:</b> Gestructureerd, schema's en modellen.<br><br>
-                        <b>Student:</b> Actieve informatieverwerker. Koppelt aan voorkennis.<br><br>
-                        <b>Activiteiten:</b> Mindmaps, samenvatten, verbanden leggen.
+                        <b>Rol Docent:</b> De expert en organisator. Beheersen cognitieve belasting.<br><br>
+                        <b>Rol Leerinhoud:</b> Gestructureerd en hiërarchisch. Schema's en modellen.<br><br>
+                        <b>Rol Student:</b> Actieve informatieverwerker. Informatie coderen.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Samenvattingen, mindmaps, verbanden leggen.
                     </div>
                 </div>
                 <div class="board-column" style="background: var(--col-constructivisme);">
-                    <h3>Constructivisme</h3>
+                    <h3 style="text-align: center;">Constructivisme</h3>
                     <div class="ghost-tekst">
-                        <b>Rol Docent:</b> Coach/Facilitator. Creëert rijke omgeving.<br><br>
-                        <b>Leerinhoud:</b> Complex en authentiek. Echte wereld problemen.<br><br>
-                        <b>Student:</b> Eigenaar. Bouwt eigen begrip door ervaring.<br><br>
-                        <b>Activiteiten:</b> Projecten, discussies, onderzoekend leren.
+                        <b>Rol Docent:</b> Coach of facilitator. Creëert rijke omgeving.<br><br>
+                        <b>Rol Leerinhoud:</b> Complex en authentiek. Problemen uit echte wereld.<br><br>
+                        <b>Rol Student:</b> Eigenaar van leerproces. Bouwt eigen begrip.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Samenwerkend en onderzoekend leren. Projecten.
                     </div>
                 </div>
             </div>
@@ -112,31 +138,31 @@
     <div class="step" id="step-6"><h2>Inspiratie 4</h2><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/" style="width:100%; height:600px; border:none;"></iframe></div>
 
     <div class="step" id="step-7">
-        <h2>Stap C: Ontwerp je Les</h2>
+        <h2 style="text-align: center;">Stap C: Ontwerp je Les</h2>
         <input type="text" id="les-doel" placeholder="Wat is het leerdoel?">
         <textarea id="les-werkvorm" rows="4" placeholder="Beschrijf de werkvorm..."></textarea>
-        <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width:100%;">Sla op & Genereer Prompt 🚀</button>
-        
-        <h3 style="margin-top: 30px;">📡 Inspiratie-muur (Live van collega's)</h3>
-        <div id="live-feed" class="live-feed"></div>
+        <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width:100%;">Sla op & Bekijk Prompt 🚀</button>
+        <h3 style="margin-top: 25px;">📡 Inspiratie-muur van collega's</h3>
+        <div id="live-feed" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;"></div>
     </div>
 
     <div class="step" id="step-8">
-        <h2>Stap D: De Gemini Prompt</h2>
+        <h2>Stap D: De Gemini Prompt Machine</h2>
         <div id="generated-prompt" class="code-box"></div>
         <button class="btn" onclick="copyToClipboard('generated-prompt')">Kopieer Prompt</button>
     </div>
 
     <div class="step" id="step-9">
         <h2>Stap E: Publiceren op GitHub</h2>
-        <a href="https://github.com/new" target="_blank" class="btn" style="display:block; text-align:center;">Open GitHub Repository</a>
+        <p>Maak een index.html aan op GitHub en plak daar je code in.</p>
+        <a href="https://github.com/new" target="_blank" class="btn">Open GitHub</a>
     </div>
 
     <div class="step" id="step-10">
         <h2>Stap F: Live Preview</h2>
         <input type="text" id="final-lesson-url" placeholder="URL van je les..." oninput="updateIframeCode()">
-        <button class="btn btn-success" onclick="loadFinalPreview()">Bekijk Les</button>
-        <iframe id="final-preview-iframe" style="width:100%; height:500px; display:none; border:1px solid #333; margin-top:10px;"></iframe>
+        <button class="btn btn-success" onclick="loadFinalPreview()">Bekijk</button>
+        <iframe id="final-preview-iframe" style="width:100%; height:500px; display:none; border:2px solid #333; margin-top:10px;"></iframe>
     </div>
 
     <div class="step" id="step-11">
@@ -147,14 +173,14 @@
 
     <div class="step" id="step-12">
         <h2>Stap H: Klaar voor LMS</h2>
-        <p>Gefeliciteerd! Je les is klaar om gedeeld te worden.</p>
+        <p>Gefeliciteerd! Je kunt de iFrame nu plaatsen in je eigen leeromgeving.</p>
     </div>
 
     <div class="step" id="step-13">
-        <h2 style="text-align: center;">Einde Workshop</h2>
+        <h2 style="text-align: center;">Klaar! Verstuur je resultaten</h2>
         <div style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 30px auto;">
-            <button class="btn btn-success" onclick="sendAllData()">📧 Verstuur resultaten naar jezelf</button>
-            <button class="btn btn-danger" onclick="resetDashboard()">🗑️ Reset Dashboard</button>
+            <button class="btn btn-success" onclick="sendAllData()">📧 Verstuur via Mail</button>
+            <button class="btn btn-danger" onclick="resetDashboard()">🗑️ Dashboard Resetten</button>
         </div>
     </div>
 
@@ -183,16 +209,15 @@
         document.getElementById('progressText').innerText = `Stap ${step} van 13`;
     };
 
-    // Firebase Whiteboard
     window.addWordToFirebase = () => {
         const val = document.getElementById('word-input').value;
-        if(val) push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 700, y: 400 });
+        if(val) push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 750, y: 350 });
         document.getElementById('word-input').value = '';
     };
 
     window.plopOogst = () => {
-        const woorden = ["Feedback", "Chunking", "Belonen", "Project", "Herhaling", "Interactie"];
-        woorden.forEach(t => push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 600 + (Math.random()*400), y: 300 + (Math.random()*300) }));
+        const woorden = ["Chunking", "Feedback", "Portfolio", "Mindmap", "Drill & Practice"];
+        woorden.forEach(t => push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 600 + (Math.random()*300), y: 300 + (Math.random()*300) }));
     };
 
     onChildAdded(ref(db, 'workshop/whiteboard/words'), (s) => {
@@ -219,26 +244,23 @@
     window.removeItem = (key) => remove(ref(db, `workshop/whiteboard/words/${key}`));
     window.clearFullReset = () => { if(confirm("Bord wissen?")) remove(ref(db, 'workshop/whiteboard')); };
 
-    // Ontwerp & Feed
     window.saveDesignAndProceed = () => {
         const n = document.getElementById('participant-name').value || "Docent";
         const d = document.getElementById('les-doel').value;
         const v = document.getElementById('les-werkvorm').value;
         const uConf = document.getElementById('user-firebase-config').value || "// Geen config.";
-        
-        document.getElementById('generated-prompt').innerText = `Maak een les voor ${n}.\nDoel: ${d}\nWerkvorm: ${v}\nFirebase: ${uConf}\nHTML/JS in 1 blok aub.`;
+        document.getElementById('generated-prompt').innerText = `Bouw een interactieve les voor ${n}.\nDoel: ${d}\nWerkvorm: ${v}\nFirebase: ${uConf}\nGenereer HTML code in 1 blok.`;
         set(ref(db, 'workshop/users/' + n.replace(/\s/g, '_')), { n, d, v });
         changeStep(1);
     };
 
     onChildAdded(ref(db, 'workshop/users'), (s) => {
-        const v = s.val(); const div = document.createElement('div');
-        div.className = 'idea-card';
-        div.innerHTML = `<strong>${v.n}</strong>: ${v.d}`;
-        document.getElementById('live-feed').prepend(div);
+        const v = s.val(); const card = document.createElement('div');
+        card.style = "background:#f8fafc; padding:10px; border-left:4px solid var(--accent); margin-bottom:5px;";
+        card.innerHTML = `<strong>${v.n}</strong>: ${v.d}`;
+        document.getElementById('live-feed').prepend(card);
     });
 
-    // Hulpmiddelen
     window.copyToClipboard = (id) => { navigator.clipboard.writeText(document.getElementById(id).innerText); alert("Gekopieerd!"); };
     window.updateIframeCode = () => {
         const url = document.getElementById('final-lesson-url').value;
@@ -250,12 +272,10 @@
         iframe.src = url; iframe.style.display = 'block';
     };
 
-    // FINALE
     window.sendAllData = () => {
         const n = document.getElementById('participant-name').value || "Deelnemer";
-        const d = document.getElementById('les-doel').value || "Geen";
-        const url = document.getElementById('final-lesson-url').value || "Geen";
-        window.location.href = `mailto:?subject=Workshop Output&body=Hoi ${n},%0D%0ADoel: ${d}%0D%0AURL: ${url}`;
+        const body = `Resultaten van ${n}:%0D%0ADoel: ${document.getElementById('les-doel').value}%0D%0AURL: ${document.getElementById('final-lesson-url').value}`;
+        window.location.href = `mailto:?subject=Workshop Output&body=${body}`;
     };
 
     window.resetDashboard = () => { if(confirm("Dashboard wissen?")) location.reload(); };
