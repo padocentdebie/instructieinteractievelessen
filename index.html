@@ -19,6 +19,36 @@
     .step { display: none; animation: fadeIn 0.5s ease-in-out; }
     .step.active { display: block; }
 
+    /* --- CSS VOOR HET FEEDBACK DASHBOARD IN STAP 12 --- */
+    #github-live-feed {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        gap: 25px;
+        margin-top: 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+        padding: 15px;
+        background: #f8fafc;
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .repo-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1px solid #cbd5e1;
+    }
+
+    .repo-card iframe {
+        width: 100%;
+        height: 500px;
+        border: none;
+        display: block;
+    }
+    /* -------------------------------------------------- */
+
     #digibord { width: 1600px; height: 900px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; border: 1px solid #ccc; }
     .board-column { flex: 1; padding: 25px; border-right: 2px dashed #ccc; position: relative; }
     .board-column:last-child { border-right: none; }
@@ -164,7 +194,7 @@
             <p><small><i>Deze link hebben we in de volgende stap nodig om de interactie te activeren.</i></small></p>
         </div>
     </div>
-    <div class="step" id="step-11"><div class="step" id="step-11">
+    <div class="step" id="step-11">
         <h2 style="text-align: center;">Stap 11: Plaats je les in It's Learning (LMS)</h2>
         
         <div style="background: #e3f2fd; border-left: 5px solid #3498db; padding: 25px; border-radius: 15px; margin-bottom: 25px;">
@@ -189,7 +219,14 @@
             <p><i>Tip: In It's Learning kies je voor 'Inhoud toevoegen' > 'Pagina' > 'Rich content' > 'broncode' of klik op het &lt;&gt; icoontje in de teksteditor.</i></p>
         </div>
     </div>
-    <div class="step" id="step-12"><h2>Stap 12: Feedback</h2><p>Samen de resultaten bekijken.</p></div>
+    <div class="step" id="step-12">
+        <div class="step" id="step-12">
+    <h2 style="text-align: center;">Stap 12: Feedback & Resultaten 🎓</h2>
+    <p style="text-align: center;">Bekijk hieronder de live lessen die zojuist zijn gepubliceerd.</p>
+    
+    <div id="github-live-feed">
+        </div>
+</div>
     <div class="step" id="step-13"><h2>Stap 13: Afronden</h2><p>Klaar voor gebruik!</p></div>
 
     <div class="navigation">
@@ -274,6 +311,51 @@
             output.style.color = "#a0aec0";
         }
     };
+    import { onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+// Functie om de link op te slaan (aanroepen bij de knop in stap 10)
+window.saveGithubLink = () => {
+    const url = document.getElementById('github-url').value.trim();
+    const naam = document.getElementById('participant-name').value || "Anoniem";
+
+    if (url.startsWith('http')) {
+        push(ref(db, 'workshop/links'), {
+            url: url,
+            naam: naam,
+            timestamp: Date.now()
+        });
+        alert("Link succesvol gedeeld met de groep!");
+        window.changeStep(1);
+    } else {
+        alert("Voer a.u.b. een geldige URL in.");
+    }
+};
+
+// Luister naar nieuwe links en toon ze in Stap 12
+const feedContainer = document.getElementById('github-live-feed');
+onValue(ref(db, 'workshop/links'), (snapshot) => {
+    feedContainer.innerHTML = ''; // Maak container leeg voor verversing
+    const data = snapshot.val();
+    
+    if (data) {
+        Object.values(data).reverse().forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'repo-card';
+            card.innerHTML = `
+                <div style="padding: 10px; background: #eee; border-bottom: 1px solid #ddd;">
+                    <strong>Les van: ${item.naam}</strong>
+                </div>
+                <iframe src="${item.url}" title="Les van ${item.naam}"></iframe>
+                <div style="padding: 10px; text-align: right;">
+                    <a href="${item.url}" target="_blank" class="btn" style="font-size: 0.8rem; padding: 5px 10px;">Open volledig ↗</a>
+                </div>
+            `;
+            feedContainer.appendChild(card);
+        });
+    } else {
+        feedContainer.innerHTML = '<p style="text-align:center; padding: 20px;">Nog geen lessen ingezonden...</p>';
+    }
+});
 </script>
 </body>
 </html>
