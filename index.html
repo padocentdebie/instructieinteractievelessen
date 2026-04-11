@@ -142,18 +142,25 @@
         </div>
     </div>
 
-    <div class="step" id="step-10">
+  <div class="step" id="step-10">
         <h2 style="text-align: center;">Stap F: Van Code naar Website (GitHub)</h2>
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+            <a href="https://github.com/new" target="_blank" class="btn" style="background: var(--github-vibrant); padding: 15px 30px; font-size: 1.1rem;">
+                Open GitHub: Nieuwe Repository maken ↗
+            </a>
+        </div>
+
         <div style="background: #f8fafc; padding: 30px; border-radius: 20px; border: 1px solid #cbd5e1; margin-bottom: 20px;">
-            <p>Volg deze stappen om je code live te zetten als een werkende website:</p>
+            <p>Volg deze stappen om je code live te zetten:</p>
             <ol style="line-height: 1.8; margin-bottom: 25px;">
-                <li>Ga naar je <strong>GitHub</strong> account en maak een <strong>New Repository</strong> aan.</li>
-                <li>Geef het een naam (bijv. 'mijn-interactieve-les') en zet hem op <strong>Public</strong>.</li>
-                <li>Klik op de link "uploading an existing file" of maak een nieuw bestand genaamd <strong>index.html</strong>.</li>
-                <li>Plak de volledige code van Gemini in dit bestand en sla op via <strong>Commit changes</strong>.</li>
-                <li>Ga bovenaan naar <strong>Settings</strong> en klik links in het menu op <strong>Pages</strong>.</li>
+                <li>Maak op GitHub een <strong>New Repository</strong> aan.</li>
+                <li>Geef het een naam (bijv. 'mijn-les') en zet hem op <strong>Public</strong>.</li>
+                <li>Kies voor "uploading an existing file" of maak een nieuw bestand genaamd <strong>index.html</strong>.</li>
+                <li>Plak de volledige code van Gemini in dit bestand en klik op <strong>Commit changes</strong>.</li>
+                <li>Ga naar <strong>Settings</strong> -> <strong>Pages</strong>.</li>
                 <li>Kies bij 'Branch' voor <strong>main</strong> en klik op <strong>Save</strong>.</li>
-                <li>Wacht ongeveer een minuutje. Ververs de pagina tot je de melding ziet: <em>"Your site is live at..."</em>.</li>
+                <li>Wacht een minuutje en ververs tot je de link ziet: <em>"Your site is live at..."</em>.</li>
             </ol>
 
             <div style="background: #fff5f5; padding: 25px; border-radius: 20px; border: 1px solid #feb2b2;">
@@ -166,7 +173,7 @@
                 </div>
 
                 <label style="margin-top: 15px; display: block;"><strong>2. Deel je resultaat:</strong></label>
-                <button class="btn btn-success" onclick="saveGithubLink()" style="width: 100%;">Deel mijn les met de groep & genereer embed-code! 🚀</button>
+                <button class="btn btn-success" onclick="saveGithubLink()" style="width: 100%;">Deel mijn les met de groep! 🚀</button>
             </div>
         </div>
     </div>
@@ -281,6 +288,46 @@
             feed.appendChild(div);
         });
     });
+    // 1. Zorgt dat de preview in Stap 10 direct werkt als je de link plakt
+window.updatePreview = () => {
+    const url = document.getElementById('github-url').value.trim();
+    const container = document.getElementById('live-preview-container');
+    const iframe = document.getElementById('github-preview-iframe');
+    
+    if (url.startsWith('http')) {
+        iframe.src = url;
+        container.style.display = 'block';
+    } else {
+        container.style.display = 'none';
+    }
+};
+
+// 2. De verbeterde save-functie die ook Stap 11 voorbereidt
+window.saveGithubLink = () => {
+    const url = document.getElementById('github-url').value.trim();
+    const naam = document.getElementById('participant-name').value || "Anoniem";
+
+    if (url.startsWith('http')) {
+        // Opslaan in Firebase voor de centrale feed (Stap 12)
+        if (typeof push === "function") {
+            push(ref(db, 'workshop/links'), { url, naam });
+        }
+
+        // Genereer de iframe-code voor de kopieer-box in Stap 11
+        const iframeCode = `<iframe src="${url}" width="100%" height="600px" frameborder="0" allowfullscreen></iframe>`;
+        
+        // Zoek de box in Stap 11 (controleer of het ID 'iframe-output' of 'iframe-code' is)
+        const outputDiv = document.getElementById('iframe-output') || document.getElementById('iframe-code');
+        if (outputDiv) {
+            outputDiv.innerText = iframeCode;
+        }
+
+        alert("Link opgeslagen en embed-code gegenereerd!");
+        window.changeStep(1); // Ga naar Stap 11
+    } else {
+        alert("Voer a.u.b. een geldige GitHub Pages URL in.");
+    }
+};
 
     // HELPERS
     window.copyToClipboard = (id) => { navigator.clipboard.writeText(document.getElementById(id).innerText); alert("Gekopieerd!"); };
