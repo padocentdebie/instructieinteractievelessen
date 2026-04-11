@@ -201,14 +201,19 @@
         document.getElementById('progressText').innerText = `Stap ${step} van 13`;
     };
 
-    window.saveDesignAndProceed = () => {
-        const naam = document.getElementById('user-name').value;
-        const doel = document.getElementById('les-doel').value;
-        const vorm = document.getElementById('les-werkvorm').value;
-        const prompt = `Hoi Gemini, ik ben ${naam}. Maak een interactieve les in HTML. Doel: ${doel}. Werkvorm: ${vorm}. Gebruik Firebase voor interactie.`;
-        document.getElementById('generated-prompt').innerText = prompt;
-        window.changeStep(1);
-    };
+   window.saveDesignAndProceed = () => {
+    const naam = document.getElementById('user-name').value || "Deelnemer";
+    const doel = document.getElementById('les-doel').value;
+    const vorm = document.getElementById('les-werkvorm').value;
+    
+    const volledigePrompt = `Hoi Gemini, ik ben ${naam}. Ik wil een digitale les ontwerpen.\n\n` +
+                            `Leerdoel: ${doel}\n` +
+                            `Werkvorm: ${vorm}\n\n` +
+                            `Opdracht voor jou: ontwerp de les in html-code, maak er een rustige lay-out bij en doe voorstellen voor interactie.`;
+    
+    document.getElementById('generated-prompt').innerText = volledigePrompt;
+    changeStep(1); // Gaat van stap 7 naar stap 8
+};
 
     window.mailAllesNaarMij = () => {
         const naam = document.getElementById('user-name').value || "Deelnemer";
