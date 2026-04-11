@@ -19,7 +19,6 @@
     .step { display: none; animation: fadeIn 0.5s ease-in-out; }
     .step.active { display: block; }
 
-    /* --- CSS VOOR HET FEEDBACK DASHBOARD IN STAP 12 --- */
     #github-live-feed {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
@@ -48,12 +47,26 @@
         display: block;
     }
 
-    #digibord { width: 1600px; height: 900px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; border: 1px solid #ccc; }
-    .board-column { flex: 1; padding: 25px; border-right: 2px dashed #ccc; position: relative; }
+    /* WHITEBOARD STYLING */
+    #digibord { width: 1600px; height: 900px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none; border: 1px solid #ccc; overflow: hidden; }
+    .board-column { flex: 1; padding: 25px; border-right: 2px dashed #ccc; position: relative; pointer-events: none; }
     .board-column:last-child { border-right: none; }
     
     .ghost-tekst { position: absolute; top: 80px; left: 25px; right: 25px; font-size: 1rem; color: #000; line-height: 1.7; opacity: 0.5; pointer-events: none; z-index: 1; }
     .ghost-tekst b { color: #000; font-weight: bold; }
+
+    .sticky-note {
+        position: absolute;
+        padding: 15px;
+        background: #fff9c4;
+        border: 1px solid #fbc02d;
+        box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+        cursor: move;
+        border-radius: 5px;
+        font-weight: bold;
+        z-index: 10;
+        pointer-events: auto;
+    }
 
     .btn { background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; margin: 5px; }
     .btn-success { background: #27ae60; }
@@ -65,47 +78,25 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     
     .btn-reset { 
-        background: #4a5568; 
-        color: white; 
-        border: none; 
-        padding: 20px; 
-        border-radius: 15px; 
-        cursor: pointer; 
-        font-weight: bold; 
-        width: 100%; 
-        font-size: 1.1rem;
-        transition: 0.3s;
+        background: #4a5568; color: white; border: none; padding: 20px; border-radius: 15px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1rem; transition: 0.3s;
     }
-    .btn-reset:hover { background: #2d3748; }
 </style>
 </head>
 <body>
 
 <div class="container">
     <div class="step active" id="step-1">
-        <div class="global-privacy-alert">⚠️ BELANGRIJK: Voer NOOIT echte persoonsgegevens of vertrouwelijke informatie in!</div>
         <h2 style="text-align: center;">🚀 Workshop Dashboard</h2>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px;">
-            <div class="flow-card" style="background: #e3f2fd; border-top: 5px solid #3498db; padding: 20px; border-radius: 15px; text-align: center;"><strong>Waarom?</strong><br><small>Waarom al deze moeite?</small></div>
-            <div class="flow-card" style="background: #e8f5e9; border-top: 5px solid #27ae60; padding: 20px; border-radius: 15px; text-align: center;"><strong>Wat?</strong><br><small>Wat moet er geleerd worden?</small></div>
-            <div class="flow-card" style="background: #fff3e0; border-top: 5px solid #f39c12; padding: 20px; border-radius: 15px; text-align: center;"><strong>Hoe?</strong><br><small>Welke leeractiviteiten?</small></div>
-            <div class="flow-card" style="background: #f3e5f5; border-top: 5px solid #9b59b6; padding: 20px; border-radius: 15px; text-align: center;"><strong>AI?</strong><br><small>Laat Artificiële Intelligentie het werk doen.</small></div>
-        </div>
-        <div class="materials-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
-            <a href="https://github.com/" target="_blank" class="material-card" style="background: #3b82f6; padding: 25px; border-radius: 20px; text-align: center; color: white; text-decoration: none;"><h3>GitHub<br><small>Bezorgt jouw les-link op internet</small></h3></a>
-            <a href="https://console.firebase.google.com/" target="_blank" class="material-card" style="background: #fbbf24; padding: 25px; border-radius: 20px; text-align: center; color: #4d3a00; text-decoration: none;"><h3>Firebase<br><small>De motor voor interactie</small></h3></a>
-            <a href="https://gemini.google.com/" target="_blank" class="material-card" style="background: #ec4899; padding: 25px; border-radius: 20px; text-align: center; color: white; text-decoration: none;"><h3>Gemini<br>Ontwerpt jouw lessen</h3></a>
-        </div>
         <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
             <label><b>Voornaam Deelnemer:</b></label>
             <input type="text" id="participant-name" placeholder="Typ je voornaam...">
             <label><b>Firebase Config:</b></label>
-            <textarea id="user-firebase-config" placeholder="Firebase Config hier..." rows="4"></textarea>
+            <textarea id="user-firebase-config" placeholder="Plak hier je config..." rows="4"></textarea>
             <button class="btn" onclick="changeStep(1)" style="width: 100%;">Laten we beginnen! →</button>
         </div>
     </div>
 
-   <div class="step" id="step-2">
+    <div class="step" id="step-2">
         <h2 style="text-align: center;">Stap A: Coöperatief Brainstormen</h2>
         <div style="display: flex; gap: 10px; margin-bottom: 15px; background: #f0f4f8; padding: 15px; border-radius: 15px; align-items: center;">
             <input type="text" id="word-input" placeholder="Typ zelf een begrip..." style="flex: 1; margin: 0;">
@@ -125,7 +116,6 @@
                         <b>Rol Toetsen:</b> Toetsen zijn kwantitatief. Er wordt puur gekeken naar het eindproduct: is het antwoord goed of fout?
                     </div>
                 </div>
-
                 <div class="board-column" style="background: var(--col-cognitivisme);">
                     <h3 style="text-align: center;">Cognitivisme</h3>
                     <div class="ghost-tekst">
@@ -136,7 +126,6 @@
                         <b>Rol Toetsen:</b> Toetsen richten zich op inzicht. Niet alleen "wat" weet de student, maar kan hij de regels ook toepassen in een vergelijkbare, nieuwe context?
                     </div>
                 </div>
-
                 <div class="board-column" style="background: var(--col-constructivisme);">
                     <h3 style="text-align: center;">Constructivisme</h3>
                     <div class="ghost-tekst">
@@ -147,102 +136,32 @@
                         <b>Rol Toetsen:</b> Toetsen zijn holistisch. Er wordt gekeken naar het proces en de groei (bijvoorbeeld via een portfolio) en het vermogen om in complexe situaties te handelen.
                     </div>
                 </div>
+                <div id="sticky-container"></div>
             </div>
         </div>
     </div>
-    <div class="step" id="step-3"><h2>Inspiratie 1</h2><iframe src="https://padocentdebie.github.io/PVBEvindingen5foutievezinnen/" style="width:100%; height:600px; border:none;"></iframe></div>
-    <div class="step" id="step-4"><h2>Inspiratie 2</h2><iframe src="https://padocentdebie.github.io/Q2PVBevindingen5woordenschatbingo/" style="width:100%; height:600px; border:none;"></iframe></div>
-    <div class="step" id="step-5"><h2>Inspiratie 3</h2><iframe src="https://padocentdebie.github.io/Q1MutatielesPVAangifteles2samenstellingen/" style="width:100%; height:600px; border:none;"></iframe></div>
-    <div class="step" id="step-6"><h2>Inspiratie 4</h2><iframe src="https://padocentdebie.github.io/Q2PVBevindingenobjectiviteit2opstellenOpstellenPVBevindingen/" style="width:100%; height:600px; border:none;"></iframe></div>
 
     <div class="step" id="step-7">
         <h2 style="text-align: center;">Stap C: Ontwerp je Les</h2>
         <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #eee;">
-            <label><b>Jouw voornaam:</b></label><input type="text" id="user-name" placeholder="Jan...">
-            <label><b>Wat is het leerdoel?</b></label><input type="text" id="les-doel" placeholder="Leerdoel...">
-            <label><b>Beschrijf de werkvorm:</b></label><textarea id="les-werkvorm" rows="4" placeholder="Werkvorm..."></textarea>
-            <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%;">Sla op & Genereer Prompt 🚀</button>
+            <label><b>Leerdoel:</b></label><input type="text" id="les-doel">
+            <label><b>Werkvorm:</b></label><textarea id="les-werkvorm" rows="3"></textarea>
+            <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width:100%;">Genereer Prompt 🚀</button>
         </div>
     </div>
 
-    <div class="step" id="step-8">
-        <h2>Stap D: De Gemini Prompt Machine</h2>
-        <div id="generated-prompt" class="code-box"></div>
-        <button class="btn" onclick="copyToClipboard('generated-prompt')">Kopieer Prompt</button>
-    </div>
-
-    <div class="step" id="step-9">
-        <h2 style="text-align: center;">Stap E: Genereer de Code met Gemini</h2>
-        <div style="display: flex; justify-content: center; margin: 30px 0;">
-            <a href="https://gemini.google.com/" target="_blank" style="background: #ec4899; color: white; padding: 30px; border-radius: 20px; text-decoration: none; font-weight: bold;"> Open Gemini & Plak Prompt</a>
-        </div>
-    </div>
+    <div class="step" id="step-8"><h2>De Gemini Prompt</h2><div id="generated-prompt" class="code-box"></div></div>
     
     <div class="step" id="step-10">
-        <h2 style="text-align: center;">Stap F: Je les op internet zetten (GitHub)</h2>
-        <div style="background: #f6f8fa; border-left: 5px solid #24292f; padding: 25px; border-radius: 15px; margin-bottom: 25px;">
-            <p><strong>Volg deze stappen in het GitHub-tabblad dat je in stap 1 hebt geopend:</strong></p>
-            <ol style="line-height: 1.8;">
-                <li>Klik in GitHub bij <strong>'Repositories'</strong> op de groene knop <strong>'New'</strong>.</li>
-                <li><strong>Bedenk een handige naam</strong> voor de les.</li>
-                <li>Scroll iets naar beneden en klik op de blauwe link <strong>'creating a new file'</strong>.</li>
-                <li>Noem het bestand altijd exact: <code style="background: #eee; padding: 2px 5px; border-radius: 4px;">index.html</code></li>
-                <li><strong>Plak de code</strong> die je van Gemini hebt gekregen.</li>
-                <li>Klik op de groene knop <strong>'Commit changes...'</strong>.</li>
-                <li>Klik op <strong>'Settings'</strong> in de bovenste menubalk.</li>
-                <li>Klik in de linkerkolom op <strong>'Pages'</strong>.</li>
-                <li>Zet bij 'Branch' de selectie op <strong>'main'</strong> en klik op <strong>'Save'</strong>.</li>
-                <li><strong>Wacht een minuutje</strong> en ververs de pagina voor de blauwe link.</li>
-                <li><strong>Kopieer de hele link</strong>.</li>
-            </ol>
-        </div>
-
-        <div style="background: #fff5f5; padding: 20px; border-radius: 15px; border: 1px solid #feb2b2;">
-            <label><strong>Plak hier de link van je live les:</strong></label>
-            <input type="text" id="github-url" placeholder="https://jouwnaam.github.io/jouw-les/" style="border-color: #fc8181;">
-            <button class="btn btn-success" onclick="saveGithubLink()" style="width: 100%; margin-top: 10px;">Deel mijn les met de groep! 🚀</button>
-            <p><small><i>Deze link hebben we in de volgende stap nodig om de interactie te activeren.</i></small></p>
-        </div>
-    </div>
-
-    <div class="step" id="step-11">
-        <h2 style="text-align: center;">Stap 11: Plaats je les in It's Learning (LMS)</h2>
-        <div style="background: #e3f2fd; border-left: 5px solid #3498db; padding: 25px; border-radius: 15px; margin-bottom: 25px;">
-            <p><strong>Om je les in een LMS zoals It's Learning te tonen, gebruiken we een 'iframe'.</strong></p>
-            <p>1. Plak hieronder je gekopieerde GitHub-link.<br>
-               2. Kopieer daarna de gegenereerde iframe-code.<br>
-               3. Plak deze code in je LMS (gebruik de 'Broncode' of 'Embed' knop).</p>
-        </div>
-
-        <div style="background: #f9f9f9; padding: 25px; border-radius: 20px; border: 1px solid #ddd;">
-            <label><b>Stap 1: Plak je GitHub link:</b></label>
-            <input type="text" id="github-input-lms" placeholder="https://jouwnaam.github.io/jouw-les/" oninput="generateIframe()" style="width: 100%;">
-            <label style="margin-top: 20px; display: block;"><b>Stap 2: Kopieer deze Iframe-code:</b></label>
-            <div id="iframe-output" class="code-box" style="min-height: 50px; background: #2d3748; color: #a0aec0;">
-                De code verschijnt hier zodra je een link plakt...
-            </div>
-            <button class="btn btn-success" onclick="copyToClipboard('iframe-output')" style="width: 100%; margin-top: 10px;">Kopieer Iframe-code 📋</button>
-        </div>
-    </div>
-
-    <div class="step" id="step-12">
-        <h2 style="text-align: center;">Stap 12: Feedback & Resultaten 🎓</h2>
-        <p style="text-align: center;">Bekijk hieronder de live lessen die zojuist zijn gepubliceerd.</p>
-        <div id="github-live-feed"></div>
+        <h2>GitHub Link</h2>
+        <input type="text" id="github-url" placeholder="https://...">
+        <button class="btn btn-success" onclick="saveGithubLink()">Deel met groep</button>
     </div>
 
     <div class="step" id="step-13">
-        <h2 style="text-align: center;">Stap 13: Afronden & Opruimen 🧹</h2>
-        <div style="background: #f0fdf4; padding: 25px; border-radius: 20px; border: 1px solid #bbf7d0; margin-bottom: 20px;">
-            <h3>📧 Resultaten bewaren</h3>
-            <p>Wil je de ontwerpen en links van deze sessie bewaren? Gebruik de knop hieronder om een verzamelmail op te stellen.</p>
-            <button class="btn btn-success" onclick="mailAlleSchermen()" style="width: 100%; padding: 15px;">Mail alle schermen naar mij ✉️</button>
-        </div>
-        <div style="background: #fff5f5; padding: 25px; border-radius: 20px; border: 1px solid #fed7d7;">
-            <h3>⚠️ Grote Reset</h3>
-            <p>Klaar voor de volgende groep? Deze knop maakt het whiteboard leeg en wist alle ingezonden lessen uit de database.</p>
-            <button class="btn-reset" onclick="hardResetAlles()">VOLLEDIGE RESET (Bord + Lessen) 🔥</button>
-        </div>
+        <h2>Afronden</h2>
+        <button class="btn btn-success" onclick="mailAlleSchermen()" style="width: 100%;">Mail resultaten ✉️</button>
+        <button class="btn-reset" onclick="hardResetAlles()">RESET ALLES 🔥</button>
     </div>
 
     <div class="navigation">
@@ -254,7 +173,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getDatabase, ref, push, remove, onValue, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const masterConfig = { apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4", databaseURL: "https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app" };
     const app = initializeApp(masterConfig);
@@ -264,126 +183,69 @@
 
     window.changeStep = (n) => {
         const nextStepNum = currentStep + n;
-        const nextStepEl = document.getElementById(`step-${nextStepNum}`);
-        if (nextStepEl) {
+        if (document.getElementById(`step-${nextStepNum}`)) {
             document.getElementById(`step-${currentStep}`).classList.remove('active');
             currentStep = nextStepNum;
-            nextStepEl.classList.add('active');
+            document.getElementById(`step-${currentStep}`).classList.add('active');
             document.getElementById('prevBtn').disabled = (currentStep === 1);
-            document.getElementById('nextBtn').style.display = (currentStep >= 13) ? 'none' : 'inline-block';
             document.getElementById('progressText').innerText = `Stap ${currentStep} van 13`;
-            window.scrollTo(0, 0);
         }
+    };
+
+    // --- WHITEBOARD LOGICA ---
+    window.addWordToFirebase = () => {
+        const val = document.getElementById('word-input').value;
+        if(val) push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 750, y: 100 });
+        document.getElementById('word-input').value = '';
+    };
+
+    window.plopOogst = () => {
+        const woorden = ["Chunking", "Eigen inbreng", "Formatief toetsen", "Inbreng student", "Snelle feedback", "Conditionering", "Sociaal leren", "Belonen", "Authentieke taken", "Herhaling", "Portfolio"];
+        woorden.forEach((t) => push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 100 + (Math.random() * 1000), y: 50 + (Math.random() * 200) }));
+    };
+
+    // Luisteren naar woorden in Firebase en ze tekenen
+    onValue(ref(db, 'workshop/whiteboard/words'), (snapshot) => {
+        const container = document.getElementById('sticky-container');
+        container.innerHTML = '';
+        const data = snapshot.val();
+        if (data) {
+            Object.entries(data).forEach(([key, val]) => {
+                const div = document.createElement('div');
+                div.className = 'sticky-note';
+                div.innerText = val.text;
+                div.style.left = val.x + 'px';
+                div.style.top = val.y + 'px';
+                container.appendChild(div);
+            });
+        }
+    });
+
+    window.clearFullReset = () => { if(confirm("Bord leegmaken?")) remove(ref(db, 'workshop/whiteboard/words')); };
+
+    // --- MAIL FUNCTIE ---
+    window.mailAlleSchermen = () => {
+        const naam = document.getElementById('participant-name').value || "Deelnemer";
+        const doel = document.getElementById('les-doel').value || "Niet ingevuld";
+        const werkvorm = document.getElementById('les-werkvorm').value || "Niet ingevuld";
+        const eigenLes = document.getElementById('github-url').value || "Niet ingevuld";
+
+        let body = `Resultaten van de Workshop\n--------------------------\n`;
+        body += `Naam: ${naam}\nLeerdoel: ${doel}\nWerkvorm: ${werkvorm}\n\nLink naar jouw GitHub les:\n${eigenLes}`;
+        
+        const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&su=Workshop Resultaten - ${naam}&body=${encodeURIComponent(body)}`;
+        window.open(mailtoUrl, '_blank');
     };
 
     window.saveDesignAndProceed = () => {
         const naam = document.getElementById('participant-name').value || "Deelnemer";
         const doel = document.getElementById('les-doel').value;
         const vorm = document.getElementById('les-werkvorm').value;
-        const volledigePrompt = `Hoi Gemini, ik ben ${naam}. Ik wil een digitale les ontwerpen.\n\n` +
-                                `Leerdoel: ${doel}\n` +
-                                `Werkvorm: ${vorm}\n\n` +
-                                `Opdracht voor jou: ontwerp de les in html-code, maak er een rustige lay-out bij en doe voorstellen voor interactie.`;
-        document.getElementById('generated-prompt').innerText = volledigePrompt;
-        window.changeStep(1); 
+        document.getElementById('generated-prompt').innerText = `Hoi Gemini, ik ben ${naam}. Doel: ${doel}. Vorm: ${vorm}. Maak HTML...`;
+        window.changeStep(1);
     };
 
-    window.addWordToFirebase = () => {
-        const val = document.getElementById('word-input').value;
-        if(val) push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 750, y: 350 });
-        document.getElementById('word-input').value = '';
-    };
-
-    window.plopOogst = () => {
-        const woorden = ["Chunking", "Eigen inbreng", "Formatief toetsen", "Inbreng student", "Snelle feedback", "Conditionering", "Sociaal leren", "Belonen", "Authentieke taken", "Herhaling", "Portfolio"];
-        woorden.forEach((t) => {
-            push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 650 + (Math.random() * 300), y: 350 + (Math.random() * 200) });
-        });
-    };
-
-    window.clearFullReset = () => {
-        if(confirm("Bord leegmaken?")) remove(ref(db, 'workshop/whiteboard/words'));
-    };
-
-    window.copyToClipboard = (id) => {
-        const text = document.getElementById(id).innerText;
-        navigator.clipboard.writeText(text);
-        alert("Gekopieerd!");
-    };
-
-    window.generateIframe = () => {
-        const url = document.getElementById('github-input-lms').value.trim();
-        const output = document.getElementById('iframe-output');
-        if (url.startsWith('http')) {
-            output.innerText = `<iframe src="${url}" width="100%" height="800px" frameborder="0" allowfullscreen></iframe>`;
-            output.style.color = "#f8fafc";
-        } else {
-            output.innerText = "Wacht op geldige link...";
-            output.style.color = "#a0aec0";
-        }
-    };
-
-    window.saveGithubLink = () => {
-        const url = document.getElementById('github-url').value.trim();
-        const naam = document.getElementById('participant-name').value || "Anoniem";
-        if (url.startsWith('http')) {
-            push(ref(db, 'workshop/links'), { url, naam, timestamp: Date.now() });
-            alert("Link succesvol gedeeld!");
-            window.changeStep(2); // Direct naar stap 12 (resultaten)
-        } else {
-            alert("Voer a.u.b. een geldige URL in.");
-        }
-    };
-
-    const feedContainer = document.getElementById('github-live-feed');
-    onValue(ref(db, 'workshop/links'), (snapshot) => {
-        feedContainer.innerHTML = '';
-        const data = snapshot.val();
-        if (data) {
-            Object.values(data).reverse().forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'repo-card';
-                card.innerHTML = `
-                    <div style="padding: 10px; background: #eee; border-bottom: 1px solid #ddd;"><strong>Les van: ${item.naam}</strong></div>
-                    <iframe src="${item.url}"></iframe>
-                    <div style="padding: 10px; text-align: right;"><a href="${item.url}" target="_blank" class="btn" style="font-size: 0.8rem;">Open volledig ↗</a></div>`;
-                feedContainer.appendChild(card);
-            });
-        } else {
-            feedContainer.innerHTML = '<p style="text-align:center; padding: 20px;">Nog geen lessen ingezonden...</p>';
-        }
-    });
-
-   window.mailAlleSchermen = () => {
-    // Gegevens verzamelen
-    const naam = document.getElementById('participant-name').value || "Deelnemer";
-    const doel = document.getElementById('les-doel').value || "Niet ingevuld";
-    const werkvorm = document.getElementById('les-werkvorm').value || "Niet ingevuld";
-    const eigenLes = document.getElementById('github-url').value || "Niet ingevuld";
-
-    // De mail-inhoud opbouwen
-    let body = `Resultaten van de Workshop\n`;
-    body += `--------------------------\n`;
-    body += `Naam: ${naam}\n`;
-    body += `Leerdoel: ${doel}\n`;
-    body += `Werkvorm: ${werkvorm}\n\n`;
-    body += `Link naar jouw live les op GitHub:\n${eigenLes}\n\n`;
-    body += `Met vriendelijke groet,\nJe AI Dashboard`;
-
-    // De URL-veilig maken voor een mail-link
-    const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&su=Mijn Workshop Resultaten - ${naam}&body=${encodeURIComponent(body)}`;
-    
-    window.open(mailtoUrl, '_blank');
-};
-
-    window.hardResetAlles = () => {
-        if (confirm("WEET JE HET ZEKER? Dit wist ALLES!")) {
-            remove(ref(db, 'workshop/whiteboard/words'));
-            remove(ref(db, 'workshop/links'));
-            alert("Systeem gereset.");
-            location.reload();
-        }
-    };
+    window.hardResetAlles = () => { if(confirm("ALLES WISSEN?")) { remove(ref(db, 'workshop')); location.reload(); } };
 </script>
 </body>
 </html>
