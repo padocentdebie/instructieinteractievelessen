@@ -143,11 +143,31 @@
     </div>
 
     <div class="step" id="step-10">
-        <h2>Stap F: Deel je les</h2>
-        <div style="background: #fff5f5; padding: 25px; border-radius: 20px; border: 1px solid #feb2b2;">
-            <label><strong>Plak hier de link van je live les op GitHub:</strong></label>
-            <input type="text" id="github-url" placeholder="https://jouwnaam.github.io/project/">
-            <button class="btn btn-success" onclick="saveGithubLink()" style="width: 100%;">Deel met de groep! 🚀</button>
+        <h2 style="text-align: center;">Stap F: Van Code naar Website (GitHub)</h2>
+        <div style="background: #f8fafc; padding: 30px; border-radius: 20px; border: 1px solid #cbd5e1; margin-bottom: 20px;">
+            <p>Volg deze stappen om je code live te zetten als een werkende website:</p>
+            <ol style="line-height: 1.8; margin-bottom: 25px;">
+                <li>Ga naar je <strong>GitHub</strong> account en maak een <strong>New Repository</strong> aan.</li>
+                <li>Geef het een naam (bijv. 'mijn-interactieve-les') en zet hem op <strong>Public</strong>.</li>
+                <li>Klik op de link "uploading an existing file" of maak een nieuw bestand genaamd <strong>index.html</strong>.</li>
+                <li>Plak de volledige code van Gemini in dit bestand en sla op via <strong>Commit changes</strong>.</li>
+                <li>Ga bovenaan naar <strong>Settings</strong> en klik links in het menu op <strong>Pages</strong>.</li>
+                <li>Kies bij 'Branch' voor <strong>main</strong> en klik op <strong>Save</strong>.</li>
+                <li>Wacht ongeveer een minuutje. Ververs de pagina tot je de melding ziet: <em>"Your site is live at..."</em>.</li>
+            </ol>
+
+            <div style="background: #fff5f5; padding: 25px; border-radius: 20px; border: 1px solid #feb2b2;">
+                <label><strong>1. Plak hier de URL van je live website:</strong></label>
+                <input type="text" id="github-url" placeholder="https://jouwnaam.github.io/projectnaam/" oninput="updatePreview()">
+                
+                <div id="live-preview-container" style="margin-top: 15px; display: none;">
+                    <p><small><strong>Controleer hieronder of je les goed verschijnt:</strong></small></p>
+                    <iframe id="github-preview-iframe" src="" style="width: 100%; height: 350px; border: 2px solid #ddd; border-radius: 10px; background: white;"></iframe>
+                </div>
+
+                <label style="margin-top: 15px; display: block;"><strong>2. Deel je resultaat:</strong></label>
+                <button class="btn btn-success" onclick="saveGithubLink()" style="width: 100%;">Deel mijn les met de groep & genereer embed-code! 🚀</button>
+            </div>
         </div>
     </div>
 
