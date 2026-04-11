@@ -26,9 +26,6 @@
     .ghost-tekst { position: absolute; top: 80px; left: 25px; right: 25px; font-size: 1rem; color: #000; line-height: 1.7; opacity: 0.5; pointer-events: none; z-index: 1; }
     .ghost-tekst b { color: #000; font-weight: bold; }
 
-    .draggable-word { position: absolute; z-index: 10; background: var(--white); padding: 10px 35px 10px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: move; font-weight: 600; border-left: 5px solid var(--accent); white-space: nowrap; }
-    .delete-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--danger); cursor: pointer; font-weight: bold; font-size: 1.2rem; }
-
     .btn { background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; margin: 5px; }
     .btn-success { background: #27ae60; }
     .btn-danger { background: var(--danger); }
@@ -78,31 +75,33 @@
                 <div class="board-column" style="background: var(--col-behaviorisme);">
                     <h3 style="text-align: center;">Behaviorisme</h3>
                     <div class="ghost-tekst">
-                        <b>Rol Docent:</b> De docent is de regisseur...<br><br>
-                        <b>Rol Leerinhoud:</b> De leerinhoud is gefragmenteerd...<br><br>
-                        <b>Rol Student:</b> De student is een reactieve volger...<br><br>
-                        <b>Rol Leeractiviteiten:</b> Veel herhaling en imitatie...<br><br>
-                        <b>Rol Toetsen:</b> Toetsen zijn kwantitatief...
+                        <b>Rol Docent:</b> De docent is de regisseur. Hij of zij bepaalt exact welk gedrag gewenst is, deelt de stof op in kleine stapjes en geeft direct feedback (beloning/straf).<br><br>
+                        <b>Rol Leerinhoud:</b> De leerinhoud is gefragmenteerd en lineair. Het bestaat uit objectieve feiten en vaardigheden die stap voor stap opgebouwd worden.<br><br>
+                        <b>Rol Student:</b> De student is een reactieve volger. Succes wordt bepaald door hoe nauwkeurig de student de instructies opvolgt en de juiste respons geeft op een prikkel.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Veel herhaling en imitatie. Denk aan "drill & practice" software, invuloefeningen en het aanleren van automatismen.<br><br>
+                        <b>Rol Toetsen:</b> Toetsen zijn kwantitatief. Er wordt puur gekeken naar het eindproduct: is het antwoord goed of fout?
                     </div>
                 </div>
+
                 <div class="board-column" style="background: var(--col-cognitivisme);">
                     <h3 style="text-align: center;">Cognitivisme</h3>
                     <div class="ghost-tekst">
-                        <b>Rol Docent:</b> De docent is de expert...<br><br>
-                        <b>Rol Leerinhoud:</b> De inhoud is gestructureerd...<br><br>
-                        <b>Rol Student:</b> De student is een actieve informatieverwerker...<br><br>
-                        <b>Rol Leeractiviteiten:</b> Activiteiten die begrip stimuleren...<br><br>
-                        <b>Rol Toetsen:</b> Toetsen richten zich op inzicht...
+                        <b>Rol Docent:</b> De docent is de expert en organisator. De taak is om informatie zo aan te bieden dat deze aansluit bij wat de student al weet, om zo de "cognitieve belasting" te beheersen.<br><br>
+                        <b>Rol Leerinhoud:</b> De inhoud is gestructureerd en hiërarchisch. Er wordt veel gewerkt met schema’s, modellen en logische verbanden tussen concepten.<br><br>
+                        <b>Rol Student:</b> De student is een actieve informatieverwerker. Hij moet actief nadenken, informatie coderen en strategieën gebruiken om kennis op te slaan.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Activiteiten die begrip stimuleren, zoals het maken van samenvattingen, mindmaps, het uitleggen van concepten en het leggen van verbanden met voorkennis.<br><br>
+                        <b>Rol Toetsen:</b> Toetsen richten zich op inzicht. Niet alleen "wat" weet de student, maar kan hij de regels ook toepassen in een vergelijkbare, nieuwe context?
                     </div>
                 </div>
+
                 <div class="board-column" style="background: var(--col-constructivisme);">
                     <h3 style="text-align: center;">Constructivisme</h3>
                     <div class="ghost-tekst">
-                        <b>Rol Docent:</b> De docent is de coach...<br><br>
-                        <b>Rol Leerinhoud:</b> De inhoud is complex...<br><br>
-                        <b>Rol Student:</b> De student is de eigenaar...<br><br>
-                        <b>Rol Leeractiviteiten:</b> Samenwerkend en onderzoekend leren...<br><br>
-                        <b>Rol Toetsen:</b> Toetsen zijn holistisch...
+                        <b>Rol Docent:</b> De docent is de coach of facilitator. Hij creëert een rijke omgeving en stelt vragen die de student aanzetten tot zelfontdekking, in plaats van de antwoorden direct te geven.<br><br>
+                        <b>Rol Leerinhoud:</b> De inhoud is complex en authentiek. Er wordt gewerkt met "vage" problemen uit de echte wereld die vanuit meerdere perspectieven bekeken kunnen worden.<br><br>
+                        <b>Rol Student:</b> De student is de eigenaar van het leerproces. Hij bouwt zijn eigen unieke begrip op door ervaringen op te doen en daarover te reflecteren.<br><br>
+                        <b>Rol Leeractiviteiten:</b> Samenwerkend en onderzoekend leren. Denk aan projecten, discussies, casussen uit de praktijk en sociale interactie (sociaal-constructivisme).<br><br>
+                        <b>Rol Toetsen:</b> Toetsen zijn holistisch. Er wordt gekeken naar het proces en de groei (bijvoorbeeld via een portfolio) en het vermogen om in complexe situaties te handelen.
                     </div>
                 </div>
             </div>
@@ -137,10 +136,10 @@
         </div>
     </div>
 
-    <div class="step" id="step-10"><h2 style="text-align: center;">Stap 10: Plak je Code</h2><p>Plaats hier je resultaat uit Gemini.</p></div>
-    <div class="step" id="step-11"><h2 style="text-align: center;">Stap 11: Testen</h2><p>Bekijk hoe je les werkt.</p></div>
-    <div class="step" id="step-12"><h2 style="text-align: center;">Stap 12: Verfijnen</h2><p>Pas de code aan waar nodig.</p></div>
-    <div class="step" id="step-13"><h2 style="text-align: center;">Stap 13: Afronden</h2><p>Gefeliciteerd! Je digitale les is klaar.</p></div>
+    <div class="step" id="step-10"><h2>Stap 10: Plak je Code</h2><p>Hier ga je verder met de code uit Gemini.</p></div>
+    <div class="step" id="step-11"><h2>Stap 11: Hosting</h2><p>Je les online zetten.</p></div>
+    <div class="step" id="step-12"><h2>Stap 12: Feedback</h2><p>Samen de resultaten bekijken.</p></div>
+    <div class="step" id="step-13"><h2>Stap 13: Afronden</h2><p>Klaar voor gebruik!</p></div>
 
     <div class="navigation">
         <button class="btn" id="prevBtn" onclick="changeStep(-1)" disabled>Vorige</button>
@@ -151,24 +150,66 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, set, push, onChildAdded, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getDatabase, ref, push, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const masterConfig = { apiKey: "AIzaSyBRq1HFmhrpW_EMMZwpURrbTArz-L5iWT4", databaseURL: "https://pvaangifteinleveren-77dbe-default-rtdb.europe-west1.firebasedatabase.app" };
     const app = initializeApp(masterConfig);
     const db = getDatabase(app);
 
-    let step = 1;
+    let currentStep = 1;
 
     window.changeStep = (n) => {
-        const nextStepNum = step + n;
+        const nextStepNum = currentStep + n;
         const nextStepEl = document.getElementById(`step-${nextStepNum}`);
         
         if (nextStepEl) {
-            document.getElementById(`step-${step}`).classList.remove('active');
-            step = nextStepNum;
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep = nextStepNum;
             nextStepEl.classList.add('active');
-            document.getElementById('prevBtn').disabled = (step === 1);
             
-            // Controleer of er een volgende stap is om de knop te tonen/verbergen
-            const hasMoreSteps = document.getElementById(`step-${step + 1}`);
-            document.getElementById('nextBtn').style.display = hasMoreSteps ? 'inline-block' : 'none';
+            document.getElementById('prevBtn').disabled = (currentStep === 1);
+            document.getElementById('nextBtn').style.display = (currentStep >= 13) ? 'none' : 'inline-block';
+            document.getElementById('progressText').innerText = `Stap ${currentStep} van 13`;
+            window.scrollTo(0, 0);
+        }
+    };
+
+    window.saveDesignAndProceed = () => {
+        const naam = document.getElementById('participant-name').value || "Deelnemer";
+        const doel = document.getElementById('les-doel').value;
+        const vorm = document.getElementById('les-werkvorm').value;
+        
+        const volledigePrompt = `Hoi Gemini, ik ben ${naam}. Ik wil een digitale les ontwerpen.\n\n` +
+                                `Leerdoel: ${doel}\n` +
+                                `Werkvorm: ${vorm}\n\n` +
+                                `Opdracht voor jou: ontwerp de les in html-code, maak er een rustige lay-out bij en doe voorstellen voor interactie.`;
+        
+        document.getElementById('generated-prompt').innerText = volledigePrompt;
+        window.changeStep(1); 
+    };
+
+    window.addWordToFirebase = () => {
+        const val = document.getElementById('word-input').value;
+        if(val) push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 750, y: 350 });
+        document.getElementById('word-input').value = '';
+    };
+
+    window.plopOogst = () => {
+        const woorden = ["Chunking", "Eigen inbreng", "Formatief toetsen", "Inbreng student", "Snelle feedback", "Conditionering", "Schema's bouwen", "Sociaal leren", "Belonen", "Authentieke taken", "Herhaling", "Portfolio"];
+        woorden.forEach((t) => {
+            push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 650 + (Math.random() * 300), y: 350 + (Math.random() * 200) });
+        });
+    };
+
+    window.clearFullReset = () => {
+        if(confirm("Bord leegmaken?")) remove(ref(db, 'workshop/whiteboard/words'));
+    };
+
+    window.copyToClipboard = (id) => {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text);
+        alert("Gekopieerd!");
+    };
+</script>
+</body>
+</html>
