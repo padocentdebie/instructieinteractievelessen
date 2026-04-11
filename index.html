@@ -205,31 +205,32 @@
 
     let currentStep = 1;
 
-    window.changeStep = (n) => {
-        const nextStepNum = currentStep + n;
-        const currentStepEl = document.getElementById(`step-${currentStep}`);
-        const nextStepEl = document.getElementById(`step-${nextStepNum}`);
+   window.changeStep = (n) => {
+    // Verberg de huidige actieve stap
+    const currentEl = document.querySelector('.step.active');
+    if (!currentEl) return;
 
-        if (nextStepEl) {
-            // Verberg huidige stap
-            currentStepEl.classList.remove('active');
-            // Update nummer
-            currentStep = nextStepNum;
-            // Toon nieuwe stap
-            nextStepEl.classList.add('active');
-            
-            // Update knoppen en tekst
-            document.getElementById('prevBtn').disabled = (currentStep === 1);
-            document.getElementById('nextBtn').style.display = (currentStep >= 13) ? 'none' : 'inline-block';
-            document.getElementById('progressText').innerText = `Stap ${currentStep} van 13`;
-            
-            // Scroll naar boven voor gebruiksgemak
-            window.scrollTo(0, 0);
-        } else {
-            console.error("Stap niet gevonden:", nextStepNum);
-        }
-    };
+    // Haal het huidige nummer op uit het ID (bijv. "step-2" -> 2)
+    let currentNum = parseInt(currentEl.id.split('-')[1]);
+    let nextNum = currentNum + n;
 
+    const nextEl = document.getElementById(`step-${nextNum}`);
+
+    if (nextEl) {
+        currentEl.classList.remove('active');
+        nextEl.classList.add('active');
+        
+        // Update de globale teller
+        currentStep = nextNum; 
+
+        // Update de knoppen onderaan
+        document.getElementById('prevBtn').disabled = (currentStep === 1);
+        document.getElementById('nextBtn').style.display = (currentStep >= 13) ? 'none' : 'inline-block';
+        document.getElementById('progressText').innerText = `Stap ${currentStep} van 13`;
+        
+        window.scrollTo(0, 0);
+    }
+};
     // --- WHITEBOARD LOGICA ---
     window.addWordToFirebase = () => {
         const val = document.getElementById('word-input').value;
