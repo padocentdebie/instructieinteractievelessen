@@ -173,22 +173,30 @@
     let step = 1;
 
     window.changeStep = (n) => {
-        const nextStep = step + n;
-        const nextStepElement = document.getElementById(`step-${nextStep}`);
+    const nextStepNum = step + n;
+    const nextStepEl = document.getElementById(`step-${nextStepNum}`);
+    
+    if (nextStepEl) {
+        // Verberg huidige stap
+        document.getElementById(`step-${step}`).classList.remove('active');
         
-        if (nextStepElement) {
-            document.getElementById(`step-${step}`).classList.remove('active');
-            step = nextStep;
-            nextStepElement.classList.add('active');
-            document.getElementById('prevBtn').disabled = (step === 1);
-            if (document.getElementById('nextBtn')) {
-                document.getElementById('nextBtn').style.display = (step >= 13) ? 'none' : 'inline-block';
-            }
-            document.getElementById('progressText').innerText = `Stap ${step} van 13`;
-            window.scrollTo(0, 0);
-        }
-    };
-
+        // Update naar nieuwe stap
+        step = nextStepNum;
+        nextStepEl.classList.add('active');
+        
+        // Update knoppen
+        document.getElementById('prevBtn').disabled = (step === 1);
+        
+        // Zorg dat de knop zichtbaar blijft zolang er een volgende stap is
+        const hasMoreSteps = document.getElementById(`step-${step + 1}`);
+        document.getElementById('nextBtn').style.display = hasMoreSteps ? 'inline-block' : 'none';
+        
+        // Update tekst
+        document.getElementById('progressText').innerText = `Stap ${step} van 13`;
+    } else {
+        console.error("Fout: Stap " + nextStepNum + " is niet gevonden in de HTML!");
+    }
+};
     window.saveDesignAndProceed = () => {
         const naam = document.getElementById('participant-name').value || "Deelnemer";
         const doel = document.getElementById('les-doel').value;
