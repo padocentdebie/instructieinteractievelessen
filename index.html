@@ -60,29 +60,52 @@
         <button class="btn" onclick="changeStep(1)" style="width: 100%;">Laten we beginnen! →</button>
     </div>
 
-    <div class="step" id="step-2">
-        <h2 style="text-align: center;">Stap A: Coöperatief Brainstormen</h2>
-        <div style="display: flex; gap: 10px; margin-bottom: 15px; background: #f0f4f8; padding: 15px; border-radius: 15px; align-items: center;">
-            <input type="text" id="word-input" placeholder="Typ zelf een begrip..." style="flex: 1; margin: 0;">
-            <button class="btn" onclick="addWordToFirebase()" style="background: #3498db;">Voeg toe</button>
-            <button class="btn" onclick="plopOogst()" style="background: #27ae60;">Oogst Begrippen 🌾</button>
-            <button class="btn btn-danger" onclick="clearFullReset()">RESET BORD</button>
-        </div>
-        <div style="width: 100%; overflow: auto; border: 3px solid #ddd; border-radius: 20px;">
-            <div id="digibord">
-                <div class="board-column" style="background: var(--col-behaviorisme);">
-                    <h3>Behaviorisme</h3>
-                    <div class="ghost-tekst"><b>Rol Docent:</b> Regisseur. Bepaalt gedrag...</div>
-                </div>
-                <div class="board-column" style="background: var(--col-cognitivisme);">
-                    <h3>Cognitivisme</h3>
-                    <div class="ghost-tekst"><b>Rol Docent:</b> Expert en organisator...</div>
-                </div>
-                <div class="board-column" style="background: var(--col-constructivisme);">
-                    <h3>Constructivisme</h3>
-                    <div class="ghost-tekst"><b>Rol Docent:</b> Coach of facilitator...</div>
+       <div class="step" id="step-2">
+    <h2 style="text-align: center;">Stap A: Coöperatief Brainstormen</h2>
+    
+    <div style="display: flex; gap: 10px; margin-bottom: 15px; background: #f0f4f8; padding: 15px; border-radius: 15px; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+        <input type="text" id="word-input" placeholder="Typ zelf een begrip..." style="flex: 1; margin: 0; padding: 12px; border-radius: 8px; border: 1px solid #ccc;">
+        <button class="btn" onclick="addWordToFirebase()" style="background: #3498db;">Voeg toe</button>
+        <button class="btn" onclick="plopOogst()" style="background: #27ae60; color: white;">Oogst Begrippen 🌾</button>
+        <button class="btn btn-danger" onclick="clearFullReset()" style="background: #e74c3c;">RESET BORD</button>
+    </div>
+
+    <div style="width: 100%; overflow: auto; border: 3px solid #ddd; border-radius: 20px; background: #fff;">
+        <div id="digibord" style="width: 1600px; height: 900px; position: relative; background: white; display: flex; cursor: crosshair; user-select: none;">
+            
+            <div class="board-column" style="background: var(--col-behaviorisme);">
+                <h3 style="text-align: center;">Behaviorisme</h3>
+                <div class="ghost-tekst">
+                    <b>Rol Docent:</b> De docent is de regisseur. Hij of zij bepaalt exact welk gedrag gewenst is, deelt de stof op in kleine stapjes en geeft direct feedback (beloning/straf).<br><br>
+                    <b>Rol Leerinhoud:</b> De leerinhoud is gefragmenteerd en lineair. Het bestaat uit objectieve feiten en vaardigheden die stap voor stap opgebouwd worden.<br><br>
+                    <b>Rol Student:</b> De student is een reactieve volger. Succes wordt bepaald door hoe nauwkeurig de student de instructies opvolgt en de juiste respons geeft op een prikkel.<br><br>
+                    <b>Rol Leeractiviteiten:</b> Veel herhaling en imitatie. Denk aan "drill & practice" software, invuloefeningen en het aanleren van automatismen.<br><br>
+                    <b>Rol Toetsen:</b> Toetsen zijn kwantitatief. Er wordt puur gekeken naar het eindproduct: is het antwoord goed of fout?
                 </div>
             </div>
+
+            <div class="board-column" style="background: var(--col-cognitivisme);">
+                <h3 style="text-align: center;">Cognitivisme</h3>
+                <div class="ghost-tekst">
+                    <b>Rol Docent:</b> De docent is de expert en organisator. De taak is om informatie zo aan te bieden dat deze aansluit bij wat de student al weet, om zo de "cognitieve belasting" te beheersen.<br><br>
+                    <b>Rol Leerinhoud:</b> De inhoud is gestructureerd en hiërarchisch. Er wordt veel gewerkt met schema’s, modellen en logische verbanden tussen concepten.<br><br>
+                    <b>Rol Student:</b> De student is een actieve informatieverwerker. Hij moet actief nadenken, informatie coderen en strategieën gebruiken om kennis op te slaan.<br><br>
+                    <b>Rol Leeractiviteiten:</b> Activiteiten die begrip stimuleren, zoals het maken van samenvattingen, mindmaps, het uitleggen van concepten en het leggen van verbanden met voorkennis.<br><br>
+                    <b>Rol Toetsen:</b> Toetsen richten zich op inzicht. Niet alleen "wat" weet de student, maar kan hij de regels ook toepassen in een vergelijkbare, nieuwe context?
+                </div>
+            </div>
+
+            <div class="board-column" style="background: var(--col-constructivisme);">
+                <h3 style="text-align: center;">Constructivisme</h3>
+                <div class="ghost-tekst">
+                    <b>Rol Docent:</b> De docent is de coach of facilitator. Hij creëert een rijke omgeving en stelt vragen die de student aanzetten tot zelfontdekking, in plaats van de antwoorden direct te geven.<br><br>
+                    <b>Rol Leerinhoud:</b> De inhoud is complex en authentiek. Er wordt gewerkt met "vage" problemen uit de echte wereld die vanuit meerdere perspectieven bekeken kunnen worden.<br><br>
+                    <b>Rol Student:</b> De student is de eigenaar van het leerproces. Hij bouwt zijn eigen unieke begrip op door ervaringen op te doen en daarover te reflecteren.<br><br>
+                    <b>Rol Leeractiviteiten:</b> Samenwerkend en onderzoekend leren. Denk aan projecten, discussies, casussen uit de praktijk en sociale interactie (sociaal-constructivisme).<br><br>
+                    <b>Rol Toetsen:</b> Toetsen zijn holistisch. Er wordt gekeken naar het proces en de groei (bijvoorbeeld via een portfolio) en het vermogen om in complexe situaties te handelen.
+                </div>
+            </div>
+
         </div>
     </div>
 
