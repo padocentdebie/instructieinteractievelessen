@@ -355,15 +355,27 @@
         }
     });
 
-    window.mailAlleSchermen = () => {
-        const naam = document.getElementById('participant-name').value || "Deelnemer";
-        const doel = document.getElementById('les-doel').value || "Niet ingevuld";
-        const vorm = document.getElementById('les-werkvorm').value || "Niet ingevuld";
-        const githubLink = document.getElementById('github-url').value || "Geen link";
-        const subject = encodeURIComponent(`Workshop Resultaten 2026 - ${naam}`);
-        const body = encodeURIComponent(`Hoi ${naam},\n\nHier zijn je resultaten:\nLeerdoel: ${doel}\nWerkvorm: ${vorm}\nLink: ${githubLink}`);
-        window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=${subject}&body=${body}`, '_blank');
-    };
+   window.mailAlleSchermen = () => {
+    // Gegevens verzamelen
+    const naam = document.getElementById('participant-name').value || "Deelnemer";
+    const doel = document.getElementById('les-doel').value || "Niet ingevuld";
+    const werkvorm = document.getElementById('les-werkvorm').value || "Niet ingevuld";
+    const eigenLes = document.getElementById('github-url').value || "Niet ingevuld";
+
+    // De mail-inhoud opbouwen
+    let body = `Resultaten van de Workshop\n`;
+    body += `--------------------------\n`;
+    body += `Naam: ${naam}\n`;
+    body += `Leerdoel: ${doel}\n`;
+    body += `Werkvorm: ${werkvorm}\n\n`;
+    body += `Link naar jouw live les op GitHub:\n${eigenLes}\n\n`;
+    body += `Met vriendelijke groet,\nJe AI Dashboard`;
+
+    // De URL-veilig maken voor een mail-link
+    const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&su=Mijn Workshop Resultaten - ${naam}&body=${encodeURIComponent(body)}`;
+    
+    window.open(mailtoUrl, '_blank');
+};
 
     window.hardResetAlles = () => {
         if (confirm("WEET JE HET ZEKER? Dit wist ALLES!")) {
