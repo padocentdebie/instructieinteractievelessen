@@ -210,26 +210,28 @@
         document.getElementById('progressText').innerText = `Stap ${step} van 13`;
     };
 
-   window.saveDesignAndProceed = () => {
-    const naam = document.getElementById('user-name').value || "Deelnemer";
-    const doel = document.getElementById('les-doel').value;
-    const vorm = document.getElementById('les-werkvorm').value;
-    
-    const volledigePrompt = `Hoi Gemini, ik ben ${naam}. Ik wil een digitale les ontwerpen.\n\n` +
-                            `Leerdoel: ${doel}\n` +
-                            `Werkvorm: ${vorm}\n\n` +
-                            `Opdracht voor jou: ontwerp de les in html-code, maak er een rustige lay-out bij en doe voorstellen voor interactie.`;
-    
-    document.getElementById('generated-prompt').innerText = volledigePrompt;
-    changeStep(1); // Gaat van stap 7 naar stap 8
-};
+    window.saveDesignAndProceed = () => {
+        // GEWIJZIGD: Haalt nu de naam op uit het inlogveld van stap 1
+        const naam = document.getElementById('participant-name').value || "Deelnemer";
+        const doel = document.getElementById('les-doel').value;
+        const vorm = document.getElementById('les-werkvorm').value;
+        
+        const volledigePrompt = `Hoi Gemini, ik ben ${naam}. Ik wil een digitale les ontwerpen.\n\n` +
+                                `Leerdoel: ${doel}\n` +
+                                `Werkvorm: ${vorm}\n\n` +
+                                `Opdracht voor jou: ontwerp de les in html-code, maak er een rustige lay-out bij en doe voorstellen voor interactie.`;
+        
+        document.getElementById('generated-prompt').innerText = volledigePrompt;
+        changeStep(1); // Gaat van stap 7 naar stap 8
+    };
 
     window.mailAllesNaarMij = () => {
-        const naam = document.getElementById('user-name').value || "Deelnemer";
+        // GEWIJZIGD: Gebruikt ook hier de naam uit stap 1
+        const naam = document.getElementById('participant-name').value || "Deelnemer";
         const doel = document.getElementById('les-doel').value;
         const vorm = document.getElementById('les-werkvorm').value;
         const prompt = document.getElementById('generated-prompt').innerText;
-        const url = document.getElementById('final-lesson-url').value;
+        const url = document.getElementById('final-lesson-url') ? document.getElementById('final-lesson-url').value : "";
 
         const body = `Mijn Workshop Resultaten:%0D%0A%0D%0A` +
                      `Naam: ${naam}%0D%0A` +
@@ -252,7 +254,6 @@
         }
     };
 
-    // Firebase & Clipboard functies blijven gelijk...
     window.addWordToFirebase = () => {
         const val = document.getElementById('word-input').value;
         if(val) push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 750, y: 350 });
