@@ -35,28 +35,7 @@
     .navigation { display: flex; justify-content: space-between; margin-top: 40px; border-top: 2px solid #eee; padding-top: 25px; align-items: center; }
     input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
     .code-box { background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin: 15px 0; white-space: pre-wrap; border: 1px solid #334155; }
-/* Het rode kruisje rechtsboven de sticky note */
-.delete-btn {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: var(--danger);
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    line-height: 18px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    display: none; /* Standaard onzichtbaar */
-}
 
-/* Toon het kruisje alleen als je over de note hoovert */
-.sticky-note:hover .delete-btn {
-    display: block;
-}
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
@@ -147,6 +126,10 @@
             <label><b>Wat is het leerdoel?</b></label><input type="text" id="les-doel" placeholder="Bijv: redenen van wetenschap in pv">
             <label><b>Beschrijf de werkvorm:</b></label><textarea id="les-werkvorm" rows="4" placeholder="Bijv: Een tekst opstellen die automatisch wordt nagekeken..."></textarea>
             <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%;">Sla op & Genereer Prompt 🚀</button>
+            <div id="prompt-live-feed-container" style="margin-top:20px; border-top: 1px solid #eee; padding-top: 15px;">
+                <small><b>Gedeelde doelen van deelnemers:</b></small>
+                <div id="prompt-live-feed" style="max-height: 100px; overflow-y: auto; font-size: 0.85rem; color: #666;"></div>
+            </div>
         </div>
     </div>
 
@@ -224,7 +207,7 @@
         }
     };
 
-    // --- WHITEBOARD & DRAG LOGICA ---
+    // --- WHITEBOARD & DRAG LOGICA (VERBETERD VOOR SYNC) ---
     let activeNode = null;
     let offset = { x: 0, y: 0 };
 
@@ -242,44 +225,36 @@
     onValue(ref(db, 'workshop/whiteboard/words'), (snapshot) => {
         const container = document.getElementById('sticky-container');
         if (!container) return;
-        container.innerHTML = '';
         const data = snapshot.val();
+        
+        // Verwijder lokale nodes die niet meer in DB bestaan
+        const currentNotes = container.querySelectorAll('.sticky-note');
+        currentNotes.forEach(note => {
+            if (!data || !data[note.dataset.key]) note.remove();
+        });
+
         if (data) {
             Object.entries(data).forEach(([key, v]) => {
-    const div = document.createElement('div');
-    div.className = 'sticky-note';
-    div.style.left = v.x + 'px'; 
-    div.style.top = v.y + 'px';
-    div.dataset.key = key;
-
-    // 1. De tekst van de note
-    const textSpan = document.createElement('span');
-    textSpan.innerText = v.text;
-    div.appendChild(textSpan);
-
-    // 2. Het verwijderkruisje toevoegen
-    const delBtn = document.createElement('div');
-    delBtn.className = 'delete-btn';
-    delBtn.innerHTML = '&times;';
-    delBtn.onclick = (e) => {
-        e.stopPropagation(); // Voorkom dat slepen start bij klikken op kruisje
-        if(confirm("Verwijderen?")) {
-            // Import 'remove' is al aanwezig bovenin je script
-            remove(ref(db, `workshop/whiteboard/words/${key}`));
-        }
-    };
-    div.appendChild(delBtn);
-
-    // Dragging logica behouden
-    div.onmousedown = (e) => {
-        activeNode = div;
-        offset.x = e.clientX - div.offsetLeft;
-        offset.y = e.clientY - div.offsetTop;
-        div.style.zIndex = 1000;
-    };
-
-    container.appendChild(div);
-});
+                let div = container.querySelector(`[data-key="${key}"]`);
+                if (!div) {
+                    div = document.createElement('div');
+                    div.className = 'sticky-note';
+                    div.dataset.key = key;
+                    div.innerText = v.text;
+                    div.onmousedown = (e) => {
+                        activeNode = div;
+                        offset.x = e.clientX - div.offsetLeft;
+                        offset.y = e.clientY - div.offsetTop;
+                        div.style.zIndex = 1000;
+                    };
+                    container.appendChild(div);
+                }
+                // Verplaats enkel als de gebruiker dit specifieke element niet zelf vasthoudt
+                if (activeNode !== div) {
+                    div.style.left = v.x + 'px';
+                    div.style.top = v.y + 'px';
+                }
+            });
         }
     });
 
@@ -335,22 +310,55 @@
         }
     });
 
-    // --- OVERIGE HELPERS ---
+    // --- PROMPT GENERATOR & LIVE FEED (VERBETERD) ---
     window.saveDesignAndProceed = () => {
         const naam = document.getElementById('participant-name').value || "Deelnemer";
         const doel = document.getElementById('les-doel').value;
         const vorm = document.getElementById('les-werkvorm').value;
         const prompt = `Hoi Gemini, ik ben ${naam}. Ik wil een interactieve les maken. Leerdoel: ${doel}. Werkvorm: ${vorm}. Genereer een volledige HTML-pagina met CSS en JavaScript.`;
+        
+        // 1. Toon in UI
         document.getElementById('generated-prompt').innerText = prompt;
+        
+        // 2. Kopieer naar klembord
+        navigator.clipboard.writeText(prompt);
+
+        // 3. Deel in Firebase feed
+        push(ref(db, 'workshop/shared_prompts'), { naam, doel });
+
         window.changeStep(1);
     };
 
+    // Listener voor live-feed in stap 7
+    onValue(ref(db, 'workshop/shared_prompts'), (snapshot) => {
+        const feedContainer = document.getElementById('prompt-live-feed');
+        if (!feedContainer) return;
+        const data = snapshot.val();
+        if (data) {
+            feedContainer.innerHTML = '';
+            Object.values(data).reverse().slice(0, 5).forEach(item => {
+                const div = document.createElement('div');
+                div.innerHTML = `• <b>${item.naam}</b>: ${item.doel}`;
+                feedContainer.appendChild(div);
+            });
+        }
+    });
+
     window.copyToClipboard = (id) => { navigator.clipboard.writeText(document.getElementById(id).innerText); alert("Gekopieerd!"); };
+    
     window.mailAlleSchermen = () => {
-        const body = `Naam: ${document.getElementById('participant-name').value}\nLeerdoel: ${document.getElementById('les-doel').value}\nURL: ${document.getElementById('github-url').value}`;
-        window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=Workshop Resultaten&body=${encodeURIComponent(body)}`, '_blank');
+        const naam = document.getElementById('participant-name').value;
+        const doel = document.getElementById('les-doel').value;
+        const body = `Naam: ${naam}\nLeerdoel: ${doel}`;
+        window.location.href = `mailto:?subject=Workshop Resultaten&body=${encodeURIComponent(body)}`;
     };
-    window.hardResetAlles = () => { if(confirm("ALLES WISSEN?")) { remove(ref(db, 'workshop')); location.reload(); }};
+
+    window.hardResetAlles = () => {
+        if(confirm("DIT VERWIJDERT ALLES VOOR IEDEREEN. Weet je het zeker?")) {
+            remove(ref(db, 'workshop'));
+            location.reload();
+        }
+    };
 </script>
 </body>
 </html>
