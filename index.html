@@ -277,16 +277,64 @@
         }
     };
 
-    onValue(ref(db, 'workshop/links'), (snapshot) => {
-        const feed = document.getElementById('github-live-feed');
-        feed.innerHTML = '';
-        const data = snapshot.val();
-        if(data) Object.values(data).reverse().forEach(item => {
+    // Houd de huidige actieve noot bij
+let activeNode = null;
+let offset = { x: 0, y: 0 };
+
+onValue(ref(db, 'workshop/whiteboard/words'), (snapshot) => {
+    const container = document.getElementById('sticky-container');
+    if (!container) return;
+    container.innerHTML = '';
+    const data = snapshot.val();
+    
+    if (data) {
+        Object.entries(data).forEach(([key, v]) => {
             const div = document.createElement('div');
-            div.className = 'repo-card';
-            div.innerHTML = `<div style="padding:10px;"><strong>Les van: ${item.naam}</strong></div><iframe src="${item.url}"></iframe>`;
-            feed.appendChild(div);
+            div.className = 'sticky-note';
+            div.style.left = v.x + 'px';
+            div.style.top = v.y + 'px';
+            div.innerText = v.text;
+            div.dataset.key = key; // Sla de Firebase ID op in het element
+
+            // Start het slepen
+            div.onmousedown = (e) => {
+                activeNode = div;
+                offset.x = e.clientX - div.offsetLeft;
+                offset.y = e.clientY - div.offsetTop;
+                div.style.zIndex = 1000;
+            };
+
+            container.appendChild(div);
         });
+    }
+});
+
+// Handelen van beweging op het hele document
+document.onmousemove = (e) => {
+    if (!activeNode) return;
+    
+    const x = e.clientX - offset.x;
+    const y = e.clientY - offset.y;
+    
+    // Visuele feedback tijdens slepen
+    activeNode.style.left = x + 'px';
+    activeNode.style.top = y + 'px';
+};
+
+// Loslaten en opslaan in Firebase
+document.onmouseup = () => {
+    if (activeNode) {
+        const key = activeNode.dataset.key;
+        const x = parseInt(activeNode.style.left);
+        const y = parseInt(activeNode.style.top);
+
+        // Update de positie in Firebase voor real-time sync
+        update(ref(db, `workshop/whiteboard/words/${key}`), { x, y });
+        
+        activeNode.style.zIndex = 10;
+        activeNode = null;
+    }
+};
     });
     // 1. Zorgt dat de preview in Stap 10 direct werkt als je de link plakt
 window.updatePreview = () => {
