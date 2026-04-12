@@ -35,7 +35,28 @@
     .navigation { display: flex; justify-content: space-between; margin-top: 40px; border-top: 2px solid #eee; padding-top: 25px; align-items: center; }
     input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
     .code-box { background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin: 15px 0; white-space: pre-wrap; border: 1px solid #334155; }
+/* Het rode kruisje rechtsboven de sticky note */
+.delete-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--danger);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: none; /* Standaard onzichtbaar */
+}
 
+/* Toon het kruisje alleen als je over de note hoovert */
+.sticky-note:hover .delete-btn {
+    display: block;
+}
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
@@ -225,19 +246,40 @@
         const data = snapshot.val();
         if (data) {
             Object.entries(data).forEach(([key, v]) => {
-                const div = document.createElement('div');
-                div.className = 'sticky-note';
-                div.style.left = v.x + 'px'; div.style.top = v.y + 'px';
-                div.innerText = v.text;
-                div.dataset.key = key;
-                div.onmousedown = (e) => {
-                    activeNode = div;
-                    offset.x = e.clientX - div.offsetLeft;
-                    offset.y = e.clientY - div.offsetTop;
-                    div.style.zIndex = 1000;
-                };
-                container.appendChild(div);
-            });
+    const div = document.createElement('div');
+    div.className = 'sticky-note';
+    div.style.left = v.x + 'px'; 
+    div.style.top = v.y + 'px';
+    div.dataset.key = key;
+
+    // 1. De tekst van de note
+    const textSpan = document.createElement('span');
+    textSpan.innerText = v.text;
+    div.appendChild(textSpan);
+
+    // 2. Het verwijderkruisje toevoegen
+    const delBtn = document.createElement('div');
+    delBtn.className = 'delete-btn';
+    delBtn.innerHTML = '&times;';
+    delBtn.onclick = (e) => {
+        e.stopPropagation(); // Voorkom dat slepen start bij klikken op kruisje
+        if(confirm("Verwijderen?")) {
+            // Import 'remove' is al aanwezig bovenin je script
+            remove(ref(db, `workshop/whiteboard/words/${key}`));
+        }
+    };
+    div.appendChild(delBtn);
+
+    // Dragging logica behouden
+    div.onmousedown = (e) => {
+        activeNode = div;
+        offset.x = e.clientX - div.offsetLeft;
+        offset.y = e.clientY - div.offsetTop;
+        div.style.zIndex = 1000;
+    };
+
+    container.appendChild(div);
+});
         }
     });
 
