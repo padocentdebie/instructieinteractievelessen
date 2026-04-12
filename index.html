@@ -12,13 +12,13 @@
     }
 
     body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-    .container { width: 95%; max-width: 1200px; background: var(--white); padding: 40px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); position: relative; margin: 20px; }
+    .container { width: 98%; max-width: 100%; background: var(--white); padding: 40px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); position: relative; margin: 20px; }
     
     .step { display: none; animation: fadeIn 0.4s ease-out; }
     .step.active { display: block; }
 
     /* Whiteboard & Sticky Notes */
-    #digibord { width: 1600px; height: 900px; position: relative; background: white; display: flex; border: 1px solid #ccc; overflow: hidden; border-radius: 10px; }
+    #digibord { width: 100%; min-height: 800px; position: relative; background: white; display: flex; border: 1px solid #ccc; overflow: hidden; border-radius: 10px; }
     .board-column { flex: 1; padding: 25px; border-right: 2px dashed #ccc; position: relative; }
     .ghost-tekst { font-size: 0.95rem; color: #000; line-height: 1.6; opacity: 0.5; pointer-events: none; }
     .sticky-note { position: absolute; padding: 15px; background: #fff9c4; border: 1px solid #fbc02d; box-shadow: 3px 3px 10px rgba(0,0,0,0.1); border-radius: 5px; font-weight: bold; z-index: 10; cursor: move; min-width: 100px; text-align: center; }
