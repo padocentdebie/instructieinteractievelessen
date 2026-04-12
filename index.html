@@ -21,7 +21,7 @@
     #digibord { width: 100%; min-height: 800px; position: relative; background: white; display: flex; border: 1px solid #ccc; overflow: hidden; border-radius: 10px; }
     .board-column { flex: 1; padding: 25px; border-right: 2px dashed #ccc; position: relative; }
     .ghost-tekst { font-size: 0.95rem; color: #000; line-height: 1.6; opacity: 0.5; pointer-events: none; }
-    .sticky-note { position: absolute; padding: 15px; background: #fff9c4; border: 1px solid #fbc02d; box-shadow: 3px 3px 10px rgba(0,0,0,0.1); border-radius: 5px; font-weight: bold; z-index: 10; cursor: move; min-width: 100px; text-align: center; }
+    .sticky-note { position: absolute; padding: 15px; background: #fff9c4; border: 1px solid #fbc02d; box-shadow: 3px 3px 10px rgba(0,0,0,0.1); border-radius: 5px; font-weight: bold; z-index: 10; cursor: move; min-width: 100px; text-align: center; user-select: none; }
 
     /* Feed */
     #github-live-feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 25px; margin-top: 20px; max-height: 60vh; overflow-y: auto; padding: 10px; background: #f8fafc; border-radius: 20px; }
@@ -123,8 +123,8 @@
     <div class="step" id="step-7">
         <h2 style="text-align: center;">Stap C: Ontwerp je Les</h2>
         <div style="background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #eee;">
-            <label><b>Wat is het leerdoel?</b></label><input type="text" id="les-doel" placeholder="Bijv: redenen van wetenschao in pv">
-            <label><b>Beschrijf de werkvorm:</b></label><textarea id="les-werkvorm" rows="4" placeholder="Bijv: Een tekst opstellen die automatisch wordt nagekeken met directe feedback..."></textarea>
+            <label><b>Wat is het leerdoel?</b></label><input type="text" id="les-doel" placeholder="Bijv: redenen van wetenschap in pv">
+            <label><b>Beschrijf de werkvorm:</b></label><textarea id="les-werkvorm" rows="4" placeholder="Bijv: Een tekst opstellen die automatisch wordt nagekeken..."></textarea>
             <button class="btn btn-success" onclick="saveDesignAndProceed()" style="width: 100%;">Sla op & Genereer Prompt 🚀</button>
         </div>
     </div>
@@ -142,56 +142,32 @@
         </div>
     </div>
 
-  <div class="step" id="step-10">
-        <h2 style="text-align: center;">Stap F: Van Code naar Website (GitHub)</h2>
-        
-        <div style="text-align: center; margin-bottom: 20px;">
-            <a href="https://github.com/new" target="_blank" class="btn" style="background: var(--github-vibrant); padding: 15px 30px; font-size: 1.1rem;">
-                Open GitHub: Nieuwe Repository maken ↗
-            </a>
-        </div>
-
+    <div class="step" id="step-10">
+        <h2 style="text-align: center;">Stap F: GitHub</h2>
         <div style="background: #f8fafc; padding: 30px; border-radius: 20px; border: 1px solid #cbd5e1; margin-bottom: 20px;">
-            <p>Volg deze stappen om je code live te zetten:</p>
-            <ol style="line-height: 1.8; margin-bottom: 25px;">
-                <li>Maak op GitHub een <strong>New Repository</strong> aan.</li>
-                <li>Geef het een naam (bijv. 'mijn-les') en zet hem op <strong>Public</strong>.</li>
-                <li>Kies voor "uploading an existing file" of maak een nieuw bestand genaamd <strong>index.html</strong>.</li>
-                <li>Plak de volledige code van Gemini in dit bestand en klik op <strong>Commit changes</strong>.</li>
-                <li>Ga naar <strong>Settings</strong> -> <strong>Pages</strong>.</li>
-                <li>Kies bij 'Branch' voor <strong>main</strong> en klik op <strong>Save</strong>.</li>
-                <li>Wacht een minuutje en ververs tot je de link ziet: <em>"Your site is live at..."</em>.</li>
-            </ol>
-
-            <div style="background: #fff5f5; padding: 25px; border-radius: 20px; border: 1px solid #feb2b2;">
-                <label><strong>1. Plak hier de URL van je live website:</strong></label>
-                <input type="text" id="github-url" placeholder="https://jouwnaam.github.io/projectnaam/" oninput="updatePreview()">
-                
-                <div id="live-preview-container" style="margin-top: 15px; display: none;">
-                    <p><small><strong>Controleer hieronder of je les goed verschijnt:</strong></small></p>
-                    <iframe id="github-preview-iframe" src="" style="width: 100%; height: 350px; border: 2px solid #ddd; border-radius: 10px; background: white;"></iframe>
-                </div>
-
-                <label style="margin-top: 15px; display: block;"><strong>2. Deel je resultaat:</strong></label>
-                <button class="btn btn-success" onclick="saveGithubLink()" style="width: 100%;">Deel mijn les met de groep! 🚀</button>
+            <label><strong>Plak hier de URL van je live website:</strong></label>
+            <input type="text" id="github-url" placeholder="https://jouwnaam.github.io/projectnaam/" oninput="updatePreview()">
+            <div id="live-preview-container" style="margin-top: 15px; display: none;">
+                <iframe id="github-preview-iframe" src="" style="width: 100%; height: 350px; border: 2px solid #ddd; border-radius: 10px; background: white;"></iframe>
             </div>
+            <button class="btn btn-success" onclick="saveGithubLink()" style="width: 100%;">Deel mijn les! 🚀</button>
         </div>
     </div>
 
     <div class="step" id="step-11">
-        <h2>Stap 11: Plaats in It's Learning</h2>
-        <div id="iframe-output" class="code-box">Vul eerst je link in bij stap 10...</div>
+        <h2>Stap 11: Embed Code</h2>
+        <div id="iframe-output" class="code-box"></div>
         <button class="btn" onclick="copyToClipboard('iframe-output')">Kopieer Embed Code</button>
     </div>
 
     <div class="step" id="step-12">
-        <h2>Stap 12: Live Overzicht Lessen 🎓</h2>
+        <h2>Stap 12: Live Overzicht 🎓</h2>
         <div id="github-live-feed"></div>
     </div>
 
     <div class="step" id="step-13">
         <h2>Stap 13: Afronden</h2>
-        <button class="btn btn-success" onclick="mailAlleSchermen()" style="width: 100%;">Mail mijn schermen naar mij ✉️</button>
+        <button class="btn btn-success" onclick="mailAlleSchermen()" style="width: 100%;">Mail resultaten ✉️</button>
         <button class="btn-danger" onclick="hardResetAlles()" style="width: 100%; padding: 20px; border-radius: 15px; margin-top: 50px;">VOLLEDIGE RESET 🔥</button>
     </div>
 
@@ -210,11 +186,7 @@
     const app = initializeApp(masterConfig);
     const db = getDatabase(app);
 
-    // BULLETPROOF NAVIGATIE
-    <script type="module">
-    // ... imports en config blijven gelijk ...
-
-    // NAVIGATIE
+    // --- NAVIGATIE ---
     window.changeStep = (n) => {
         const currentEl = document.querySelector('.step.active');
         const currentNum = parseInt(currentEl.id.split('-')[1]);
@@ -231,9 +203,20 @@
         }
     };
 
-    // DRAG & DROP + FIREBASE SYNC (De gecombineerde versie)
+    // --- WHITEBOARD & DRAG LOGICA ---
     let activeNode = null;
     let offset = { x: 0, y: 0 };
+
+    window.addWordToFirebase = () => {
+        const val = document.getElementById('word-input').value;
+        if(val) push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 750, y: 150 });
+        document.getElementById('word-input').value = '';
+    };
+
+    window.plopOogst = () => {
+        const woorden = ["Chunking", "Inbreng in de leeromgeving", "Formatief toetsen", "Snelle feedback", "Sociaal leren", "Snel kennis activeren", "Eigen motivatie oproepen"];
+        woorden.forEach(t => push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 200 + (Math.random()*800), y: 100 + (Math.random()*400) }));
+    };
 
     onValue(ref(db, 'workshop/whiteboard/words'), (snapshot) => {
         const container = document.getElementById('sticky-container');
@@ -267,166 +250,64 @@
     document.onmouseup = () => {
         if (activeNode) {
             const key = activeNode.dataset.key;
-            update(ref(db, `workshop/whiteboard/words/${key}`), { 
-                x: parseInt(activeNode.style.left), 
-                y: parseInt(activeNode.style.top) 
-            });
+            update(ref(db, `workshop/whiteboard/words/${key}`), { x: parseInt(activeNode.style.left), y: parseInt(activeNode.style.top) });
             activeNode.style.zIndex = 10;
             activeNode = null;
         }
     };
 
-    // OVERIGE FUNCTIES (Plak hier de rest: saveGithubLink, updatePreview, etc.)
-    // ...
-</script>
-
-    // WHITEBOARD FUNCTIES
-    window.addWordToFirebase = () => {
-        const val = document.getElementById('word-input').value;
-        if(val) push(ref(db, 'workshop/whiteboard/words'), { text: val, x: 750, y: 150 });
-        document.getElementById('word-input').value = '';
-    };
-
-    window.plopOogst = () => {
-        const woorden = ["Chunking", "Inbreng in de leeromgeving", "Formatief toetsen", "Snelle feedback", "Sociaal leren", "Snel kennis activeren", "Eigen motivatie oproepen"];
-        woorden.forEach(t => push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 200 + (Math.random()*800), y: 100 + (Math.random()*400) }));
-    };
-
-    
     window.clearFullReset = () => { if(confirm("Bord leegmaken?")) remove(ref(db, 'workshop/whiteboard/words')); };
 
-    // PROMPT & DESIGN
-    window.saveDesignAndProceed = () => {
-        const naam = document.getElementById('participant-name').value || "Deelnemer";
-        const doel = document.getElementById('les-doel').value;
-        const vorm = document.getElementById('les-werkvorm').value;
-        const prompt = `Hoi Gemini, ik ben ${naam}. Ik wil een interactieve les maken. Leerdoel: ${doel}. Werkvorm: ${vorm}. Genereer een volledige, losstaande HTML-pagina met CSS en JavaScript. Maak het visueel aantrekkelijk.`;
-        document.getElementById('generated-prompt').innerText = prompt;
-        window.changeStep(1);
+    // --- GITHUB & FEED FUNCTIES ---
+    window.updatePreview = () => {
+        const url = document.getElementById('github-url').value.trim();
+        const container = document.getElementById('live-preview-container');
+        const iframe = document.getElementById('github-preview-iframe');
+        if (url.startsWith('http')) { iframe.src = url; container.style.display = 'block'; }
+        else { container.style.display = 'none'; }
     };
 
-    // GITHUB & FEED
     window.saveGithubLink = () => {
-        const url = document.getElementById('github-url').value;
+        const url = document.getElementById('github-url').value.trim();
         const naam = document.getElementById('participant-name').value || "Anoniem";
-        if(url.startsWith('http')) {
+        if (url.startsWith('http')) {
             push(ref(db, 'workshop/links'), { url, naam });
-            document.getElementById('iframe-output').innerText = `<iframe src="${url}" width="100%" height="800px" frameborder="0"></iframe>`;
+            document.getElementById('iframe-output').innerText = `<iframe src="${url}" width="100%" height="600px" frameborder="0"></iframe>`;
             alert("Opgeslagen!");
             window.changeStep(1);
         }
     };
 
-    // Houd de huidige actieve noot bij
-let activeNode = null;
-let offset = { x: 0, y: 0 };
-
-onValue(ref(db, 'workshop/whiteboard/words'), (snapshot) => {
-    const container = document.getElementById('sticky-container');
-    if (!container) return;
-    container.innerHTML = '';
-    const data = snapshot.val();
-    
-    if (data) {
-        Object.entries(data).forEach(([key, v]) => {
-            const div = document.createElement('div');
-            div.className = 'sticky-note';
-            div.style.left = v.x + 'px';
-            div.style.top = v.y + 'px';
-            div.innerText = v.text;
-            div.dataset.key = key; // Sla de Firebase ID op in het element
-
-            // Start het slepen
-            div.onmousedown = (e) => {
-                activeNode = div;
-                offset.x = e.clientX - div.offsetLeft;
-                offset.y = e.clientY - div.offsetTop;
-                div.style.zIndex = 1000;
-            };
-
-            container.appendChild(div);
-        });
-    }
-});
-
-// Handelen van beweging op het hele document
-document.onmousemove = (e) => {
-    if (!activeNode) return;
-    
-    const x = e.clientX - offset.x;
-    const y = e.clientY - offset.y;
-    
-    // Visuele feedback tijdens slepen
-    activeNode.style.left = x + 'px';
-    activeNode.style.top = y + 'px';
-};
-
-// Loslaten en opslaan in Firebase
-document.onmouseup = () => {
-    if (activeNode) {
-        const key = activeNode.dataset.key;
-        const x = parseInt(activeNode.style.left);
-        const y = parseInt(activeNode.style.top);
-
-        // Update de positie in Firebase voor real-time sync
-        update(ref(db, `workshop/whiteboard/words/${key}`), { x, y });
-        
-        activeNode.style.zIndex = 10;
-        activeNode = null;
-    }
-};
-    // 1. Zorgt dat de preview in Stap 10 direct werkt als je de link plakt
-window.updatePreview = () => {
-    const url = document.getElementById('github-url').value.trim();
-    const container = document.getElementById('live-preview-container');
-    const iframe = document.getElementById('github-preview-iframe');
-    
-    if (url.startsWith('http')) {
-        iframe.src = url;
-        container.style.display = 'block';
-    } else {
-        container.style.display = 'none';
-    }
-};
-
-// 2. De verbeterde save-functie die ook Stap 11 voorbereidt
-window.saveGithubLink = () => {
-    const url = document.getElementById('github-url').value.trim();
-    const naam = document.getElementById('participant-name').value || "Anoniem";
-
-    if (url.startsWith('http')) {
-        // Opslaan in Firebase voor de centrale feed (Stap 12)
-        if (typeof push === "function") {
-            push(ref(db, 'workshop/links'), { url, naam });
+    onValue(ref(db, 'workshop/links'), (snapshot) => {
+        const feed = document.getElementById('github-live-feed');
+        if (!feed) return;
+        feed.innerHTML = '';
+        const data = snapshot.val();
+        if (data) {
+            Object.values(data).forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'repo-card';
+                card.innerHTML = `<div style="padding:10px;"><b>${item.naam}</b></div><iframe src="${item.url}"></iframe>`;
+                feed.appendChild(card);
+            });
         }
+    });
 
-        // Genereer de iframe-code voor de kopieer-box in Stap 11
-        const iframeCode = `<iframe src="${url}" width="100%" height="600px" frameborder="0" allowfullscreen></iframe>`;
-        
-        // Zoek de box in Stap 11 (controleer of het ID 'iframe-output' of 'iframe-code' is)
-        const outputDiv = document.getElementById('iframe-output') || document.getElementById('iframe-code');
-        if (outputDiv) {
-            outputDiv.innerText = iframeCode;
-        }
-
-        alert("Link opgeslagen en embed-code gegenereerd!");
-        window.changeStep(1); // Ga naar Stap 11
-    } else {
-        alert("Voer a.u.b. een geldige GitHub Pages URL in.");
-    }
-};
-
-    // HELPERS
-    window.copyToClipboard = (id) => { navigator.clipboard.writeText(document.getElementById(id).innerText); alert("Gekopieerd!"); };
-    
-    window.mailAlleSchermen = () => {
-        const naam = document.getElementById('participant-name').value;
+    // --- OVERIGE HELPERS ---
+    window.saveDesignAndProceed = () => {
+        const naam = document.getElementById('participant-name').value || "Deelnemer";
         const doel = document.getElementById('les-doel').value;
-        const les = document.getElementById('github-url').value;
-        const body = `Resultaten Workshop:\nNaam: ${naam}\nLeerdoel: ${doel}\nLeslink: ${les}`;
-        window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=Mijn Workshop Resultaten&body=${encodeURIComponent(body)}`, '_blank');
+        const vorm = document.getElementById('les-werkvorm').value;
+        const prompt = `Hoi Gemini, ik ben ${naam}. Ik wil een interactieve les maken. Leerdoel: ${doel}. Werkvorm: ${vorm}. Genereer een volledige HTML-pagina met CSS en JavaScript.`;
+        document.getElementById('generated-prompt').innerText = prompt;
+        window.changeStep(1);
     };
 
+    window.copyToClipboard = (id) => { navigator.clipboard.writeText(document.getElementById(id).innerText); alert("Gekopieerd!"); };
+    window.mailAlleSchermen = () => {
+        const body = `Naam: ${document.getElementById('participant-name').value}\nLeerdoel: ${document.getElementById('les-doel').value}\nURL: ${document.getElementById('github-url').value}`;
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=Workshop Resultaten&body=${encodeURIComponent(body)}`, '_blank');
+    };
     window.hardResetAlles = () => { if(confirm("ALLES WISSEN?")) { remove(ref(db, 'workshop')); location.reload(); }};
 </script>
 </body>
