@@ -239,20 +239,7 @@
         woorden.forEach(t => push(ref(db, 'workshop/whiteboard/words'), { text: t, x: 200 + (Math.random()*800), y: 100 + (Math.random()*400) }));
     };
 
-    onValue(ref(db, 'workshop/whiteboard/words'), (snapshot) => {
-        const container = document.getElementById('sticky-container');
-        if (!container) return;
-        container.innerHTML = '';
-        const data = snapshot.val();
-        if (data) Object.values(data).forEach(v => {
-            const div = document.createElement('div');
-            div.className = 'sticky-note';
-            div.style.left = v.x + 'px'; div.style.top = v.y + 'px';
-            div.innerText = v.text;
-            container.appendChild(div);
-        });
-    });
-
+    
     window.clearFullReset = () => { if(confirm("Bord leegmaken?")) remove(ref(db, 'workshop/whiteboard/words')); };
 
     // PROMPT & DESIGN
