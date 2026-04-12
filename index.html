@@ -211,6 +211,10 @@
     const db = getDatabase(app);
 
     // BULLETPROOF NAVIGATIE
+    <script type="module">
+    // ... imports en config blijven gelijk ...
+
+    // NAVIGATIE
     window.changeStep = (n) => {
         const currentEl = document.querySelector('.step.active');
         const currentNum = parseInt(currentEl.id.split('-')[1]);
@@ -226,6 +230,55 @@
             window.scrollTo(0, 0);
         }
     };
+
+    // DRAG & DROP + FIREBASE SYNC (De gecombineerde versie)
+    let activeNode = null;
+    let offset = { x: 0, y: 0 };
+
+    onValue(ref(db, 'workshop/whiteboard/words'), (snapshot) => {
+        const container = document.getElementById('sticky-container');
+        if (!container) return;
+        container.innerHTML = '';
+        const data = snapshot.val();
+        if (data) {
+            Object.entries(data).forEach(([key, v]) => {
+                const div = document.createElement('div');
+                div.className = 'sticky-note';
+                div.style.left = v.x + 'px'; div.style.top = v.y + 'px';
+                div.innerText = v.text;
+                div.dataset.key = key;
+                div.onmousedown = (e) => {
+                    activeNode = div;
+                    offset.x = e.clientX - div.offsetLeft;
+                    offset.y = e.clientY - div.offsetTop;
+                    div.style.zIndex = 1000;
+                };
+                container.appendChild(div);
+            });
+        }
+    });
+
+    document.onmousemove = (e) => {
+        if (!activeNode) return;
+        activeNode.style.left = (e.clientX - offset.x) + 'px';
+        activeNode.style.top = (e.clientY - offset.y) + 'px';
+    };
+
+    document.onmouseup = () => {
+        if (activeNode) {
+            const key = activeNode.dataset.key;
+            update(ref(db, `workshop/whiteboard/words/${key}`), { 
+                x: parseInt(activeNode.style.left), 
+                y: parseInt(activeNode.style.top) 
+            });
+            activeNode.style.zIndex = 10;
+            activeNode = null;
+        }
+    };
+
+    // OVERIGE FUNCTIES (Plak hier de rest: saveGithubLink, updatePreview, etc.)
+    // ...
+</script>
 
     // WHITEBOARD FUNCTIES
     window.addWordToFirebase = () => {
