@@ -97,7 +97,7 @@
         <div style="background: #fff9db; color: #856404; padding: 15px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #ffeeba; font-size: 0.9rem;">
             <strong>🔥 Firebase Interactiviteit Activeren:</strong><br>
             Ga in de Firebase Console naar <b>Realtime Database</b> > <b>Rules</b> en zet de regels op:
-            <code style="display:block; background:#fff; padding:10px; margin-top:5px; border-radius:4px; white-space: pre;">{
+            <code style="display:block; background:#fff; padding:15px; margin-top:10px; border-radius:8px; white-space: pre-wrap; font-family: monospace;">{
   "rules": {
     ".read": true,
     ".write": true
@@ -113,6 +113,7 @@
             <button class="btn" onclick="changeStep(1)" style="width: 100%; background: #2c3e50; margin-top: 10px;">Laten we beginnen! →</button>
         </div>
     </div>
+
 
     <div class="step" id="step-2">
         <h2 style="text-align: center;">Stap A: Coöperatief Brainstormen</h2>
@@ -397,7 +398,14 @@
         const naam = document.getElementById('participant-name').value || "Deelnemer";
         const doel = document.getElementById('les-doel').value;
         const vorm = document.getElementById('les-werkvorm').value;
-        const prompt = `Hoi Gemini, ik ben ${naam}. Ik wil een interactieve les maken. Leerdoel: ${doel}. Werkvorm: ${vorm}. Genereer een volledige HTML-pagina met CSS en JavaScript.`;
+        const config = document.getElementById('user-firebase-config').value || "// Geen config ingevuld";
+        
+        const prompt = `Hoi Gemini, ik ben ${naam}. Ik wil een interactieve les maken.\n\n` +
+                       `Leerdoel: ${doel}\n` +
+                       `Werkvorm: ${vorm}\n\n` +
+                       `Gebruik deze Firebase configuratie voor de interactiviteit:\n${config}\n\n` +
+                       `Genereer een volledige HTML-pagina inclusief de bijbehorende CSS en JavaScript (in één bestand).`;
+        
         document.getElementById('generated-prompt').innerText = prompt;
         navigator.clipboard.writeText(prompt);
         push(ref(db, 'workshop/shared_prompts'), { naam, doel });
